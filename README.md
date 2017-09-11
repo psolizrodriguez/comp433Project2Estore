@@ -1,5 +1,5 @@
 # Helpful SQL Notes
-[SQL Notes](\documents\SQL_helpful_notes.md)
+[SQL Notes](./documents/SQL_helpful_notes.md)
 # Connection Details
 **Host:** 18.220.231.8  
 **Database:** test  
