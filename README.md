@@ -9,9 +9,9 @@
 ![EStore](https://i.imgur.com/pZ1eb2O.gif)
 # To do
 ## 1. Create SQL statements for the following tables:
-### Order
-### Customer
-### Address
+### -Order
+### -Customer
+### -Address
 CREATE TABLE `Address` (
   `address_id` int(11) NOT NULL,
   `street` varchar(100) DEFAULT NULL,
@@ -21,19 +21,19 @@ CREATE TABLE `Address` (
   `zip` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`address_id`)
 );
-### Product
+### -Product
 CREATE TABLE `Product` (
   `id` int(11) NOT NULL,
   `title` varchar(45) DEFAULT NULL,
   `price` decimal(4,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
-### Book
-### Order Detail
+### -Book
+### -Order Detail
 ## 2. Insert SQL statements for the following tables:
-### Order
-### Customer
-### Address
-### Product
-### Book
-### Order Detail
+### -Order
+### -Customer
+### -Address
+### -Product
+### -Book
+### -Order Detail
