@@ -1,5 +1,11 @@
 # Helpful SQL Notes
 [SQL Notes](./documents/SQL_helpful_notes.md)
+# Git Import project in eclipse
+1) create directory "comp433Project2Estore" inside of your workspace
+2) git init
+3) git remote add comp433Project2Estore https://github.com/psolizrodriguez/comp433Project2Estore.git
+4) git pull comp433Project2Estore master
+5) create a Dynamic Web Project on eclipse using that path
 # Connection Details
 **Host:** 18.220.231.8  
 **Database:** test  
