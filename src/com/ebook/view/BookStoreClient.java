@@ -9,7 +9,7 @@ import com.ebook.model.order.Order;
 import com.ebook.model.order.OrderDetail;
 
 public class BookStoreClient {
-			
+		/*	
 		public static void main (String args[]) throws Exception {
 						
 	        Customer customer = new Customer();;
@@ -88,5 +88,5 @@ public class BookStoreClient {
 	        System.out.println("\n\tOrder Total:\t\t" + orderTotal);
 	        
 		}
-
+*/
 }

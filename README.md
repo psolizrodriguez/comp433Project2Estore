@@ -12,7 +12,7 @@
 **User:** jcicale  
 **Password:** jcicale  
 # Class Diagram
-![EStore](https://i.imgur.com/pZ1eb2O.gif)
+![EStore](https://i.imgur.com/4Ha50PY.png)
 # To do
 ## 1. Create SQL statements for the following tables:
 ### * Order

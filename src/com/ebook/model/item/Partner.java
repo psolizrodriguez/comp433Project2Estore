@@ -1,19 +1,18 @@
-package com.ebook.model.customer;
+package com.ebook.model.item;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ebook.model.order.Order;
+import com.ebook.model.customer.Address;
 
-public class Customer {
-	private String customerId;
-	private String lastName;
-	private String firstName;
+public class Partner {
+	private String partnerId;
+	private String name;
 	private String userName;
 	private String password;
 	private Address billingAddress;
 	private Address shippingAddress;
-	private List<Order> orders = new ArrayList<Order>();
+	private List<Inventory> orders = new ArrayList<Inventory>();
 
 	public String getUserName() {
 		return userName;
@@ -31,12 +30,20 @@ public class Customer {
 		this.password = password;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
+	public String getPartnerId() {
+		return partnerId;
 	}
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+	public void setPartnerId(String partnerId) {
+		this.partnerId = partnerId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Address getBillingAddress() {
@@ -55,31 +62,12 @@ public class Customer {
 		this.shippingAddress = shippingAddress;
 	}
 
-	public String getCustomerId() {
-		return customerId;
+	public List<Inventory> getOrders() {
+		return orders;
 	}
 
-	public void setCustomerId(String id) {
-		this.customerId = id;
+	public void setOrders(List<Inventory> orders) {
+		this.orders = orders;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public void addOrder(Order order) {
-		orders.add(order);
-	}
 }
