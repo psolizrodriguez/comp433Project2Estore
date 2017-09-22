@@ -11,12 +11,12 @@ import com.ebook.model.customer.Customer;
 public class CustomerDAO {
 	public CustomerDAO() {}
 	
-	public Customer getCustomer(String customerId) {
-		 	 
-	    try { 		
+	public Customer getCustomer(String customerId) {		
+		  try { 		
 	    	//Get Customer
 	    	Statement st = DBHelper.getConnection().createStatement();
-	    	String selectCustomerQuery = "SELECT customerID, lname, fname FROM Customer WHERE customerID = '" + customerId + "'";
+	    	String selectCustomerQuery = "SELECT customer_id, last_name, first_name, username, password "
+	    			+ "FROM Customer WHERE customer_id = '" + customerId + "'";
 
 	    	ResultSet custRS = st.executeQuery(selectCustomerQuery);      
 	    	System.out.println("CustomerDAO: *************** Query " + selectCustomerQuery);
@@ -24,13 +24,36 @@ public class CustomerDAO {
 	      //Get Customer
     	  Customer customer = new Customer();
 	      while ( custRS.next() ) {
-	    	  customer.setCustomerId(custRS.getString("customerID"));
-	    	  customer.setLastName(custRS.getString("lname"));
-	    	  customer.setFirstName(custRS.getString("fname"));
+	    	  customer.setCustomerId(custRS.getString("customer_id"));
+	    	  customer.setLastName(custRS.getString("last_name"));
+	    	  customer.setFirstName(custRS.getString("first_name"));
+	    	  customer.setUserName(custRS.getString("username"));
+	    	  customer.setPassword(custRS.getString("password"));
 	      }
 	      //close to manage resources
 	      custRS.close();
-	      	    		  
+	     //Get Billing Address
+	      String selectBillingAddress = "SELECT customer_id, address_id, type, status FROM CustomerAddresses WHERE customer_id = 'A002' AND type = '1' AND status = 'Active'";
+	      ResultSet addRS = st.executeQuery(selectBillingAddress);
+	      if(addRS.next()) {
+	    	  
+	    	  Address billingAddress =new Address();
+	    	  billingAddress.setAddressId(addRS.getInt("address_id"));
+	    	  String billingAddressSelect ="SELECT address_id, street,unit,city,state,zip FROM Address WHERE address_id = " + billingAddress.getAddressId();
+	    	  ResultSet addRSBilling = st.executeQuery(billingAddressSelect);
+	    	  if(addRSBilling.next()) {
+		    	  billingAddress.setCity(addRSBilling.getString("city"));
+		    	  billingAddress.setStreet(addRSBilling.getString("street"));
+		    	  billingAddress.setState(addRSBilling.getString("state"));
+		    	  billingAddress.setZip(addRSBilling.getString("zip"));
+		    	  billingAddress.setUnit(addRSBilling.getString("unit"));
+		      }
+	    	  addRSBilling.close();
+	    	  customer.setBillingAddress(billingAddress);
+	      }
+	      addRS.close();
+	      
+	      /*	    		  
 	      //Get Address
 	      String selectAddressQuery = "SELECT addressID, street, unit, city, state, zip FROM Address WHERE customerID = '" + customerId + "'";
 	      ResultSet addRS = st.executeQuery(selectAddressQuery);
@@ -51,7 +74,7 @@ public class CustomerDAO {
 	      //close to manage resources
 	      addRS.close();
 	      st.close();
-	      
+	      */
 	      return customer;
 	    }	    
 	    catch (SQLException se) {
@@ -59,12 +82,11 @@ public class CustomerDAO {
 	      System.err.println(se.getMessage());
 	      se.printStackTrace();
 	    }
-	    
 	    return null;
 	  }
 	
 	public void addCustomer(Customer cust) {
-		Connection con = DBHelper.getConnection();
+		/*Connection con = DBHelper.getConnection();
         PreparedStatement custPst = null;
         PreparedStatement addPst = null;
 
@@ -105,6 +127,6 @@ public class CustomerDAO {
       	      System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
     	      System.err.println(ex.getMessage());
             }
-        }
+        }*/
     }
 }

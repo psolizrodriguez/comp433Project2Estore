@@ -6,7 +6,6 @@ import java.util.List;
 public class Book extends Product {
 	private String isbn;
 	private String author;
-	private List<Review> review = new ArrayList<Review>();
 
 	public String getIsbn() {
 		return isbn;
@@ -14,14 +13,6 @@ public class Book extends Product {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
-	}
-
-	public List<Review> getReview() {
-		return review;
-	}
-
-	public void setReview(List<Review> review) {
-		this.review = review;
 	}
 
 	public Book() {
