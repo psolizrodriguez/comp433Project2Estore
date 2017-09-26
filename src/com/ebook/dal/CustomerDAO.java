@@ -33,7 +33,7 @@ public class CustomerDAO {
 	      //close to manage resources
 	      custRS.close();
 	     //Get Billing Address
-	      String selectBillingAddress = "SELECT customer_id, address_id, type, status FROM CustomerAddresses WHERE customer_id = 'A002' AND type = '1' AND status = 'Active'";
+	      String selectBillingAddress = "SELECT customer_id, address_id, type, status FROM CustomerAddresses WHERE customer_id = '" + customerId + "' AND type = '1' AND status = 'Active'";
 	      ResultSet addRS = st.executeQuery(selectBillingAddress);
 	      if(addRS.next()) {
 	    	  
@@ -52,6 +52,26 @@ public class CustomerDAO {
 	    	  customer.setBillingAddress(billingAddress);
 	      }
 	      addRS.close();
+	      
+	      //Get Shipping Address
+	      String selectShippingAddress = "SELECT customer_id, address_id, type, status FROM CustomerAddresses WHERE customer_id = '" + customerId + "' AND type = '2' AND status = 'Active'";
+	      ResultSet shipRS = st.executeQuery(selectShippingAddress);
+	      if(shipRS.next()) {
+	    	  	Address shippingAddress = new Address();
+	    	  	shippingAddress.setAddressId(shipRS.getInt("address_id"));
+	    	  	String shippingAddressSelect = "SELECT address_id, street, unit, city, state, zip FROM Address WHERE address_id = " + shippingAddress.getAddressId();
+	    	  	ResultSet addRSShipping = st.executeQuery(shippingAddressSelect);
+	    	  	if(addRSShipping.next()) {
+	    	  		shippingAddress.setCity(addRSShipping.getString("city"));
+	    	  		shippingAddress.setStreet(addRSShipping.getString("street"));
+			    	shippingAddress.setState(addRSShipping.getString("state"));
+			    	shippingAddress.setZip(addRSShipping.getString("zip"));
+			    	shippingAddress.setUnit(addRSShipping.getString("unit"));
+	    	  	}
+	    	  	addRSShipping.close();
+	    	  	customer.setShippingAddress(shippingAddress);
+	      }
+	      shipRS.close();
 	      
 	      /*	    		  
 	      //Get Address

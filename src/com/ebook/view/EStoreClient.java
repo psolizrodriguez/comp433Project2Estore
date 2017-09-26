@@ -11,6 +11,8 @@ public class EStoreClient {
 		CustomerDAO customerDAO = new CustomerDAO();
 		Customer hanSolo = customerDAO.getCustomer("A002");
 		System.out.println(hanSolo.getBillingAddress().getCity());
+		System.out.println(hanSolo.getShippingAddress().getCity());
+		
 	}
 
 }
