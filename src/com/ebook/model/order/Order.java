@@ -7,7 +7,7 @@ import com.ebook.model.customer.Address;
 import com.ebook.model.item.Inventory;
 
 public class Order {
-	private String orderId;
+	private int orderId;
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	private boolean paymentReceived;
 	private String orderState = "Open";
@@ -42,11 +42,11 @@ public class Order {
 	public Order() {
 	}
 
-	public String getOrderId() {
+	public int getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 
