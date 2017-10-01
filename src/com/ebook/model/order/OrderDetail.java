@@ -1,18 +1,29 @@
 package com.ebook.model.order;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import com.ebook.model.item.Inventory;
 
+@Entity
 public class OrderDetail {
+	@Id
+	private String orderDetailId;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn
 	private Inventory inventory;
-	private int quantity;
-	private double subTotal;
+	private Integer quantity;
+	private Double subTotal;
 
-	public OrderDetail() {
+	public String getOrderDetailId() {
+		return orderDetailId;
 	}
 
-	public OrderDetail(Inventory inventory, int quantity) {
-		this.inventory = inventory;
-		this.quantity = quantity;
+	public void setOrderDetailId(String orderDetailId) {
+		this.orderDetailId = orderDetailId;
 	}
 
 	public Inventory getInventory() {
@@ -23,12 +34,20 @@ public class OrderDetail {
 		this.inventory = inventory;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	public Double getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(Double subTotal) {
+		this.subTotal = subTotal;
 	}
 
 }

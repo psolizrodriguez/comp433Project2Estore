@@ -1,9 +1,28 @@
 package com.ebook.model.order;
 
+import java.util.Calendar;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import com.ebook.model.customer.Address;
 
-public class ShippingOrder extends Order {
+@Entity
+public class ShippingOrder extends CustomerOrder {
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn
 	private Address shippingAddress;
+	private Calendar estimatedDelivery;
+
+	public Calendar getEstimatedDelivery() {
+		return estimatedDelivery;
+	}
+
+	public void setEstimatedDelivery(Calendar estimatedDelivery) {
+		this.estimatedDelivery = estimatedDelivery;
+	}
 
 	public Address getShippingAddress() {
 		return shippingAddress;

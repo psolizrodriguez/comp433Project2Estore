@@ -1,0 +1,198 @@
+@CHARSET "ISO-8859-1";
+.css_zerocolumna {
+	font-weight: 600;
+	font-size:13px;
+	font-family: verdana;
+	width: 200px;
+	background-color: #FAE093;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.css_primeracolumna {
+	font-weight: 600;
+	font-size:13px;
+	font-family: verdana;
+	width: 25px;
+	background-color: #FADD67;
+	padding-left: 5px;
+}
+
+.css_segundacolumna {
+	font-weight: normal;
+	font-size: 13px;
+	font-family: verdana;
+	width: 25px;
+	background-color: #FAE093;
+	text-align: right;
+	padding-right: 5px;
+}
+
+.css_terceracolumna {
+	font-weight: normal;
+	font-size: 13px;
+	font-family: verdana;
+	width: 25px;
+	background-color: #FADD67;
+	padding-left: 5px;
+}
+
+.css_cuartacolumna {
+	font-weight: normal;
+	font-size: 13px;
+	font-family: verdana;
+	width: 75px;
+	background-color: #FAE093;
+	text-align: right;
+	padding-right: 5px;
+}
+
+.css_quintacolumna {
+	font-weight: normal;
+	font-size: 13px;
+	font-family: verdana;
+	width: 75px;
+	background-color: #FADD67;
+	text-align: right;
+	padding-right: 5px;
+}
+
+.css_sextacolunma {
+	font-weight: normal;
+	font-size: 13px;
+	font-family: verdana;
+	width: 75px;
+	background-color: #FAE093;
+	text-align: right;
+	padding-right: 5px;
+}
+
+.css_septimacolumna {
+	font-weight: normal;
+	font-size: 13px;
+	font-family: verdana;
+	width: 75px;
+	background-color: #FADD67;
+	text-align: right;
+	padding-right: 5px;
+}
+
+.css_tabla_visible {
+	width: 98%;
+	border: 10px;
+	border-color: white;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+.css_tabla_boton {
+	padding-top: 10px;
+}
+
+.css_titulos_tabla {
+	background-color: #333366;
+    font-weight: bold;
+	font-size: 13px;
+	font-family: verdana;
+	color: white;
+	padding-left: 5px;
+}
+.css_title_fecha{
+	font-family: verdana;
+	font-size: 13px;
+	font-weight: 600;
+	padding-top: 14px;
+}
+.css_numerales{
+	background-color: #FAE093;
+    font-weight: normal;
+	font-size: 13px;
+	font-family: verdana;
+	width: 15px;
+	text-align: right;
+	padding-right: 5px;
+}
+.css_checkboxtabla{
+	background-color: #FADD67;
+	width: 10px;
+}
+.css_tabla_botonnuevo{
+    margin: 1px;
+	text-decoration: none;
+	font: bold 15px 'Trebuchet MS', Arial, Helvetica;
+	text-align: center;
+	color: white;
+	border: 1px solid #9c9c9c;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+	box-shadow: 0 0 .5px rgba(0, 0, 0, 0.4);
+	background: #4477a1;
+    border-radius: .3em;
+    border-top: 1px solid #666699;
+    border-top: 1px solid #666699;
+    background-size: 3px 3px;
+    box-shadow: 0 0 .1em rgba(0,0,0,0.4);
+    top: 1px;
+}
+.css_tabla_botoneliminar{
+	margin: 1px;
+	text-decoration: none;
+	font: bold 15px 'Trebuchet MS', Arial, Helvetica;
+	text-align: center;
+	color: white;
+	border: 1px solid #9c9c9c;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+	box-shadow: 0 0 .5px rgba(0, 0, 0, 0.4);
+	background: #4477a1;
+    border-radius: .3em;
+    border-top: 1px solid #666699;
+    border-top: 1px solid #666699;
+    background-size: 3px 3px;
+    box-shadow: 0 0 .1em rgba(0,0,0,0.4);
+    top: 1px;
+}
+.css_box_fecha{
+	font-family: verdana;
+	font-size: 13px;
+	font-weight: normal;
+	border-radius: .3em;
+}
+.css_contenedor_titulo_header{
+	background-color: green;
+	width: 300px;
+	background-color: #333366;
+    font-weight: bold;
+	font-size: 20px;
+	font-family: verdana;
+	color: white;
+	border: medium;
+	border-color: white;
+	border-style: solid;
+	border-radius: .3em;
+}
+.css_contenedor_titulo_header_ingresos{
+	background-color: green;
+	width: 300px;
+	background-color: #65C458;
+    font-weight: bold;
+	font-size: 20px;
+	font-family: verdana;
+	color: white;
+	border: medium;
+	border-color: white;
+	border-style: solid;
+	border-radius: .3em;
+}
+.css_contenedor_titulo_header_egresos{
+	background-color: green;
+	width: 300px;
+	background-color: #DE4040;
+    font-weight: bold;
+	font-size: 20px;
+	font-family: verdana;
+	color: white;
+	border: medium;
+	border-color: white;
+	border-style: solid;
+	border-radius: .3em;
+}

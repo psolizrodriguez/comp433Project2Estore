@@ -1,5 +1,8 @@
 package com.ebook.model.order;
 
+import javax.persistence.Entity;
+
+@Entity
 public class CreditCardPayment extends PaymentMethod {
 	private String creditCardNumber;
 	private String nameOnCard;

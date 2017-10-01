@@ -1,8 +1,16 @@
 package com.ebook.model.order;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import com.ebook.model.customer.Address;
 
-public class PickUpOrder extends Order {
+@Entity
+public class PickUpOrder extends CustomerOrder {
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn
 	private Address pickUpAddress;
 	private String initialTime;
 	private String finalTime;

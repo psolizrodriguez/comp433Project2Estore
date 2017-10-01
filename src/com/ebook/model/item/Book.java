@@ -1,8 +1,8 @@
 package com.ebook.model.item;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
 
+@Entity
 public class Book extends Product {
 	private String isbn;
 	private String author;

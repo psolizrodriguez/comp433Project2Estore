@@ -1,11 +1,28 @@
 package com.ebook.model.item;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Inventory {
-	private String partner_id;
-	private String product_id;
+	@Id
+	private String inventoryId;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn
 	private Product product;
-	private double price;
-	private int quantity;
+	private Double price;
+	private Integer quantity;
+
+	public String getInventoryId() {
+		return inventoryId;
+	}
+
+	public void setInventoryId(String inventoryId) {
+		this.inventoryId = inventoryId;
+	}
 
 	public Product getProduct() {
 		return product;
@@ -15,35 +32,19 @@ public class Inventory {
 		this.product = product;
 	}
 
-	public String getPartner_id() {
-		return partner_id;
-	}
-
-	public void setPartner_id(String partner_id) {
-		this.partner_id = partner_id;
-	}
-
-	public String getProduct_id() {
-		return product_id;
-	}
-
-	public void setProduct_id(String product_id) {
-		this.product_id = product_id;
-	}
-
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 

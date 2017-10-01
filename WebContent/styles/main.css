@@ -1,0 +1,26 @@
+@CHARSET "ISO-8859-1";
+.layout_main_table{
+	/* background-color: olive; */
+	border-color: #333399;	
+    border-radius: 8px;
+    border-width: 2px;
+    width: auto;
+    width: 960px;
+}
+.css_layout_body{
+	background-color: #FF9933;
+}
+.css_layout_menu{
+	background-color: #0C2C67;
+	width: 100%;
+}
+.css_layout_header{
+	background-color: #333399;
+	font-family: 'Museo sans';
+	font-size: 18px;
+	color: white;
+	
+}
+.css_layout_footer{
+	background-color: #AE241A;
+}

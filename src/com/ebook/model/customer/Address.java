@@ -1,8 +1,12 @@
 package com.ebook.model.customer;
 
-public class Address {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-	private int addressId;
+@Entity
+public class Address {
+	@Id
+	private String addressId;
 	private String street;
 	private String unit;
 	private String city;
@@ -12,11 +16,11 @@ public class Address {
 	public Address() {
 	}
 
-	public int getAddressId() {
+	public String getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(int addressId) {
+	public void setAddressId(String addressId) {
 		this.addressId = addressId;
 	}
 

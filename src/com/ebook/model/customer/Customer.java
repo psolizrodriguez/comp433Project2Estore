@@ -1,19 +1,25 @@
 package com.ebook.model.customer;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
-import com.ebook.model.order.Order;
-
+@Entity
 public class Customer {
+	@Id
 	private String customerId;
 	private String lastName;
 	private String firstName;
 	private String userName;
 	private String password;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn
 	private Address billingAddress;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn
 	private Address shippingAddress;
-	private List<Order> orders = new ArrayList<Order>();
 
 	public String getUserName() {
 		return userName;
@@ -29,14 +35,6 @@ public class Customer {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
 	}
 
 	public Address getBillingAddress() {
@@ -79,7 +77,4 @@ public class Customer {
 		this.firstName = firstName;
 	}
 
-	public void addOrder(Order order) {
-		orders.add(order);
-	}
 }

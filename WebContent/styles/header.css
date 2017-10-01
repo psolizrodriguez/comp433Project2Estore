@@ -1,0 +1,6 @@
+@CHARSET "ISO-8859-1";
+.main_table{
+	background-color: green;
+	background-image: url("../images/calendar_2011.gif");
+	color: white;
+}

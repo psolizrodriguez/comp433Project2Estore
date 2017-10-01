@@ -1,6 +1,11 @@
 package com.ebook.model.item;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Review {
+	@Id
 	private String reviewId;
 	private String title;
 	private String description;
