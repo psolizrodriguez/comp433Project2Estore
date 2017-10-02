@@ -1,5 +1,8 @@
 package com.ebook.common.controllers;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -11,8 +14,11 @@ import com.ebook.common.utility.ConfigManager;
 import com.ebook.model.customer.Address;
 import com.ebook.model.customer.Customer;
 import com.ebook.model.item.Book;
+import com.ebook.model.item.Inventory;
+import com.ebook.model.item.Partner;
 import com.ebook.model.item.Product;
 import com.ebook.service.customer.CustomerService;
+import com.ebook.service.item.PartnerService;
 import com.ebook.service.item.ProductService;
 
 @Controller
@@ -22,6 +28,8 @@ public class MainController {
 	private CustomerService customerService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private PartnerService partnerService;
 
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request) {
@@ -77,6 +85,31 @@ public class MainController {
 		odyssey.setISBN("9785040381791");
 		odyssey.setAuthor("Homer");
 		productService.add(odyssey);
+		// Adding Partners
+		LOGGER.info("Adding Partner Amazon");
+		Partner amazon = new Partner();
+		amazon.setPartnerId("001");
+		amazon.setName("Amazon");
+		amazon.setUserName("amazon");
+		amazon.setPassword("amazon12345");
+		List<Inventory> amazonInventory = new LinkedList<>();
+		amazonInventory.add(new Inventory("001-001", fitbitAlta, 150.0, 10));
+		amazonInventory.add(new Inventory("001-002", headphones, 80.0, 10));
+		amazonInventory.add(new Inventory("001-003", laptopBag, 15.0, 10));
+		amazon.setInventory(amazonInventory);
+		partnerService.add(amazon);
+		LOGGER.info("Adding Partner Ebay");
+		Partner ebay = new Partner();
+		ebay.setPartnerId("002");
+		ebay.setName("Ebay");
+		ebay.setUserName("ebay");
+		ebay.setPassword("ebay12345");
+		List<Inventory> ebayInventory = new LinkedList<>();
+		ebayInventory.add(new Inventory("002-001", fitbitAlta, 160.0, 15));
+		ebayInventory.add(new Inventory("002-002", headphones, 70.0, 15));
+		ebayInventory.add(new Inventory("002-003", laptopBag, 20.0, 15));
+		ebay.setInventory(ebayInventory);
+		partnerService.add(ebay);
 		return "index";
 	}
 

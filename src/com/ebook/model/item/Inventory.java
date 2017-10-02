@@ -16,6 +16,17 @@ public class Inventory {
 	private Double price;
 	private Integer quantity;
 
+	public Inventory() {
+
+	}
+
+	public Inventory(String inventoryId, Product product, Double price, Integer quantity) {
+		this.inventoryId = inventoryId;
+		this.product = product;
+		this.price = price;
+		this.quantity = quantity;
+	}
+
 	public String getInventoryId() {
 		return inventoryId;
 	}
