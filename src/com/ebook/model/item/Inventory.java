@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 public class Inventory {
 	@Id
 	private String inventoryId;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Product product;
 	private Double price;

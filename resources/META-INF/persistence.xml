@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 	<persistence-unit name="BASEApplication" transaction-type="RESOURCE_LOCAL">
-		<mapping-file>META-INF/named-query.xml</mapping-file>
+		<mapping-file>META-INF/item.xml</mapping-file>
 		<properties>
 			<property name="hibernate.archive.autodetection" value="class" />
 		</properties>

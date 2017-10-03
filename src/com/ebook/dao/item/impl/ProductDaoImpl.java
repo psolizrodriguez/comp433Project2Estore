@@ -15,7 +15,7 @@ public class ProductDaoImpl extends AbstractBaseDao implements ProductDao {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Product add(Product product) {
+	public Product save(Product product) {
 		return (Product) super.store(product);
 	}
 

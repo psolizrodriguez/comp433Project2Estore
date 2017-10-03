@@ -15,8 +15,8 @@ public class PartnerServiceImpl implements PartnerService {
 	PartnerDao dao;
 
 	@Override
-	public Partner add(Partner partner) {
-		return dao.add(partner);
+	public Partner save(Partner partner) {
+		return dao.save(partner);
 	}
 
 	@Override

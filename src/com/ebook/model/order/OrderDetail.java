@@ -12,11 +12,23 @@ import com.ebook.model.item.Inventory;
 public class OrderDetail {
 	@Id
 	private String orderDetailId;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Inventory inventory;
 	private Integer quantity;
 	private Double subTotal;
+
+	public OrderDetail() {
+
+	}
+
+	public OrderDetail(String orderDetailId, Inventory inventory, Integer quantity) {
+		this.orderDetailId = orderDetailId;
+		this.inventory = inventory;
+		this.quantity = quantity;
+		this.subTotal = inventory.getPrice() * this.quantity;
+		System.out.println("subTotal = " + this.subTotal);
+	}
 
 	public String getOrderDetailId() {
 		return orderDetailId;

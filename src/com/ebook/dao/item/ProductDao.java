@@ -6,7 +6,7 @@ import com.ebook.common.dao.Dao;
 import com.ebook.model.item.Product;
 
 public interface ProductDao extends Dao {
-	public Product add(Product product);
+	public Product save(Product product);
 
 	public List<Product> listAll();
 

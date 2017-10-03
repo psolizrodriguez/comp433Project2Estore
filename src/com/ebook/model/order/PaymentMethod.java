@@ -9,31 +9,41 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class PaymentMethod {
 	@Id
-	private int paymentId;
-	private boolean paymentReceived;
-	private double subTotal;
+	private String paymentId;
+	private String paymentStatus;
+	private Double subTotal;
 
-	public int getPaymentId() {
+	public PaymentMethod() {
+
+	}
+
+	public PaymentMethod(String paymentId, String paymentStatus, double subTotal) {
+		this.paymentId = paymentId;
+		this.paymentStatus = paymentStatus;
+		this.subTotal = subTotal;
+	}
+
+	public String getPaymentId() {
 		return paymentId;
 	}
 
-	public void setPaymentId(int paymentId) {
+	public void setPaymentId(String paymentId) {
 		this.paymentId = paymentId;
 	}
 
-	public boolean isPaymentReceived() {
-		return paymentReceived;
+	public String getPaymentStatus() {
+		return paymentStatus;
 	}
 
-	public void setPaymentReceived(boolean paymentReceived) {
-		this.paymentReceived = paymentReceived;
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
 
-	public double getSubTotal() {
+	public Double getSubTotal() {
 		return subTotal;
 	}
 
-	public void setSubTotal(double subTotal) {
+	public void setSubTotal(Double subTotal) {
 		this.subTotal = subTotal;
 	}
 

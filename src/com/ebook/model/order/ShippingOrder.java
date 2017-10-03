@@ -11,7 +11,7 @@ import com.ebook.model.customer.Address;
 
 @Entity
 public class ShippingOrder extends CustomerOrder {
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Address shippingAddress;
 	private Calendar estimatedDelivery;

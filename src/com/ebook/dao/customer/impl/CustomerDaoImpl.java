@@ -15,7 +15,7 @@ public class CustomerDaoImpl extends AbstractBaseDao implements CustomerDao {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Customer add(Customer customer) {
+	public Customer save(Customer customer) {
 		return (Customer) super.store(customer);
 	}
 

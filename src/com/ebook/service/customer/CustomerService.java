@@ -5,7 +5,7 @@ import java.util.List;
 import com.ebook.model.customer.Customer;
 
 public interface CustomerService {
-	public Customer add(Customer customer);
+	public Customer save(Customer customer);
 
 	public List<Customer> listAll();
 

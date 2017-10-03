@@ -6,7 +6,7 @@ import com.ebook.common.dao.Dao;
 import com.ebook.model.item.Partner;
 
 public interface PartnerDao extends Dao {
-	public Partner add(Partner partner);
+	public Partner save(Partner partner);
 
 	public List<Partner> listAll();
 

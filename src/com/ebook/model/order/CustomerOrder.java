@@ -25,11 +25,11 @@ public class CustomerOrder {
 	@JoinColumn
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	private String paymentStatus;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Customer customer;
 	private String orderState = "Open";
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Address billingAddress;
 	private Double total;
@@ -50,6 +50,12 @@ public class CustomerOrder {
 	}
 
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		if (orderDetails.size() > 0) {
+			this.total = 0.0;
+			for (OrderDetail orderDetail : orderDetails) {
+				this.total += orderDetail.getSubTotal();
+			}
+		}
 		this.orderDetails = orderDetails;
 	}
 

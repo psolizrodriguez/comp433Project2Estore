@@ -5,11 +5,11 @@ import java.util.List;
 import com.ebook.model.item.Product;
 
 public interface ProductService {
-	public Product add(Product product);
+	public Product save(Product product);
 
 	public List<Product> listAll();
 
 	public Product getById(String productId);
 
-	public boolean remove(Product menu);
+	public boolean remove(Product product);
 }

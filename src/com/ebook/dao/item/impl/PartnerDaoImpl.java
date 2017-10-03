@@ -15,7 +15,7 @@ public class PartnerDaoImpl extends AbstractBaseDao implements PartnerDao {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Partner add(Partner partner) {
+	public Partner save(Partner partner) {
 		return (Partner) super.store(partner);
 	}
 

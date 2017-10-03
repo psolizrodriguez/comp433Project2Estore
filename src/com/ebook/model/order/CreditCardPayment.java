@@ -9,6 +9,19 @@ public class CreditCardPayment extends PaymentMethod {
 	private String securityCode;
 	private String validDate;
 
+	public CreditCardPayment() {
+
+	}
+
+	public CreditCardPayment(String paymentId, String paymentStatus, Double subTotal, String creditCardNumber,
+			String nameOnCard, String securityCode, String validDate) {
+		super(paymentId, paymentStatus, subTotal);
+		this.creditCardNumber = creditCardNumber;
+		this.nameOnCard = nameOnCard;
+		this.securityCode = securityCode;
+		this.validDate = validDate;
+	}
+
 	public String getCreditCardNumber() {
 		return creditCardNumber;
 	}
