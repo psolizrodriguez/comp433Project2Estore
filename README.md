@@ -10,11 +10,11 @@ items that you will sell and to provide your partners to be able to add their in
 sold on your site using APIs. 
 ## Use Cases
 ### Customer Registration
-[Customer Registration](https://i.imgur.com/UDAThTs.png)
+![Customer Registration](https://i.imgur.com/UDAThTs.png)
 ### Buying Experience
-[Buying Experience](https://i.imgur.com/b6otbrU.png)
+![Buying Experience](https://i.imgur.com/b6otbrU.png)
 ### Partner Registration
-[Partner Registration](https://i.imgur.com/QYRwtCg.png)
+![Partner Registration](https://i.imgur.com/QYRwtCg.png)
 ## Import Git Project in eclipse
 1) Create directory "comp433Project2Estore" inside of your workspace  
 2) Execute the following code inside of that directory once Git is installed in your machine: 
