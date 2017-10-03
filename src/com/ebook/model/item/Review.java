@@ -1,7 +1,12 @@
 package com.ebook.model.item;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import com.ebook.model.customer.Customer;
 
 @Entity
 public class Review {
@@ -9,7 +14,22 @@ public class Review {
 	private String reviewId;
 	private String title;
 	private String description;
-	private int rating;
+	private Integer rating;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn
+	private Customer customer;
+
+	public Review() {
+
+	}
+
+	public Review(String reviewId, String title, String description, Integer rating, Customer customer) {
+		this.reviewId = reviewId;
+		this.title = title;
+		this.description = description;
+		this.rating = rating;
+		this.customer = customer;
+	}
 
 	public String getReviewId() {
 		return reviewId;
@@ -35,12 +55,20 @@ public class Review {
 		this.description = description;
 	}
 
-	public int getRating() {
+	public Integer getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(Integer rating) {
 		this.rating = rating;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }

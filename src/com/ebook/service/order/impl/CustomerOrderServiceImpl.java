@@ -89,29 +89,30 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 
 	@Override
 	public boolean cancelOrderDetail(CustomerOrder customerOrder, OrderDetail orderDetail) {
+
 		orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_CANCELED);
 		orderDetail.getInventory().setQuantity(orderDetail.getInventory().getQuantity() + orderDetail.getQuantity());
 		inventoryDao.save(orderDetail.getInventory());
 		Double ammountRefund = orderDetail.getSubTotal();
+		customerOrder.setTotal(customerOrder.getTotal() - ammountRefund);
 		if (customerOrder.getPaymentMethod() != null && customerOrder.getPaymentMethod().size() > 0) {
 			for (PaymentMethod paymentMethod : customerOrder.getPaymentMethod()) {
 				if (ammountRefund > 0.0) {
 					Double refunded = 0.0;
 					if (paymentMethod.getSubTotal() > ammountRefund) {
 						refunded = ammountRefund;
-						paymentMethod.setSubTotal(paymentMethod.getSubTotal() - ammountRefund);
 						ammountRefund = 0.0;
 					} else {
 						ammountRefund -= paymentMethod.getSubTotal();
 						refunded = paymentMethod.getSubTotal();
-						paymentMethod.setSubTotal(0.0);
-
 					}
 					Refund refund = new Refund(orderDetail.getOrderDetailId() + "-" + paymentMethod.getPaymentId(),
 							AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, refunded, orderDetail, paymentMethod);
 					refundService.save(refund);
-					if (paymentMethod.getSubTotal() == 0.0) {
+					if (paymentMethod.getSubTotal() == refunded) {
 						paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_REFUNDED);
+					} else {
+						paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PARTIALLY_REFUNDED);
 					}
 				}
 

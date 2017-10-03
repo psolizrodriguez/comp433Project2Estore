@@ -17,6 +17,7 @@ import com.ebook.model.item.Book;
 import com.ebook.model.item.Inventory;
 import com.ebook.model.item.Partner;
 import com.ebook.model.item.Product;
+import com.ebook.model.item.Review;
 import com.ebook.model.order.CreditCardPayment;
 import com.ebook.model.order.CustomerOrder;
 import com.ebook.model.order.OrderDetail;
@@ -178,6 +179,12 @@ public class MainController {
 		orderDetailService.shipOrderDetail((ShippingOrder) orderDetails.get(0), "9999999999999999999");
 		// Cancel HeadPhones Order
 		customerOrderService.cancelOrderDetail(juliaOrder, orderDetails.get(1));
+		// Write Review for Order of Fitbit
+		List<Review> reviewsFitbit = new ArrayList<>();
+		reviewsFitbit.add(new Review("1", "Excellent Activity Tracker",
+				"Small and stylish, very accurate on with the step count.", 5, juliaCicale));
+		fitbitAlta.setReview(reviewsFitbit);
+		productService.save(fitbitAlta);
 		return "index";
 	}
 

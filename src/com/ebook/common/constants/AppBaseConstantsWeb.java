@@ -9,6 +9,7 @@ public class AppBaseConstantsWeb {
 	public static final String PAYMENT_STATUS_VERIFIED = "Verified";
 	public static final String PAYMENT_STATUS_PAID = "Paid";
 	public static final String PAYMENT_STATUS_REFUNDED = "Refunded";
+	public static final String PAYMENT_STATUS_PARTIALLY_REFUNDED = "Partially Refunded";
 	// ORDER STATUS
 	public static final String ORDER_STATUS_PENDING = "Pending";
 	public static final String ORDER_STATUS_READY_TO_SHIP = "Ready to Ship";
