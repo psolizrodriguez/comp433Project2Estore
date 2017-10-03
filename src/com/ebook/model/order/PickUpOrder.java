@@ -1,42 +1,28 @@
 package com.ebook.model.order;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
-import com.ebook.model.customer.Address;
+import com.ebook.model.item.Inventory;
 
 @Entity
-public class PickUpOrder extends CustomerOrder {
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private Address pickUpAddress;
-	private String initialTime;
-	private String finalTime;
+public class PickUpOrder extends OrderDetail {
 
-	public String getInitialTime() {
-		return initialTime;
+	private String timeForPickUp;
+
+	public PickUpOrder() {
+
 	}
 
-	public void setInitialTime(String initialTime) {
-		this.initialTime = initialTime;
+	public PickUpOrder(String orderDetailId, Inventory inventory, Integer quantity, String orderState) {
+		super(orderDetailId, inventory, quantity, orderState);
 	}
 
-	public String getFinalTime() {
-		return finalTime;
+	public String getTimeForPickUp() {
+		return timeForPickUp;
 	}
 
-	public void setFinalTime(String finalTime) {
-		this.finalTime = finalTime;
-	}
-
-	public Address getPickUpAddress() {
-		return pickUpAddress;
-	}
-
-	public void setPickUpAddress(Address pickUpAddress) {
-		this.pickUpAddress = pickUpAddress;
+	public void setTimeForPickUp(String timeForPickUp) {
+		this.timeForPickUp = timeForPickUp;
 	}
 
 }

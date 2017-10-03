@@ -8,13 +8,33 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.ebook.model.customer.Address;
+import com.ebook.model.item.Inventory;
 
 @Entity
-public class ShippingOrder extends CustomerOrder {
+public class ShippingOrder extends OrderDetail {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Address shippingAddress;
 	private Calendar estimatedDelivery;
+	private String trackingNumber;
+
+	public ShippingOrder() {
+
+	}
+
+	public ShippingOrder(String orderDetailId, Inventory inventory, Integer quantity, String orderState,
+			Address shippingAddress) {
+		super(orderDetailId, inventory, quantity, orderState);
+		this.shippingAddress = shippingAddress;
+	}
+
+	public String getTrackingNumber() {
+		return trackingNumber;
+	}
+
+	public void setTrackingNumber(String trackingNumber) {
+		this.trackingNumber = trackingNumber;
+	}
 
 	public Calendar getEstimatedDelivery() {
 		return estimatedDelivery;

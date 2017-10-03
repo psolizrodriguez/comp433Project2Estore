@@ -7,8 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -17,7 +15,6 @@ import com.ebook.model.customer.Address;
 import com.ebook.model.customer.Customer;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class CustomerOrder {
 	@Id
 	private String orderId;
@@ -28,7 +25,7 @@ public class CustomerOrder {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Customer customer;
-	private String orderState = "Open";
+	private String orderState;
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	private Address billingAddress;

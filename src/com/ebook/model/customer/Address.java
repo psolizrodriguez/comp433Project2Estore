@@ -16,6 +16,15 @@ public class Address {
 	public Address() {
 	}
 
+	public Address(String addressId, String street, String unit, String city, String state, String zip) {
+		this.addressId = addressId;
+		this.street = street;
+		this.unit = unit;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+	}
+
 	public String getAddressId() {
 		return addressId;
 	}

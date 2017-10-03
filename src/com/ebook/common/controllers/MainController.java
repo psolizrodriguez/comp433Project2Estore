@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ebook.common.utility.AppBaseUtilsWeb;
+import com.ebook.common.constants.AppBaseConstantsWeb;
 import com.ebook.model.customer.Address;
 import com.ebook.model.customer.Customer;
 import com.ebook.model.item.Book;
@@ -18,15 +18,18 @@ import com.ebook.model.item.Inventory;
 import com.ebook.model.item.Partner;
 import com.ebook.model.item.Product;
 import com.ebook.model.order.CreditCardPayment;
+import com.ebook.model.order.CustomerOrder;
 import com.ebook.model.order.OrderDetail;
 import com.ebook.model.order.PayPalPayment;
 import com.ebook.model.order.PaymentMethod;
+import com.ebook.model.order.PickUpOrder;
 import com.ebook.model.order.ShippingOrder;
 import com.ebook.service.customer.CustomerService;
 import com.ebook.service.item.InventoryService;
 import com.ebook.service.item.PartnerService;
 import com.ebook.service.item.ProductService;
 import com.ebook.service.order.CustomerOrderService;
+import com.ebook.service.order.OrderDetailService;
 
 @Controller
 public class MainController {
@@ -40,6 +43,8 @@ public class MainController {
 	private InventoryService inventoryService;
 	@Autowired
 	private CustomerOrderService customerOrderService;
+	@Autowired
+	private OrderDetailService orderDetailService;
 
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request) {
@@ -143,27 +148,36 @@ public class MainController {
 		}
 		// Placing Order
 		System.out.println("Placing Order");
-		ShippingOrder juliaOrder = new ShippingOrder();
+		CustomerOrder juliaOrder = new CustomerOrder();
 		juliaOrder.setOrderId("1");
 		juliaOrder.setBillingAddress(juliaCicale.getBillingAddress());
 		juliaOrder.setCustomer(juliaCicale);
-		juliaOrder.setOrderState("Pending");
-		juliaOrder.setPaymentStatus("Pending");
-		juliaOrder.setShippingAddress(juliaCicale.getShippingAddress());
-		juliaOrder.setEstimatedDelivery(AppBaseUtilsWeb.getCurrentTime());
+		juliaOrder.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_PENDING);
+		juliaOrder.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PENDING);
+
 		// Adding items to the Order
 		List<OrderDetail> orderDetails = new ArrayList<>();
-		orderDetails.add(new OrderDetail("1", searchFitbit.get(0), 1));
-		orderDetails.add(new OrderDetail("2", searchHeadphones.get(0), 2));
+		orderDetails.add(new ShippingOrder("1", searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
+				juliaCicale.getShippingAddress()));
+		orderDetails.add(new PickUpOrder("2", searchHeadphones.get(0), 2, AppBaseConstantsWeb.ORDER_STATUS_PENDING));
 		juliaOrder.setOrderDetails(orderDetails);
 		System.out.println("Total of Order is : " + juliaOrder.getTotal());
 		// Adding Payment Method to the Order
 		List<PaymentMethod> paymentMethods = new ArrayList<>();
-		paymentMethods.add(
-				new CreditCardPayment("1", "Pending", 190.0, "1010101010101010101020", "Julia Cicale", "911", "20/20"));
-		paymentMethods.add(new PayPalPayment("2", "Pending", 100.0, "XVF1022", "julia.cicale@gmail.com"));
+		paymentMethods.add(new CreditCardPayment("1", AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 100.0,
+				"1010101010101010101020", "Julia Cicale", "911", "20/20"));
+		paymentMethods.add(new PayPalPayment("2", AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 190.0, "XVF1022",
+				"julia.cicale@gmail.com"));
 		juliaOrder.setPaymentMethod(paymentMethods);
 		customerOrderService.save(juliaOrder);
+		// Accept Payment
+		customerOrderService.acceptPayment(juliaOrder);
+		// Fulfill Order
+		customerOrderService.fulfillOrder(juliaOrder);
+		// Ship Fitbit Order
+		orderDetailService.shipOrderDetail((ShippingOrder) orderDetails.get(0), "9999999999999999999");
+		// Cancel HeadPhones Order
+		customerOrderService.cancelOrderDetail(juliaOrder, orderDetails.get(1));
 		return "index";
 	}
 
