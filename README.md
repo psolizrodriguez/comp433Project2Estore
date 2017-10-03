@@ -1,13 +1,20 @@
 # COMP 388/433: Assignment 2
+## Team Members
+- Julia Cicale  
+- Percy Soliz  
 ## Description
 Suppose you want to sell any items online (like big eCommerce sites) – you have also decided
 that you will also allow other partners/companies to sell their inventory on your site. Your
 approach is to provide web service APIs for all functionalities that will provide access to your
 items that you will sell and to provide your partners to be able to add their inventories to be
 sold on your site using APIs. 
-## Team Members
-- Julia Cicale  
-- Percy Soliz  
+## Use Cases
+### Customer Registration
+[Customer Registration](https://i.imgur.com/UDAThTs.png)
+### Buying Experience
+[Buying Experience](https://i.imgur.com/b6otbrU.png)
+### Partner Registration
+[Partner Registration](https://i.imgur.com/QYRwtCg.png)
 ## Import Git Project in eclipse
 1) Create directory "comp433Project2Estore" inside of your workspace  
 2) Execute the following code inside of that directory once Git is installed in your machine: 
@@ -26,6 +33,6 @@ git pull comp433Project2Estore master
 **User:** jcicale  
 **Password:** jcicale  
 ## Class Diagram
-![EStore](https://i.imgur.com/xyUaF1D.gif)
+![EStore_CD](https://i.imgur.com/xyUaF1D.gif)
 ## Entity Relationship Diagram
-![EStore](https://i.imgur.com/7TRWs6v.png)
+![EStore_ERD](https://i.imgur.com/7TRWs6v.png)
