@@ -11,9 +11,11 @@ sold on your site using APIs.
 ## Import Git Project in eclipse
 1) Create directory "comp433Project2Estore" inside of your workspace  
 2) Execute the following code inside of that directory once Git is installed in your machine: 
-```git init  
+```
+git init  
 git remote add comp433Project2Estore https://github.com/psolizrodriguez/comp433Project2Estore.git  
-git pull comp433Project2Estore master```
+git pull comp433Project2Estore master
+```
 3) Create a Dynamic Web with tomcat 9 as container Project on eclipse using that path  
 4) The class **com.ebook.common.controllers.MainController** has the code to test and insert all the dummy data  
 ## Connection Details
