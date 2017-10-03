@@ -16,12 +16,13 @@ git init
 git remote add comp433Project2Estore https://github.com/psolizrodriguez/comp433Project2Estore.git  
 git pull comp433Project2Estore master
 ```
-3) Create a Dynamic Web with tomcat 9 as container Project on eclipse using that path  
+3) Create a Dynamic Web with tomcat 9 as container on eclipse using that path  
 4) The class **com.ebook.common.controllers.MainController** has the code to test and insert all the dummy data  
-## Connection Details
+## Data Base Connection Details
 **Host:** 18.220.231.8  
 **Database:** test  
 **User:** jcicale  
 **Password:** jcicale  
 ## Class Diagram
-![EStore](https://i.imgur.com/4Ha50PY.png)
+![EStore](https://i.imgur.com/xyUaF1D.gif)
+## Entity Relationship Diagram
