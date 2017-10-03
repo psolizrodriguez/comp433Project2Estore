@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ebook.common.constants.AppBaseConstantsWeb;
+import com.ebook.common.utility.AppBaseUtilsWeb;
 import com.ebook.model.customer.Address;
 import com.ebook.model.customer.Customer;
 import com.ebook.model.item.Book;
@@ -56,7 +57,7 @@ public class MainController {
 		juliaCicale.setFirstName("Julia");
 		juliaCicale.setLastName("Cicale");
 		juliaCicale.setUserName("julia.cicale");
-		juliaCicale.setPassword("julia.cicale");
+		juliaCicale.setPassword(AppBaseUtilsWeb.encriptText("julia.cicale"));
 		Address juliaShip = new Address();
 		juliaShip.setAddressId("00006");
 		juliaShip.setStreet("123 Home St.");
@@ -107,7 +108,7 @@ public class MainController {
 		amazon.setPartnerId("001");
 		amazon.setName("Amazon");
 		amazon.setUserName("amazon");
-		amazon.setPassword("amazon12345");
+		amazon.setPassword(AppBaseUtilsWeb.encriptText("amazon12345"));
 		List<Inventory> amazonInventory = new LinkedList<>();
 		amazonInventory.add(new Inventory("001-001", fitbitAlta, 150.0, 10));
 		amazonInventory.add(new Inventory("001-002", headphones, 80.0, 10));
@@ -119,7 +120,7 @@ public class MainController {
 		ebay.setPartnerId("002");
 		ebay.setName("Ebay");
 		ebay.setUserName("ebay");
-		ebay.setPassword("ebay12345");
+		ebay.setPassword(AppBaseUtilsWeb.encriptText("ebay12345"));
 		List<Inventory> ebayInventory = new LinkedList<>();
 		ebayInventory.add(new Inventory("002-001", fitbitAlta, 160.0, 15));
 		ebayInventory.add(new Inventory("002-002", headphones, 70.0, 15));
