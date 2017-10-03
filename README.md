@@ -6,8 +6,8 @@ approach is to provide web service APIs for all functionalities that will provid
 items that you will sell and to provide your partners to be able to add their inventories to be
 sold on your site using APIs. 
 ## Team Members
--Julia Cicale  
--Percy Soliz  
+- Julia Cicale  
+- Percy Soliz  
 ## Import Git Project in eclipse
 1) Create directory "comp433Project2Estore" inside of your workspace  
 2) Execute the following code inside of that directory once Git is installed in your machine: 
@@ -26,3 +26,4 @@ git pull comp433Project2Estore master
 ## Class Diagram
 ![EStore](https://i.imgur.com/xyUaF1D.gif)
 ## Entity Relationship Diagram
+![EStore](https://i.imgur.com/7TRWs6v.png)
