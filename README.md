@@ -19,7 +19,7 @@ git pull comp433Project2Estore master
 3) Create a Dynamic Web with tomcat 9 as container on eclipse using that path  
 4) The class **com.ebook.common.controllers.MainController** has the code to test and insert all the dummy data  
 ## Main Controller with Dummy Data
-[MainController.java](./blob/master/src/com/ebook/common/controllers/MainController.java)
+[MainController.java](./src/com/ebook/common/controllers/MainController.java)
 ## Data Base Connection Details
 **Host:** 18.220.231.8  
 **Database:** test  
