@@ -24,4 +24,5 @@
 
 	<import resource="web-application-config.xml" />
 	<import resource="classpath:dao-context.xml" />
+	<import resource="cxf.xml" />
 </beans>
