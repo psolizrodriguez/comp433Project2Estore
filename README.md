@@ -4,8 +4,8 @@
 # COMP 388/433: Project 3
 ## Description
 Use the case study material as a requirement. Your approach is to provide web service APIs for all functionalities that will provide access to your items that you will sell and to provide your partners to be able to add their inventories to be sold on your site using APIs. We will concentrate developing services for the following:  
-###1. Your web service functionalities to sell items would include functionalities such as:
-####a. Search item database by product
+### 1. Your web service functionalities to sell items would include functionalities such as:
+#### a. Search item database by product
 **URI:** http://18.220.231.8:8080/comp433Project2Estore/services/productservice/product?keywords=FitBit  
 -FitBit: Product to perform the search over the inventory  
 **Method:** GET  
@@ -56,19 +56,19 @@ none
     }
 ]
 ```
-####b. Accept buy order  
-####c. Accept Credit Card payment  
-####d. Ship orders  
-####e. Provide order status; Provide status of orders in progress  
-####f. Order Cancel  
-###2. Allowing Partners to use your site to sell their products with functionalities such as:  
-####a. Need to register and create profile of partners  
-####b. Add product or products in market place  
-####c. Push orders that customers made to partners  
-####d. Get acknowledgement of order fulfillment  
-###3. Features to make your APIs robust:  
-####a. ERROR Handling  
-####b. Exception handling  
+#### b. Accept buy order  
+#### c. Accept Credit Card payment  
+#### d. Ship orders  
+#### e. Provide order status; Provide status of orders in progress  
+#### f. Order Cancel  
+### 2. Allowing Partners to use your site to sell their products with functionalities such as:  
+#### a. Need to register and create profile of partners  
+#### b. Add product or products in market place  
+#### c. Push orders that customers made to partners  
+#### d. Get acknowledgement of order fulfillment  
+### 3. Features to make your APIs robust:  
+#### a. ERROR Handling  
+#### b. Exception handling  
 ## Tomcat Server Connection Details  
 ## Data Base Connection Details  
 **Host:** 18.220.231.8:8080  
