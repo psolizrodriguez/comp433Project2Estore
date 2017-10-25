@@ -14,7 +14,8 @@ Accept: Application/json
 {name: "",  
 lastName: ""}  
 **Response:**  
-```[
+```
+[
     {
         "productId": "001",
         "inventoryId": "001-001",
@@ -31,7 +32,8 @@ lastName: ""}
         "productPrice": 160,
         "availableQuantity": 15
     }
-]```  
+]
+```
 b. Accept buy order  
 c. Accept Credit Card payment  
 d. Ship orders  
