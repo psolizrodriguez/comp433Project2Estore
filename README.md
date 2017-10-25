@@ -6,14 +6,17 @@
 Use the case study material as a requirement. Your approach is to provide web service APIs for all functionalities that will provide access to your items that you will sell and to provide your partners to be able to add their inventories to be sold on your site using APIs. We will concentrate developing services for the following:  
 ### 1. Your web service functionalities to sell items would include functionalities such as:
 #### a. Search item database by product
-**URI:** http://18.220.231.8:8080/comp433Project2Estore/services/productservice/product?keywords=FitBit  
--FitBit: Product to perform the search over the inventory  
-**Method:** GET  
-**Headers:**  
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/productservice/product?keywords=FitBit  
+##### Parameters
+-keywords: Name of the product to perform the search over the inventory  
+##### Method: 
+GET  
+##### Headers:   
 ```
-Accept:application/json
+Accept:application/json  
 ```
-**Body:**  
+##### Body:  
 ```
 none
 ```
@@ -35,7 +38,7 @@ none
     "prospectId": 2
 } 
 ```
-**Response:**  
+##### Response:  
 ```
 [
     {
