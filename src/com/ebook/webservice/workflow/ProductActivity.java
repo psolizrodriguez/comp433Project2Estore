@@ -6,5 +6,5 @@ import com.ebook.webservice.representation.ProductRepresentation;
 
 public interface ProductActivity {
 
-	public List<ProductRepresentation> getProfiles(String keywords);
+	public List<ProductRepresentation> getProducts(String keywords);
 }

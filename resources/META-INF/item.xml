@@ -6,4 +6,9 @@
 		name="com.ebook.dao.inventory.impl.InventoryDaoImpl.listAllInventoryByKeywords">
 		<![CDATA[FROM Inventory i WHERE i.quantity > 0 AND i.product.title LIKE ?1 ORDER BY i.price]]>
 	</query>
+	<query
+		name="com.ebook.dao.inventory.impl.InventoryDaoImpl.listAll">
+		<![CDATA[FROM Inventory i WHERE i.quantity > 0 ORDER BY i.price]]>
+	</query>
+	
 </hibernate-mapping>

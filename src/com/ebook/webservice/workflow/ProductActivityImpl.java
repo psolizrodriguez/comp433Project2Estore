@@ -17,11 +17,16 @@ public class ProductActivityImpl implements ProductActivity {
 	@Autowired
 	private InventoryService inventoryService;
 
-	public List<ProductRepresentation> getProfiles(String keywords) {
+	public List<ProductRepresentation> getProducts(String keywords) {
 
 		List<Inventory> inventories = new ArrayList<>();
 		List<ProductRepresentation> productRepresentations = new ArrayList<>();
-		inventories = inventoryService.listAllInventoryByKeywords(keywords);
+		if(keywords == null) {
+			inventories = inventoryService.listAll();
+		}else {
+			inventories = inventoryService.listAllInventoryByKeywords(keywords);	
+		}
+		
 
 		Iterator<Inventory> it = inventories.iterator();
 		while (it.hasNext()) {

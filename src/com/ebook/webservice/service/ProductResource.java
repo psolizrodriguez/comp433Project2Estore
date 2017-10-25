@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,10 +23,10 @@ public class ProductResource implements ProductWebService {
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
-	@Path("/product/{keywords}")
-	public List<ProductRepresentation> getProducts(@PathParam("keywords") String keywords) {
+	@Path("/product")
+	public List<ProductRepresentation> getProducts(@QueryParam("keywords") String keywords) {
 		System.out.println("GET METHOD Request for all products .............");
-		return productActivity.getProfiles(keywords);
+		return productActivity.getProducts(keywords);
 	}
 
 }
