@@ -1,11 +1,21 @@
+
+# COMP 388/433: Project 3
 ## Team Members  
 - Julia Cicale  
 - Percy Soliz  
-# COMP 388/433: Project 3
+
+## Tomcat Server Connection Details  
+**Host:** 18.220.231.8:8080  
+**Project Name:** comp433Project2Estore  
+**User:** mapirisoft  
+**Password:** mapirisoft062012
+
 ## Description
 Use the case study material as a requirement. Your approach is to provide web service APIs for all functionalities that will provide access to your items that you will sell and to provide your partners to be able to add their inventories to be sold on your site using APIs. We will concentrate developing services for the following:  
 ### 1. Your web service functionalities to sell items would include functionalities such as:
 #### a. Search item database by product
+##### Description: 
+This method performs a search over the title column of product table joining it with inventory and verifying the quantity is bigger than 0  
 ##### URI: 
 http://18.220.231.8:8080/comp433Project2Estore/services/productservice/product?keywords=FitBit  
 ##### Parameters
@@ -72,12 +82,7 @@ none
 ### 3. Features to make your APIs robust:  
 #### a. ERROR Handling  
 #### b. Exception handling  
-## Tomcat Server Connection Details  
-## Data Base Connection Details  
-**Host:** 18.220.231.8:8080  
-**Project Name:** comp433Project2Estore  
-**User:** mapirisoft  
-**Password:** mapirisoft062012
+
 # COMP 388/433: Project 2
 ## Description
 Suppose you want to sell any items online (like big eCommerce sites) – you have also decided
