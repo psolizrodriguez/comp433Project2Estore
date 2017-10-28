@@ -10,5 +10,9 @@
 		name="com.ebook.dao.inventory.impl.InventoryDaoImpl.listAll">
 		<![CDATA[FROM Inventory i WHERE i.quantity > 0 ORDER BY i.price]]>
 	</query>
+	<query	name="com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.getById">
+		<![CDATA[FROM CustomerOrder c WHERE c.orderId = ?1]]>
+	</query>
+	
 	
 </hibernate-mapping>

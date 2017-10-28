@@ -186,6 +186,25 @@ public class MainController {
 				"Small and stylish, very accurate on with the step count.", 5, juliaCicale));
 		fitbitAlta.setReview(reviewsFitbit);
 		fitbitAlta = productService.save(fitbitAlta);
+		//Creating test Order
+		System.out.println("Placing Order");
+		searchFitbit = inventoryService.listAllInventoryByKeywords("FitBit");
+		CustomerOrder order2 = new CustomerOrder();
+		order2.setOrderId(2L);
+		order2.setBillingAddress(juliaCicale.getBillingAddress());
+		order2.setCustomer(juliaCicale);
+		order2.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_PENDING);
+		order2.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PENDING);
+		List<OrderDetail> orderDetails2 = new ArrayList<>();
+		
+		orderDetails2.add(new ShippingOrder(3L, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
+				juliaCicale.getShippingAddress()));
+		order2.setOrderDetails(orderDetails2);
+		List<PaymentMethod> paymentMethods2 = new ArrayList<>();
+		paymentMethods2.add(new CreditCardPayment(3L, AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 150.0,
+				"1010101010101010101020", "Julia Cicale", "911", "20/20"));
+		order2.setPaymentMethod(paymentMethods2);
+		order2 = customerOrderService.save(order2);
 		return "index";
 	}
 

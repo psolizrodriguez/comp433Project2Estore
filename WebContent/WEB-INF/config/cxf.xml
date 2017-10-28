@@ -24,10 +24,18 @@
 		</jaxrs:providers> 
 
 		<jaxrs:schemaLocations>
-			<jaxrs:schemaLocation>com.ebook.webservice.representation.ProductRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.AddressRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.CreditCardPaymentRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.CustomerOrderRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.CustomerOrderRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.CustomerRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.InventoryRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.OrderDetailRepresentation</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.ebook.webservice.representation.PartnerRepresentation</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.ebook.webservice.representation.PartnerRequest</jaxrs:schemaLocation>
-			<jaxrs:schemaLocation>com.ebook.webservice.representation.InventoryRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.PaymentMethodRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.PayPalPaymentRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.ProductRepresentation</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
