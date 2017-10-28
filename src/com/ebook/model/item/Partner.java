@@ -26,6 +26,17 @@ public class Partner {
 	@JoinColumn
 	private List<Inventory> inventory;
 
+	public Partner() {
+	}
+
+	public Partner(Long partnerId, String name, String userName, String password, List<Inventory> inventory) {
+		this.partnerId = partnerId;
+		this.name = name;
+		this.userName = userName;
+		this.password = password;
+		this.inventory = inventory;
+	}
+
 	public String getUserName() {
 		return userName;
 	}

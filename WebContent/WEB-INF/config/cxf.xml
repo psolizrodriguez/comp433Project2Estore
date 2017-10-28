@@ -16,7 +16,8 @@
       	
   <jaxrs:server name="EBookStoreService" address="/">
 		<jaxrs:serviceBeans>
-			<ref bean="productServiceRest" />
+			<ref bean="orderServiceRest" />
+			<ref bean="partnerServiceRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -24,9 +25,14 @@
 
 		<jaxrs:schemaLocations>
 			<jaxrs:schemaLocation>com.ebook.webservice.representation.ProductRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.PartnerRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.PartnerRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.ebook.webservice.representation.InventoryRepresentation</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 
 	</jaxrs:server>
-  	<bean id="productServiceRest" class="com.ebook.webservice.service.ProductResource" />
+  	<bean id="orderServiceRest" class="com.ebook.webservice.service.OrderResource" />
+  	<bean id="partnerServiceRest" class="com.ebook.webservice.service.PartnerResource" />
+  	
   
 </beans>

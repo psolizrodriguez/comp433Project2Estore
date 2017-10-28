@@ -17,7 +17,7 @@ Use the case study material as a requirement. Your approach is to provide web se
 ##### Description: 
 This method performs a search over the title column of product table joining it with inventory and verifying the quantity is bigger than 0  
 ##### URI: 
-http://18.220.231.8:8080/comp433Project2Estore/services/productservice/product?keywords=FitBit  
+http://18.220.231.8:8080/comp433Project2Estore/services/orderService/searchInventoryofProduct?keywords=FitBit 
 ##### Parameters
 -keywords: Name of the product to perform the search over the inventory  
 ##### Method: 
@@ -30,42 +30,28 @@ Accept:application/json
 ```
 none
 ```
-```
-{
-    "date": "12/12/17",
-    "fromHour": "15:00",
-    "toHour": "17:00",
-    "hours": 2,
-    "priceHour": 25,
-    "subTotal": 50,
-    "taxes": 5,
-    "transportation": 15,
-    "total": 70,
-    "requiredSkill": "[2]",
-    "jobTitle": "Head Chef of Event",
-    "description": "Check Engine light always on",
-    "profileId": 1,
-    "prospectId": 2
-} 
-```
 ##### Response:  
 ```
 [
     {
-        "productId": "001",
-        "inventoryId": "001-001",
-        "productName": "FitBit Alta",
-        "productDescription": "Activity Tracker",
-        "productPrice": 150,
-        "availableQuantity": 9
+        "inventoryId": 1,
+        "productRepresentation": {
+            "productId": 1,
+            "title": "FitBit Alta",
+            "description": "Activity Tracker"
+        },
+        "price": 150,
+        "quantity": 9
     },
     {
-        "productId": "001",
-        "inventoryId": "002-001",
-        "productName": "FitBit Alta",
-        "productDescription": "Activity Tracker",
-        "productPrice": 160,
-        "availableQuantity": 15
+        "inventoryId": 4,
+        "productRepresentation": {
+            "productId": 1,
+            "title": "FitBit Alta",
+            "description": "Activity Tracker"
+        },
+        "price": 160,
+        "quantity": 15
     }
 ]
 ```
@@ -76,6 +62,36 @@ none
 #### f. Order Cancel  
 ### 2. Allowing Partners to use your site to sell their products with functionalities such as:  
 #### a. Need to register and create profile of partners  
+##### Description: 
+This method allows us to register a new Partner inside of the application  
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/createPartnerProfile
+##### Parameters
+none  
+##### Method: 
+POST  
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+	"name": "JackRabbit",
+	"userName": "jackrabbit",
+	"password": "password12345"
+} 
+```
+##### Response:  
+```
+{
+    "partnerId": 3,
+    "name": "JackRabbit",
+    "userName": "jackrabbit",
+    "inventory": []
+}
+```
 #### b. Add product or products in market place  
 #### c. Push orders that customers made to partners  
 #### d. Get acknowledgement of order fulfillment  

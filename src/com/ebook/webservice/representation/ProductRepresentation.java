@@ -5,28 +5,29 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.ebook.model.item.Product;
+
 @XmlRootElement(name = "Product")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class ProductRepresentation {
 	private Long productId;
-	private Long inventoryId;
-	private String productName;
-	private String productDescription;
-	private Double productPrice;
-	private Integer availableQuantity;
+	private String title;
+	private String description;
 
 	public ProductRepresentation() {
 	}
 
-	public ProductRepresentation(Long productId, Long inventoryId, String productName, String productDescription,
-			Double productPrice, Integer availableQuantity) {
+	public ProductRepresentation(Long productId, String title, String description) {
 		this.productId = productId;
-		this.inventoryId = inventoryId;
-		this.productName = productName;
-		this.productDescription = productDescription;
-		this.productPrice = productPrice;
-		this.availableQuantity = availableQuantity;
+		this.title = title;
+		this.description = description;
+	}
+
+	public ProductRepresentation(Product product) {
+		this.productId = product.getProductId();
+		this.title = product.getTitle();
+		this.description = product.getDescription();
 	}
 
 	public Long getProductId() {
@@ -37,43 +38,20 @@ public class ProductRepresentation {
 		this.productId = productId;
 	}
 
-	public Long getInventoryId() {
-		return inventoryId;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setInventoryId(Long inventoryId) {
-		this.inventoryId = inventoryId;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getProductName() {
-		return productName;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getProductDescription() {
-		return productDescription;
-	}
-
-	public void setProductDescription(String productDescription) {
-		this.productDescription = productDescription;
-	}
-
-	public Double getProductPrice() {
-		return productPrice;
-	}
-
-	public void setProductPrice(Double productPrice) {
-		this.productPrice = productPrice;
-	}
-
-	public Integer getAvailableQuantity() {
-		return availableQuantity;
-	}
-
-	public void setAvailableQuantity(Integer availableQuantity) {
-		this.availableQuantity = availableQuantity;
-	}
 }

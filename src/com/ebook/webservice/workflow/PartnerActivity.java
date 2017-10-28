@@ -1,0 +1,9 @@
+package com.ebook.webservice.workflow;
+
+import com.ebook.webservice.representation.PartnerRepresentation;
+import com.ebook.webservice.representation.PartnerRequest;
+
+public interface PartnerActivity {
+
+	public PartnerRepresentation createPartner(PartnerRequest partnerRequest);
+}

@@ -53,20 +53,20 @@ public class MainController {
 		// Testing addCustomer
 		System.out.println("Adding Customer julia.cicale");
 		Customer juliaCicale = new Customer();
-		juliaCicale.setCustomerId(null);
+		juliaCicale.setCustomerId(1L);
 		juliaCicale.setFirstName("Julia");
 		juliaCicale.setLastName("Cicale");
 		juliaCicale.setUserName("julia.cicale");
 		juliaCicale.setPassword(AppBaseUtilsWeb.encriptText("julia.cicale"));
 		Address juliaShip = new Address();
-		juliaShip.setAddressId(null);
+		juliaShip.setAddressId(1L);
 		juliaShip.setStreet("123 Home St.");
 		juliaShip.setUnit("Unit 2");
 		juliaShip.setCity("Chicago");
 		juliaShip.setState("IL");
 		juliaShip.setZip("60657");
 		Address juliaBill = new Address();
-		juliaBill.setAddressId(null);
+		juliaBill.setAddressId(2L);
 		juliaBill.setStreet("123 Business Rd.");
 		juliaBill.setUnit("Ste 500");
 		juliaBill.setCity("Chicago");
@@ -78,24 +78,24 @@ public class MainController {
 		// Adding products
 		System.out.println("Adding Product FitBit Alta");
 		Product fitbitAlta = new Product();
-		fitbitAlta.setProductId(null);
+		fitbitAlta.setProductId(1L);
 		fitbitAlta.setTitle("FitBit Alta");
 		fitbitAlta.setDescription("Activity Tracker");
 		fitbitAlta = productService.save(fitbitAlta);
 		System.out.println("Adding Product Bluetooth Headphones");
 		Product headphones = new Product();
-		headphones.setProductId(null);
+		headphones.setProductId(2L);
 		headphones.setTitle("Bluetooth Headphones");
 		headphones.setDescription("Wireless and comfortable headphones for running");
 		headphones = productService.save(headphones);
 		System.out.println("Adding Product Laptop Bag");
 		Product laptopBag = new Product();
-		laptopBag.setProductId(null);
+		laptopBag.setProductId(3L);
 		laptopBag.setTitle("Laptop Bag");
 		laptopBag.setDescription("Fits laptops of up to 15 inches");
 		laptopBag = productService.save(laptopBag);
 		Book odyssey = new Book();
-		odyssey.setProductId(null);
+		odyssey.setProductId(4L);
 		odyssey.setTitle("The Odyssey");
 		odyssey.setDescription(
 				"Sing to me of the man, Muse, the man of twists and turns driven time and again off course, once he had plundered the hallowed heights of Troy");
@@ -105,26 +105,26 @@ public class MainController {
 		// Adding Partners
 		System.out.println("Adding Partner Amazon");
 		Partner amazon = new Partner();
-		amazon.setPartnerId(null);
+		amazon.setPartnerId(1L);
 		amazon.setName("Amazon");
 		amazon.setUserName("amazon");
 		amazon.setPassword(AppBaseUtilsWeb.encriptText("amazon12345"));
 		List<Inventory> amazonInventory = new LinkedList<>();
-		amazonInventory.add(new Inventory(null, fitbitAlta, 150.0, 10));
-		amazonInventory.add(new Inventory(null, headphones, 80.0, 10));
-		amazonInventory.add(new Inventory(null, laptopBag, 15.0, 10));
+		amazonInventory.add(new Inventory(1L, fitbitAlta, 150.0, 10));
+		amazonInventory.add(new Inventory(2L, headphones, 80.0, 10));
+		amazonInventory.add(new Inventory(3L, laptopBag, 15.0, 10));
 		amazon.setInventory(amazonInventory);
 		amazon = partnerService.save(amazon);
 		System.out.println("Adding Partner Ebay");
 		Partner ebay = new Partner();
-		ebay.setPartnerId(null);
+		ebay.setPartnerId(2L);
 		ebay.setName("Ebay");
 		ebay.setUserName("ebay");
 		ebay.setPassword(AppBaseUtilsWeb.encriptText("ebay12345"));
 		List<Inventory> ebayInventory = new LinkedList<>();
-		ebayInventory.add(new Inventory(null, fitbitAlta, 160.0, 15));
-		ebayInventory.add(new Inventory(null, headphones, 70.0, 15));
-		ebayInventory.add(new Inventory(null, laptopBag, 20.0, 15));
+		ebayInventory.add(new Inventory(4L, fitbitAlta, 160.0, 15));
+		ebayInventory.add(new Inventory(5L, headphones, 70.0, 15));
+		ebayInventory.add(new Inventory(6L, laptopBag, 20.0, 15));
 		ebay.setInventory(ebayInventory);
 		ebay = partnerService.save(ebay);
 		// Searching for Inventory
@@ -151,7 +151,7 @@ public class MainController {
 		// Placing Order
 		System.out.println("Placing Order");
 		CustomerOrder juliaOrder = new CustomerOrder();
-		juliaOrder.setOrderId(null);
+		juliaOrder.setOrderId(1L);
 		juliaOrder.setBillingAddress(juliaCicale.getBillingAddress());
 		juliaOrder.setCustomer(juliaCicale);
 		juliaOrder.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_PENDING);
@@ -159,16 +159,16 @@ public class MainController {
 
 		// Adding items to the Order
 		List<OrderDetail> orderDetails = new ArrayList<>();
-		orderDetails.add(new ShippingOrder(null, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
+		orderDetails.add(new ShippingOrder(1L, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
 				juliaCicale.getShippingAddress()));
-		orderDetails.add(new PickUpOrder(null, searchHeadphones.get(0), 2, AppBaseConstantsWeb.ORDER_STATUS_PENDING));
+		orderDetails.add(new PickUpOrder(2L, searchHeadphones.get(0), 2, AppBaseConstantsWeb.ORDER_STATUS_PENDING));
 		juliaOrder.setOrderDetails(orderDetails);
 		System.out.println("Total of Order is : " + juliaOrder.getTotal());
 		// Adding Payment Method to the Order
 		List<PaymentMethod> paymentMethods = new ArrayList<>();
-		paymentMethods.add(new CreditCardPayment(null, AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 100.0,
+		paymentMethods.add(new CreditCardPayment(1L, AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 100.0,
 				"1010101010101010101020", "Julia Cicale", "911", "20/20"));
-		paymentMethods.add(new PayPalPayment(null, AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 190.0, "XVF1022",
+		paymentMethods.add(new PayPalPayment(2L, AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 190.0, "XVF1022",
 				"julia.cicale@gmail.com"));
 		juliaOrder.setPaymentMethod(paymentMethods);
 		juliaOrder = customerOrderService.save(juliaOrder);
@@ -182,7 +182,7 @@ public class MainController {
 		customerOrderService.cancelOrderDetail(juliaOrder, juliaOrder.getOrderDetails().get(1));
 		// Write Review for Order of Fitbit
 		List<Review> reviewsFitbit = new ArrayList<>();
-		reviewsFitbit.add(new Review(null, "Excellent Activity Tracker",
+		reviewsFitbit.add(new Review(1L, "Excellent Activity Tracker",
 				"Small and stylish, very accurate on with the step count.", 5, juliaCicale));
 		fitbitAlta.setReview(reviewsFitbit);
 		fitbitAlta = productService.save(fitbitAlta);
