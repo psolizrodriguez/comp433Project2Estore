@@ -25,7 +25,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public Review getById(String reviewId) {
+	public Review getById(Long reviewId) {
 		return dao.getById(reviewId);
 	}
 

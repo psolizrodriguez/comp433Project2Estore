@@ -9,7 +9,7 @@ public interface RefundService {
 
 	public List<Refund> listAll();
 
-	public Refund getById(String refundId);
+	public Refund getById(Long refundId);
 
 	public boolean remove(Refund refund);
 }

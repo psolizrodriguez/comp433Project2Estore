@@ -13,7 +13,7 @@ public class CreditCardPayment extends PaymentMethod {
 
 	}
 
-	public CreditCardPayment(String paymentId, String paymentStatus, Double subTotal, String creditCardNumber,
+	public CreditCardPayment(Long paymentId, String paymentStatus, Double subTotal, String creditCardNumber,
 			String nameOnCard, String securityCode, String validDate) {
 		super(paymentId, paymentStatus, subTotal);
 		this.creditCardNumber = creditCardNumber;

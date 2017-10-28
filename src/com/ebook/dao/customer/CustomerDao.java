@@ -10,7 +10,7 @@ public interface CustomerDao extends Dao {
 
 	public List<Customer> listAll();
 
-	public Customer getById(String customerId);
+	public Customer getById(Long customerId);
 
 	public boolean remove(Customer customer);
 }

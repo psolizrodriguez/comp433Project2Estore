@@ -1,24 +1,30 @@
 package com.ebook.model.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 public class Partner {
 	@Id
-	private String partnerId;
+	@GeneratedValue
+	private Long partnerId;
 	private String name;
 	private String userName;
 	private String password;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinColumn
-	private List<Inventory> inventory = new ArrayList<Inventory>();
+	private List<Inventory> inventory;
 
 	public String getUserName() {
 		return userName;
@@ -36,11 +42,11 @@ public class Partner {
 		this.password = password;
 	}
 
-	public String getPartnerId() {
+	public Long getPartnerId() {
 		return partnerId;
 	}
 
-	public void setPartnerId(String partnerId) {
+	public void setPartnerId(Long partnerId) {
 		this.partnerId = partnerId;
 	}
 

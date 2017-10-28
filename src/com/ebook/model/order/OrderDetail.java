@@ -1,7 +1,9 @@
 package com.ebook.model.order;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -14,8 +16,9 @@ import com.ebook.model.item.Inventory;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class OrderDetail {
 	@Id
-	private String orderDetailId;
-	@OneToOne(fetch = FetchType.EAGER)
+	@GeneratedValue
+	private Long orderDetailId;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private Inventory inventory;
 	private Integer quantity;
@@ -26,7 +29,7 @@ public class OrderDetail {
 
 	}
 
-	public OrderDetail(String orderDetailId, Inventory inventory, Integer quantity, String orderState) {
+	public OrderDetail(Long orderDetailId, Inventory inventory, Integer quantity, String orderState) {
 		this.orderDetailId = orderDetailId;
 		this.inventory = inventory;
 		this.quantity = quantity;
@@ -34,11 +37,11 @@ public class OrderDetail {
 		this.orderState = orderState;
 	}
 
-	public String getOrderDetailId() {
+	public Long getOrderDetailId() {
 		return orderDetailId;
 	}
 
-	public void setOrderDetailId(String orderDetailId) {
+	public void setOrderDetailId(Long orderDetailId) {
 		this.orderDetailId = orderDetailId;
 	}
 

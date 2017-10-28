@@ -6,10 +6,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.ebook.model.customer.Address;
 import com.ebook.model.customer.Customer;
@@ -17,28 +21,31 @@ import com.ebook.model.customer.Customer;
 @Entity
 public class CustomerOrder {
 	@Id
-	private String orderId;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@GeneratedValue
+	private Long orderId;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinColumn
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	private String paymentStatus;
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private Customer customer;
 	private String orderState;
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private Address billingAddress;
 	private Double total;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinColumn
-	private List<PaymentMethod> paymentMethod = new ArrayList<PaymentMethod>();
+	private List<PaymentMethod> paymentMethod;
 
-	public String getOrderId() {
+	public Long getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 

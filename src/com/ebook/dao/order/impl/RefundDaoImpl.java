@@ -30,7 +30,7 @@ public class RefundDaoImpl extends AbstractBaseDao implements RefundDao {
 	}
 
 	@Override
-	public Refund getById(String refundId) {
+	public Refund getById(Long refundId) {
 		return super.verifyNamedQueryAll("com.ebook.dao.refund.impl.RefundDaoImpl.getById", refundId);
 	}
 }

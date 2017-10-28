@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class ProductRepresentation {
-	private String productId;
-	private String inventoryId;
+	private Long productId;
+	private Long inventoryId;
 	private String productName;
 	private String productDescription;
 	private Double productPrice;
@@ -19,7 +19,7 @@ public class ProductRepresentation {
 	public ProductRepresentation() {
 	}
 
-	public ProductRepresentation(String productId, String inventoryId, String productName, String productDescription,
+	public ProductRepresentation(Long productId, Long inventoryId, String productName, String productDescription,
 			Double productPrice, Integer availableQuantity) {
 		this.productId = productId;
 		this.inventoryId = inventoryId;
@@ -29,19 +29,19 @@ public class ProductRepresentation {
 		this.availableQuantity = availableQuantity;
 	}
 
-	public String getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(String productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
-	public String getInventoryId() {
+	public Long getInventoryId() {
 		return inventoryId;
 	}
 
-	public void setInventoryId(String inventoryId) {
+	public void setInventoryId(Long inventoryId) {
 		this.inventoryId = inventoryId;
 	}
 

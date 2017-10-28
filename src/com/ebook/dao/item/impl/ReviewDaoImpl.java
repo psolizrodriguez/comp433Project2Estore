@@ -30,7 +30,7 @@ public class ReviewDaoImpl extends AbstractBaseDao implements ReviewDao {
 	}
 
 	@Override
-	public Review getById(String reviewId) {
+	public Review getById(Long reviewId) {
 		return super.verifyNamedQueryAll("com.ebook.dao.review.impl.ReviewDaoImpl.getById", reviewId);
 	}
 }

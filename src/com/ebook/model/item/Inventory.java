@@ -1,7 +1,9 @@
 package com.ebook.model.item;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -9,8 +11,9 @@ import javax.persistence.OneToOne;
 @Entity
 public class Inventory {
 	@Id
-	private String inventoryId;
-	@OneToOne(fetch = FetchType.EAGER)
+	@GeneratedValue
+	private Long inventoryId;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private Product product;
 	private Double price;
@@ -20,18 +23,18 @@ public class Inventory {
 
 	}
 
-	public Inventory(String inventoryId, Product product, Double price, Integer quantity) {
+	public Inventory(Long inventoryId, Product product, Double price, Integer quantity) {
 		this.inventoryId = inventoryId;
 		this.product = product;
 		this.price = price;
 		this.quantity = quantity;
 	}
 
-	public String getInventoryId() {
+	public Long getInventoryId() {
 		return inventoryId;
 	}
 
-	public void setInventoryId(String inventoryId) {
+	public void setInventoryId(Long inventoryId) {
 		this.inventoryId = inventoryId;
 	}
 

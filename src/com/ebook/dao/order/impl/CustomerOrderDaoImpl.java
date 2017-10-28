@@ -30,7 +30,7 @@ public class CustomerOrderDaoImpl extends AbstractBaseDao implements CustomerOrd
 	}
 
 	@Override
-	public CustomerOrder getById(String customerOrderId) {
+	public CustomerOrder getById(Long customerOrderId) {
 		return super.verifyNamedQueryAll("com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.getById",
 				customerOrderId);
 	}

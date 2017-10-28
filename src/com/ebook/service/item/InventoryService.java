@@ -9,7 +9,7 @@ public interface InventoryService {
 
 	public List<Inventory> listAll();
 
-	public Inventory getById(String inventoryId);
+	public Inventory getById(Long inventoryId);
 
 	public boolean remove(Inventory inventory);
 

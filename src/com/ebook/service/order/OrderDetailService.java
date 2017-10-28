@@ -10,7 +10,7 @@ public interface OrderDetailService {
 
 	public List<OrderDetail> listAll();
 
-	public OrderDetail getById(String orderDetailId);
+	public OrderDetail getById(Long orderDetailId);
 
 	public boolean remove(OrderDetail orderDetail);
 

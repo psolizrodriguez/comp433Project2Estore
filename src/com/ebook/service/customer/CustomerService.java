@@ -9,7 +9,7 @@ public interface CustomerService {
 
 	public List<Customer> listAll();
 
-	public Customer getById(String customerId);
+	public Customer getById(Long customerId);
 
 	public boolean remove(Customer menu);
 }

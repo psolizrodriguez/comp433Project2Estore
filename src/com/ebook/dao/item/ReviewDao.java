@@ -10,7 +10,7 @@ public interface ReviewDao extends Dao {
 
 	public List<Review> listAll();
 
-	public Review getById(String reviewId);
+	public Review getById(Long reviewId);
 
 	public boolean remove(Review review);
 }

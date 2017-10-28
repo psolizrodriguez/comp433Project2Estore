@@ -1,7 +1,9 @@
 package com.ebook.model.item;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -11,11 +13,12 @@ import com.ebook.model.customer.Customer;
 @Entity
 public class Review {
 	@Id
-	private String reviewId;
+	@GeneratedValue
+	private Long reviewId;
 	private String title;
 	private String description;
 	private Integer rating;
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private Customer customer;
 
@@ -23,7 +26,7 @@ public class Review {
 
 	}
 
-	public Review(String reviewId, String title, String description, Integer rating, Customer customer) {
+	public Review(Long reviewId, String title, String description, Integer rating, Customer customer) {
 		this.reviewId = reviewId;
 		this.title = title;
 		this.description = description;
@@ -31,11 +34,11 @@ public class Review {
 		this.customer = customer;
 	}
 
-	public String getReviewId() {
+	public Long getReviewId() {
 		return reviewId;
 	}
 
-	public void setReviewId(String reviewId) {
+	public void setReviewId(Long reviewId) {
 		this.reviewId = reviewId;
 	}
 

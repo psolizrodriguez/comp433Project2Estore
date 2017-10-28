@@ -30,7 +30,7 @@ public class ProductDaoImpl extends AbstractBaseDao implements ProductDao {
 	}
 
 	@Override
-	public Product getById(String productId) {
+	public Product getById(Long productId) {
 		return super.verifyNamedQueryAll("com.ebook.dao.product.impl.ProductDaoImpl.getById", productId);
 	}
 }

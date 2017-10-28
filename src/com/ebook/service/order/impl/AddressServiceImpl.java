@@ -25,7 +25,7 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public Address getById(String addressId) {
+	public Address getById(Long addressId) {
 		return dao.getById(addressId);
 	}
 

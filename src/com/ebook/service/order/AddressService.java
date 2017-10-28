@@ -9,7 +9,7 @@ public interface AddressService {
 
 	public List<Address> listAll();
 
-	public Address getById(String addressId);
+	public Address getById(Long addressId);
 
 	public boolean remove(Address address);
 }

@@ -2,6 +2,7 @@ package com.ebook.model.order;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -12,7 +13,7 @@ import com.ebook.model.item.Inventory;
 
 @Entity
 public class ShippingOrder extends OrderDetail {
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private Address shippingAddress;
 	private Calendar estimatedDelivery;
@@ -22,7 +23,7 @@ public class ShippingOrder extends OrderDetail {
 
 	}
 
-	public ShippingOrder(String orderDetailId, Inventory inventory, Integer quantity, String orderState,
+	public ShippingOrder(Long orderDetailId, Inventory inventory, Integer quantity, String orderState,
 			Address shippingAddress) {
 		super(orderDetailId, inventory, quantity, orderState);
 		this.shippingAddress = shippingAddress;

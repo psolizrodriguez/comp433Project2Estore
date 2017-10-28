@@ -9,6 +9,7 @@ import com.ebook.common.constants.AppBaseConstantsWeb;
 import com.ebook.common.utility.AppBaseUtilsWeb;
 import com.ebook.dao.item.InventoryDao;
 import com.ebook.dao.order.CustomerOrderDao;
+import com.ebook.dao.order.OrderDetailDao;
 import com.ebook.model.order.CustomerOrder;
 import com.ebook.model.order.OrderDetail;
 import com.ebook.model.order.PaymentMethod;
@@ -25,6 +26,8 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	RefundService refundService;
 	@Autowired
 	InventoryDao inventoryDao;
+	@Autowired
+	OrderDetailDao orderDetailDao;
 
 	@Override
 	public CustomerOrder save(CustomerOrder customerOrder) {
@@ -37,7 +40,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	}
 
 	@Override
-	public CustomerOrder getById(String customerOrderId) {
+	public CustomerOrder getById(Long customerOrderId) {
 		return dao.getById(customerOrderId);
 	}
 
@@ -54,7 +57,8 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 		}
 		customerOrder.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_VERIFIED);
 		customerOrder.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP);
-		return save(customerOrder) != null;
+		customerOrder = save(customerOrder);
+		return customerOrder != null;
 	}
 
 	@Override
@@ -71,7 +75,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 						((PickUpOrder) orderDetail).setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_PICK_UP);
 						orderDetail.getInventory()
 								.setQuantity(orderDetail.getInventory().getQuantity() - orderDetail.getQuantity());
-						inventoryDao.save(orderDetail.getInventory());
+						
 					}
 				}
 			}
@@ -84,15 +88,14 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 				}
 			}
 		}
-		return save(customerOrder) != null;
+		customerOrder = save(customerOrder);
+		return customerOrder != null;
 	}
 
 	@Override
 	public boolean cancelOrderDetail(CustomerOrder customerOrder, OrderDetail orderDetail) {
-
 		orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_CANCELED);
 		orderDetail.getInventory().setQuantity(orderDetail.getInventory().getQuantity() + orderDetail.getQuantity());
-		inventoryDao.save(orderDetail.getInventory());
 		Double ammountRefund = orderDetail.getSubTotal();
 		customerOrder.setTotal(customerOrder.getTotal() - ammountRefund);
 		if (customerOrder.getPaymentMethod() != null && customerOrder.getPaymentMethod().size() > 0) {
@@ -106,9 +109,9 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 						ammountRefund -= paymentMethod.getSubTotal();
 						refunded = paymentMethod.getSubTotal();
 					}
-					Refund refund = new Refund(orderDetail.getOrderDetailId() + "-" + paymentMethod.getPaymentId(),
+					Refund refund = new Refund(null,
 							AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, refunded, orderDetail, paymentMethod);
-					refundService.save(refund);
+					refund = refundService.save(refund);
 					if (paymentMethod.getSubTotal() == refunded) {
 						paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_REFUNDED);
 					} else {
@@ -118,7 +121,8 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 
 			}
 		}
-		return save(customerOrder) != null;
+		customerOrder = save(customerOrder);
+		return customerOrder != null;
 	}
 
 }

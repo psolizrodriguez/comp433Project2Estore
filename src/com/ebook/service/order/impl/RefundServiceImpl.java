@@ -25,7 +25,7 @@ public class RefundServiceImpl implements RefundService {
 	}
 
 	@Override
-	public Refund getById(String refundId) {
+	public Refund getById(Long refundId) {
 		return dao.getById(refundId);
 	}
 

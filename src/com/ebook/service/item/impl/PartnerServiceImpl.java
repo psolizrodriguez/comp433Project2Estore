@@ -25,7 +25,7 @@ public class PartnerServiceImpl implements PartnerService {
 	}
 
 	@Override
-	public Partner getById(String partnerId) {
+	public Partner getById(Long partnerId) {
 		return dao.getById(partnerId);
 	}
 

@@ -9,7 +9,7 @@ public interface ProductService {
 
 	public List<Product> listAll();
 
-	public Product getById(String productId);
+	public Product getById(Long productId);
 
 	public boolean remove(Product product);
 }

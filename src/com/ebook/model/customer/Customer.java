@@ -2,6 +2,8 @@ package com.ebook.model.customer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -9,15 +11,16 @@ import javax.persistence.OneToOne;
 @Entity
 public class Customer {
 	@Id
-	private String customerId;
+	@GeneratedValue
+	private Long customerId;
 	private String lastName;
 	private String firstName;
 	private String userName;
 	private String password;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private Address billingAddress;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private Address shippingAddress;
 
@@ -53,11 +56,11 @@ public class Customer {
 		this.shippingAddress = shippingAddress;
 	}
 
-	public String getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(String id) {
+	public void setCustomerId(Long id) {
 		this.customerId = id;
 	}
 

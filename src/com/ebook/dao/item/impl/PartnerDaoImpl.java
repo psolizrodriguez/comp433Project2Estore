@@ -30,7 +30,7 @@ public class PartnerDaoImpl extends AbstractBaseDao implements PartnerDao {
 	}
 
 	@Override
-	public Partner getById(String partnerId) {
+	public Partner getById(Long partnerId) {
 		return super.verifyNamedQueryAll("com.ebook.dao.partner.impl.PartnerDaoImpl.getById", partnerId);
 	}
 }

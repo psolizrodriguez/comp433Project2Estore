@@ -1,26 +1,32 @@
 package com.ebook.model.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
 	@Id
-	private String productId;
+	@GeneratedValue
+	private Long productId;
 	private String title;
 	private String description;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinColumn
-	private List<Review> review = new ArrayList<Review>();
+	private List<Review> review;
 
 	public String getDescription() {
 		return description;
@@ -38,11 +44,11 @@ public class Product {
 		this.review = review;
 	}
 
-	public String getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(String productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 

@@ -11,7 +11,7 @@ public class PayPalPayment extends PaymentMethod {
 
 	}
 
-	public PayPalPayment(String paymentId, String paymentStatus, Double subTotal, String transactionId,
+	public PayPalPayment(Long paymentId, String paymentStatus, Double subTotal, String transactionId,
 			String accountEmail) {
 		super(paymentId, paymentStatus, subTotal);
 		this.transactionId = transactionId;

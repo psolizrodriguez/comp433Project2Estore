@@ -29,7 +29,7 @@ public class InventoryDaoImpl extends AbstractBaseDao implements InventoryDao {
 	}
 
 	@Override
-	public Inventory getById(String inventoryId) {
+	public Inventory getById(Long inventoryId) {
 		return super.verifyNamedQueryAll("com.ebook.dao.inventory.impl.InventoryDaoImpl.getById", inventoryId);
 	}
 

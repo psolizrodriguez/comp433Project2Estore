@@ -30,7 +30,7 @@ public class OrderDetailDaoImpl extends AbstractBaseDao implements OrderDetailDa
 	}
 
 	@Override
-	public OrderDetail getById(String orderDetailId) {
+	public OrderDetail getById(Long orderDetailId) {
 		return super.verifyNamedQueryAll("com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.getById", orderDetailId);
 	}
 }

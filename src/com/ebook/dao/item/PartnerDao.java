@@ -10,7 +10,7 @@ public interface PartnerDao extends Dao {
 
 	public List<Partner> listAll();
 
-	public Partner getById(String partnerId);
+	public Partner getById(Long partnerId);
 
 	public boolean remove(Partner partner);
 }

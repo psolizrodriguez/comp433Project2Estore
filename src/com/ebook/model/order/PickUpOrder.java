@@ -13,7 +13,7 @@ public class PickUpOrder extends OrderDetail {
 
 	}
 
-	public PickUpOrder(String orderDetailId, Inventory inventory, Integer quantity, String orderState) {
+	public PickUpOrder(Long orderDetailId, Inventory inventory, Integer quantity, String orderState) {
 		super(orderDetailId, inventory, quantity, orderState);
 	}
 

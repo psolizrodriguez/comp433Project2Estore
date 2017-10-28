@@ -1,7 +1,9 @@
 package com.ebook.model.order;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -9,13 +11,14 @@ import javax.persistence.OneToOne;
 @Entity
 public class Refund {
 	@Id
-	private String refundId;
+	@GeneratedValue
+	private Long refundId;
 	private String refundStatus;
 	private Double total;
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private OrderDetail orderDetail;
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private PaymentMethod paymentMethod;
 
@@ -23,7 +26,7 @@ public class Refund {
 
 	}
 
-	public Refund(String refundId, String refundStatus, Double total, OrderDetail orderDetail,
+	public Refund(Long refundId, String refundStatus, Double total, OrderDetail orderDetail,
 			PaymentMethod paymentMethod) {
 		this.refundId = refundId;
 		this.refundStatus = refundStatus;
@@ -32,11 +35,11 @@ public class Refund {
 		this.paymentMethod = paymentMethod;
 	}
 
-	public String getRefundId() {
+	public Long getRefundId() {
 		return refundId;
 	}
 
-	public void setRefundId(String refundId) {
+	public void setRefundId(Long refundId) {
 		this.refundId = refundId;
 	}
 

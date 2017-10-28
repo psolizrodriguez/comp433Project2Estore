@@ -32,7 +32,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	}
 
 	@Override
-	public OrderDetail getById(String orderDetailId) {
+	public OrderDetail getById(Long orderDetailId) {
 		return dao.getById(orderDetailId);
 	}
 
@@ -44,13 +44,14 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	@Override
 	public boolean shipOrderDetail(ShippingOrder orderDetail, String trackingNumber) {
 		orderDetail.getInventory().setQuantity(orderDetail.getInventory().getQuantity() - orderDetail.getQuantity());
-		inventoryDao.save(orderDetail.getInventory());
+		//inventoryDao.save(orderDetail.getInventory());
 		orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_SHIPPED);
 		orderDetail.setTrackingNumber(trackingNumber);
 		Calendar deliveryDate = AppBaseUtilsWeb.getCurrentTime();
 		deliveryDate.add(Calendar.DATE, 3);
 		orderDetail.setEstimatedDelivery(deliveryDate);
-		return save(orderDetail) != null;
+		orderDetail = (ShippingOrder)save(orderDetail);
+		return  orderDetail != null;
 	}
 
 }

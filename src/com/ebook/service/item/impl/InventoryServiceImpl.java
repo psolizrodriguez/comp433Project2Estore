@@ -25,7 +25,7 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public Inventory getById(String inventoryId) {
+	public Inventory getById(Long inventoryId) {
 		return dao.getById(inventoryId);
 	}
 

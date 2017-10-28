@@ -30,7 +30,7 @@ public class AddressDaoImpl extends AbstractBaseDao implements AddressDao {
 	}
 
 	@Override
-	public Address getById(String addressId) {
+	public Address getById(Long addressId) {
 		return super.verifyNamedQueryAll("com.ebook.dao.address.impl.AddressDaoImpl.getById", addressId);
 	}
 }

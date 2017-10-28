@@ -1,12 +1,14 @@
 package com.ebook.model.customer;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Address {
 	@Id
-	private String addressId;
+	@GeneratedValue
+	private Long addressId;
 	private String street;
 	private String unit;
 	private String city;
@@ -16,7 +18,7 @@ public class Address {
 	public Address() {
 	}
 
-	public Address(String addressId, String street, String unit, String city, String state, String zip) {
+	public Address(Long addressId, String street, String unit, String city, String state, String zip) {
 		this.addressId = addressId;
 		this.street = street;
 		this.unit = unit;
@@ -25,11 +27,11 @@ public class Address {
 		this.zip = zip;
 	}
 
-	public String getAddressId() {
+	public Long getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(String addressId) {
+	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
 	}
 
