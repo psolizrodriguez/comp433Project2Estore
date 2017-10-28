@@ -57,6 +57,94 @@ none
 ```
 #### b. Accept buy order  
 #### c. Accept Credit Card payment  
+##### Description: 
+This method allows us to validate and accept the payments of an order
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/acceptPayment
+##### Parameters
+none  
+##### Method: 
+PUT 
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+	"customerOrderId": 2
+} 
+```
+##### Response:  
+```
+{
+    "orderId": 2,
+    "orderDetails": [
+        {
+            "orderDetailId": 3,
+            "inventory": {
+                "inventoryId": 1,
+                "productRepresentation": {
+                    "productId": 1,
+                    "title": "FitBit Alta",
+                    "description": "Activity Tracker"
+                },
+                "price": 150,
+                "quantity": 9
+            },
+            "quantity": 1,
+            "subTotal": 150,
+            "orderState": "Pending"
+        }
+    ],
+    "paymentStatus": "Verified",
+    "customer": {
+        "customerId": 1,
+        "lastName": "Cicale",
+        "firstName": "Julia",
+        "userName": "julia.cicale",
+        "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
+        "billingAddress": {
+            "addressId": 2,
+            "street": "123 Business Rd.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
+        },
+        "shippingAddress": {
+            "addressId": 1,
+            "street": "123 Home St.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60657"
+        }
+    },
+    "orderState": "Ready to Ship",
+    "billingAddress": {
+        "addressId": 2,
+        "street": "123 Business Rd.",
+        "unit": "Chicago",
+        "city": "Chicago",
+        "state": "IL",
+        "zip": "60601"
+    },
+    "total": 150,
+    "paymentMethod": [
+        {
+            "paymentId": 3,
+            "paymentStatus": "Verified",
+            "subTotal": 150,
+            "creditCardNumber": "1010101010101010101020",
+            "nameOnCard": "Julia Cicale",
+            "securityCode": "911",
+            "validDate": "20/20"
+        }
+    ]
+}
+```
 #### d. Ship orders  
 #### e. Provide order status; Provide status of orders in progress  
 #### f. Order Cancel  
@@ -101,7 +189,7 @@ Content-Type:application/json
 
 # COMP 388/433: Project 2
 ## Description
-Suppose you want to sell any items online (like big eCommerce sites) – you have also decided
+Suppose you want to sell any items online (like big eCommerce sites) ï¿½ you have also decided
 that you will also allow other partners/companies to sell their inventory on your site. Your
 approach is to provide web service APIs for all functionalities that will provide access to your
 items that you will sell and to provide your partners to be able to add their inventories to be
