@@ -143,6 +143,7 @@ Content-Type:application/json
         }
     ]
 }
+```
 #### c. Accept Credit Card payment  
 ##### Description: 
 This method allows us to validate and accept the payments of an order
