@@ -13,12 +13,13 @@ import com.ebook.model.order.ShippingOrder;
 import com.ebook.service.item.PartnerService;
 import com.ebook.service.order.CustomerOrderService;
 import com.ebook.service.order.OrderDetailService;
+import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.CustomerOrderRequest;
 import com.ebook.webservice.representation.OrderDetailRepresentation;
-import com.ebook.webservice.representation.OrderDetailRequest;
 import com.ebook.webservice.representation.PartnerRepresentation;
 import com.ebook.webservice.representation.PartnerRequest;
+import com.ebook.webservice.representation.ShipOrderDetailRequest;
 
 @Service
 public class PartnerActivityImpl implements PartnerActivity {
@@ -52,10 +53,18 @@ public class PartnerActivityImpl implements PartnerActivity {
 	}
 
 	@Override
-	public OrderDetailRepresentation shipOrder(OrderDetailRequest orderDetailRequest) {
-		OrderDetail orderDetail = orderDetailService.getById(orderDetailRequest.getOrderDetailId());
-		String trackingNumber = orderDetailRequest.getTrackingNumber();
+	public OrderDetailRepresentation shipOrder(ShipOrderDetailRequest shipOrderDetailRequest) {
+		OrderDetail orderDetail = orderDetailService.getById(shipOrderDetailRequest.getOrderDetailId());
+		String trackingNumber = shipOrderDetailRequest.getTrackingNumber();
 		orderDetailService.shipOrderDetail((ShippingOrder)orderDetail, trackingNumber);
+		return new OrderDetailRepresentation(orderDetail);
+	}
+
+	@Override
+	public OrderDetailRepresentation cancelOrder(CancelOrderDetailRequest cancelOrderDetailRequest) {
+		OrderDetail orderDetail = orderDetailService.getById(cancelOrderDetailRequest.getOrderDetailId());
+		CustomerOrder customerOrder = customerOrderService.getById(cancelOrderDetailRequest.getOrderId());
+		customerOrderService.cancelOrderDetail(customerOrder, orderDetail);
 		return new OrderDetailRepresentation(orderDetail);
 	}
 

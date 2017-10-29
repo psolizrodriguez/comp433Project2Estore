@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class OrderDetailRequest {
+public class CancelOrderDetailRequest {
 	private Long orderDetailId;
-	private String trackingNumber;
+	private Long orderId;
 
 	public Long getOrderDetailId() {
 		return orderDetailId;
@@ -20,12 +20,12 @@ public class OrderDetailRequest {
 		this.orderDetailId = orderDetailId;
 	}
 
-	public String getTrackingNumber() {
-		return trackingNumber;
+	public Long getOrderId() {
+		return orderId;
 	}
 
-	public void setTrackingNumber(String trackingNumber) {
-		this.trackingNumber = trackingNumber;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 
 }

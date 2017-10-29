@@ -235,7 +235,7 @@ Content-Type:application/json
 ```
 #### d. Ship orders  
 ##### Description: 
-This method allows us to ship an OrderDetail once the Order has been fulfilled
+This method allows us to ship an Order once it has been fulfilled
 ##### URI: 
 http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/shipOrder
 ##### Parameters
@@ -250,14 +250,14 @@ Content-Type:application/json
 ##### Body:  
 ```
 {
-	"orderDetailId": 3,
+	"orderDetailId": 5,
 	"trackingNumber": "1234567898765432123456"
 }
 ```
 ##### Response:  
 ```
 {
-    "orderDetailId": 3,
+    "orderDetailId": 5,
     "inventory": {
         "inventoryId": 1,
         "productRepresentation": {
@@ -275,6 +275,45 @@ Content-Type:application/json
 ```
 #### e. Provide order status; Provide status of orders in progress  
 #### f. Order Cancel  
+##### Description: 
+This method allows us to cancel an order (instead of shipping it)
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/cancelOrder
+##### Parameters
+none  
+##### Method: 
+PUT 
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+	"orderDetailId": 6,
+	"orderId": 4
+}
+```
+##### Response:  
+```
+{
+    "orderDetailId": 6,
+    "inventory": {
+        "inventoryId": 5,
+        "productRepresentation": {
+            "productId": 2,
+            "title": "Bluetooth Headphones",
+            "description": "Wireless and comfortable headphones for running"
+        },
+        "price": 70,
+        "quantity": 15
+    },
+    "quantity": 1,
+    "subTotal": 70,
+    "orderState": "Canceled"
+}
+```
 ### 2. Allowing Partners to use your site to sell their products with functionalities such as:  
 #### a. Need to register and create profile of partners  
 ##### Description: 
