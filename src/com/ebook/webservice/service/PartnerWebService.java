@@ -13,5 +13,7 @@ public interface PartnerWebService {
 	public PartnerRepresentation createPartner(PartnerRequest partnerRequest);
 	
 	public CustomerOrderRepresentation acceptPayment(CustomerOrderRequest customerOrderRequest);
+	
+	public CustomerOrderRepresentation fulfillOrder(CustomerOrderRequest customerOrderRequest);
 
 }

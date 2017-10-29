@@ -37,4 +37,11 @@ public class PartnerActivityImpl implements PartnerActivity {
 		return new CustomerOrderRepresentation(customerOrder);
 	}
 
+	@Override
+	public CustomerOrderRepresentation fulfillOrder(CustomerOrderRequest customerOrderRequest) {
+		CustomerOrder customerOrder = customerOrderService.getById(customerOrderRequest.getCustomerOrderId());
+		customerOrderService.fulfillOrder(customerOrder);
+		return new CustomerOrderRepresentation(customerOrder);
+	}
+
 }

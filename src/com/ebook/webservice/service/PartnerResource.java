@@ -33,8 +33,16 @@ public class PartnerResource implements PartnerWebService {
 	@Produces({ "application/xml", "application/json" })
 	@Path("/acceptPayment")
 	public CustomerOrderRepresentation acceptPayment(CustomerOrderRequest customerOrderRequest) {
-		// TODO Auto-generated method stub
 		return partnerActivity.acceptPayment(customerOrderRequest);
 	}
+
+	@PUT
+	@Produces({ "application/xml", "application/json" })
+	@Path("/fulfillOrder")
+	public CustomerOrderRepresentation fulfillOrder(CustomerOrderRequest customerOrderRequest) {
+		return partnerActivity.fulfillOrder(customerOrderRequest);
+	}
+	
+	
 
 }

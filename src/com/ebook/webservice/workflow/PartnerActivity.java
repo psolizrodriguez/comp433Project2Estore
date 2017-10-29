@@ -10,4 +10,6 @@ public interface PartnerActivity {
 	public PartnerRepresentation createPartner(PartnerRequest partnerRequest);
 	
 	public CustomerOrderRepresentation acceptPayment(CustomerOrderRequest customerOrderRequest);
+	
+	public CustomerOrderRepresentation fulfillOrder(CustomerOrderRequest customerOrderRequest);
 }

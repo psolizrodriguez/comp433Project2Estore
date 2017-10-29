@@ -56,6 +56,93 @@ none
 ]
 ```
 #### b. Accept buy order  
+##### Description: 
+This method allows us to accept the order after the payment has been validated. It is now fulfilled and can be shipped.
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/fulfillOrder
+##### Parameters
+none  
+##### Method: 
+PUT 
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+	"customerOrderId": 3
+} 
+```
+##### Response:  
+```
+{
+    "orderId": 3,
+    "orderDetails": [
+        {
+            "orderDetailId": 3,
+            "inventory": {
+                "inventoryId": 1,
+                "productRepresentation": {
+                    "productId": 1,
+                    "title": "FitBit Alta",
+                    "description": "Activity Tracker"
+                },
+                "price": 150,
+                "quantity": 9
+            },
+            "quantity": 1,
+            "subTotal": 150,
+            "orderState": "Pending"
+        }
+    ],
+    "paymentStatus": "Verified",
+    "customer": {
+        "customerId": 1,
+        "lastName": "Cicale",
+        "firstName": "Julia",
+        "userName": "julia.cicale",
+        "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
+        "billingAddress": {
+            "addressId": 2,
+            "street": "123 Business Rd.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
+        },
+        "shippingAddress": {
+            "addressId": 1,
+            "street": "123 Home St.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60657"
+        }
+    },
+    "orderState": "Fulfilled",
+    "billingAddress": {
+        "addressId": 2,
+        "street": "123 Business Rd.",
+        "unit": "Chicago",
+        "city": "Chicago",
+        "state": "IL",
+        "zip": "60601"
+    },
+    "total": 150,
+    "paymentMethod": [
+        {
+            "paymentId": 3,
+            "paymentStatus": "Paid",
+            "subTotal": 150,
+            "creditCardNumber": "1010101010101010101020",
+            "nameOnCard": "Julia Cicale",
+            "securityCode": "911",
+            "validDate": "20/20"
+        }
+    ]
+}
 #### c. Accept Credit Card payment  
 ##### Description: 
 This method allows us to validate and accept the payments of an order
