@@ -13,6 +13,9 @@
 	<query	name="com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.getById">
 		<![CDATA[FROM CustomerOrder c WHERE c.orderId = ?1]]>
 	</query>
+	<query name="com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.getById">
+		<![CDATA[FROM OrderDetail o WHERE o.orderDetailId = ?1]]>
+	</query>
 	
 	
 </hibernate-mapping>

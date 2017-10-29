@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.CustomerOrderRequest;
+import com.ebook.webservice.representation.OrderDetailRepresentation;
+import com.ebook.webservice.representation.OrderDetailRequest;
 import com.ebook.webservice.representation.PartnerRepresentation;
 import com.ebook.webservice.representation.PartnerRequest;
 import com.ebook.webservice.workflow.PartnerActivity;
@@ -41,6 +43,13 @@ public class PartnerResource implements PartnerWebService {
 	@Path("/fulfillOrder")
 	public CustomerOrderRepresentation fulfillOrder(CustomerOrderRequest customerOrderRequest) {
 		return partnerActivity.fulfillOrder(customerOrderRequest);
+	}
+
+	@PUT
+	@Produces({ "application/xml", "application/json" })
+	@Path("/shipOrder")
+	public OrderDetailRepresentation shipOrder(OrderDetailRequest orderDetailRequest) {
+		return partnerActivity.shipOrder(orderDetailRequest);
 	}
 	
 	

@@ -234,6 +234,45 @@ Content-Type:application/json
 }
 ```
 #### d. Ship orders  
+##### Description: 
+This method allows us to ship an OrderDetail once the Order has been fulfilled
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/shipOrder
+##### Parameters
+none  
+##### Method: 
+PUT 
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+	"orderDetailId": 3,
+	"trackingNumber": "1234567898765432123456"
+}
+```
+##### Response:  
+```
+{
+    "orderDetailId": 3,
+    "inventory": {
+        "inventoryId": 1,
+        "productRepresentation": {
+            "productId": 1,
+            "title": "FitBit Alta",
+            "description": "Activity Tracker"
+        },
+        "price": 150,
+        "quantity": 8
+    },
+    "quantity": 1,
+    "subTotal": 150,
+    "orderState": "Shipped"
+}
+```
 #### e. Provide order status; Provide status of orders in progress  
 #### f. Order Cancel  
 ### 2. Allowing Partners to use your site to sell their products with functionalities such as:  

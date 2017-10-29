@@ -220,13 +220,28 @@ public class MainController {
 		orderDetails3.add(new ShippingOrder(3L, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
 				juliaCicale.getShippingAddress()));
 		order3.setOrderDetails(orderDetails3);
-//		List<PaymentMethod> paymentMethods3 = new ArrayList<>();
-//		paymentMethods3.add(new CreditCardPayment(4L, AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 150.0,
-//				"1010101010101010101020", "Julia Cicale", "911", "20/20"));
 		order3.setPaymentMethod(paymentMethods2);
 		order3 = customerOrderService.save(order3);
 		customerOrderService.acceptPayment(order3);
 		
+//Creating test Order for fulfillOrder
+		System.out.println("Placing Order");
+		searchFitbit = inventoryService.listAllInventoryByKeywords("FitBit");
+		CustomerOrder order4 = new CustomerOrder();
+		order4.setOrderId(4L);
+		order4.setBillingAddress(juliaCicale.getBillingAddress());
+		order4.setCustomer(juliaCicale);
+		order4.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_PENDING);
+		order4.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PENDING);
+		List<OrderDetail> orderDetails4 = new ArrayList<>();
+		orderDetails4.add(new ShippingOrder(4L, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
+				juliaCicale.getShippingAddress()));
+		order4.setOrderDetails(orderDetails3);
+		order4.setPaymentMethod(paymentMethods2);
+		order4 = customerOrderService.save(order4);
+		customerOrderService.acceptPayment(order4);
+		customerOrderService.fulfillOrder(order4);
+
 		return "index";
 	}
 
