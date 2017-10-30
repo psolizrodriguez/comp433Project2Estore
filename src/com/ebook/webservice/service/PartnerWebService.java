@@ -1,5 +1,7 @@
 package com.ebook.webservice.service;
 
+import java.util.List;
+
 import javax.jws.WebService;
 
 import com.ebook.webservice.representation.CancelOrderDetailRequest;
@@ -30,5 +32,7 @@ public interface PartnerWebService {
 	public InventoryRepresentation createInventory(InventoryRequest inventoryRequest);
 
 	public ProductRepresentation createProduct(ProductRequest productRequest);
+	
+	public List<OrderDetailRepresentation> listAllOrderDetailByPartnerIdAndOrderState(Long partnerId, String orderState);
 
 }

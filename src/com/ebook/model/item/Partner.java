@@ -1,17 +1,8 @@
 package com.ebook.model.item;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Partner {
@@ -21,20 +12,15 @@ public class Partner {
 	private String name;
 	private String userName;
 	private String password;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn
-	private List<Inventory> inventory;
 
 	public Partner() {
 	}
 
-	public Partner(Long partnerId, String name, String userName, String password, List<Inventory> inventory) {
+	public Partner(Long partnerId, String name, String userName, String password) {
 		this.partnerId = partnerId;
 		this.name = name;
 		this.userName = userName;
 		this.password = password;
-		this.inventory = inventory;
 	}
 
 	public String getUserName() {
@@ -67,14 +53,6 @@ public class Partner {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Inventory> getInventory() {
-		return inventory;
-	}
-
-	public void setInventory(List<Inventory> inventory) {
-		this.inventory = inventory;
 	}
 
 }

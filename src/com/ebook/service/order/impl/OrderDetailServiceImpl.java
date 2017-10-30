@@ -58,4 +58,14 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		return false;
 	}
 
+	@Override
+	public List<OrderDetail> listAllByPartnerId(Long partnerId) {
+		return dao.listAllByPartnerId(partnerId);
+	}
+
+	@Override
+	public List<OrderDetail> listAllByPartnerId_OrderState(Long partnerId, String orderState) {
+		return dao.listAllByPartnerId_OrderState(partnerId, orderState);
+	}
+
 }

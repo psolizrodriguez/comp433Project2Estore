@@ -609,6 +609,49 @@ Content-Type:application/json
 }
 ```
 #### d. Push orders that customers made to partners  
+##### Description: 
+This method allows the partners to get a list of all the OrderDetails that had been placed over their inventories.
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/orderService/searchOrderDetailByPartnerIdAndOrderState?partnerId=2&orderState=Ready%20to%20Pickup
+##### Parameters
+-partnerId: Id of thepartner to retrieve the orders for  
+-orderState: specify state of the order detail (optional)[Pending, Ready to Ship, Shipped, Ready to Pickup]  
+##### Method: 
+GET  
+##### Headers:   
+```
+Accept:application/json  
+```
+##### Body:  
+```
+none
+```
+##### Response:  
+```
+[
+    {
+        "orderDetailId": 6,
+        "inventory": {
+            "inventoryId": 5,
+            "partner": {
+                "partnerId": 2,
+                "name": "Ebay",
+                "userName": "ebay"
+            },
+            "product": {
+                "productId": 2,
+                "title": "Bluetooth Headphones",
+                "description": "Wireless and comfortable headphones for running"
+            },
+            "price": 70,
+            "quantity": 14
+        },
+        "quantity": 1,
+        "subTotal": 70,
+        "orderState": "Ready to Pickup"
+    }
+]
+```
 #### e. Get acknowledgement of order fulfillment  
 ### 3. Features to make your APIs robust:  
 #### a. ERROR Handling  

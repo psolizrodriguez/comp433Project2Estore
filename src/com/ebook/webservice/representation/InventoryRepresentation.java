@@ -12,24 +12,27 @@ import com.ebook.model.item.Inventory;
 @XmlType(name = "")
 public class InventoryRepresentation {
 	private Long inventoryId;
-	private ProductRepresentation productRepresentation;
+	private PartnerRepresentation partner;
+	private ProductRepresentation product;
 	private Double price;
 	private Integer quantity;
 
 	public InventoryRepresentation() {
 	}
 
-	public InventoryRepresentation(Long inventoryId, ProductRepresentation productRepresentation, Double price,
-			Integer quantity) {
+	public InventoryRepresentation(Long inventoryId, PartnerRepresentation partner, ProductRepresentation product,
+			Double price, Integer quantity) {
 		this.inventoryId = inventoryId;
-		this.productRepresentation = productRepresentation;
+		this.partner = partner;
+		this.product = product;
 		this.price = price;
 		this.quantity = quantity;
 	}
 
 	public InventoryRepresentation(Inventory inventory) {
 		this.inventoryId = inventory.getInventoryId();
-		this.productRepresentation = new ProductRepresentation(inventory.getProduct());
+		this.partner = new PartnerRepresentation(inventory.getPartner());
+		this.product = new ProductRepresentation(inventory.getProduct());
 		this.price = inventory.getPrice();
 		this.quantity = inventory.getQuantity();
 	}
@@ -42,12 +45,20 @@ public class InventoryRepresentation {
 		this.inventoryId = inventoryId;
 	}
 
-	public ProductRepresentation getProductRepresentation() {
-		return productRepresentation;
+	public PartnerRepresentation getPartner() {
+		return partner;
 	}
 
-	public void setProductRepresentation(ProductRepresentation productRepresentation) {
-		this.productRepresentation = productRepresentation;
+	public void setPartner(PartnerRepresentation partner) {
+		this.partner = partner;
+	}
+
+	public ProductRepresentation getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductRepresentation product) {
+		this.product = product;
 	}
 
 	public Double getPrice() {

@@ -33,4 +33,18 @@ public class OrderDetailDaoImpl extends AbstractBaseDao implements OrderDetailDa
 	public OrderDetail getById(Long orderDetailId) {
 		return super.verifyNamedQueryAll("com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.getById", orderDetailId);
 	}
+
+	@Override
+	public List<OrderDetail> listAllByPartnerId(Long partnerId) {
+		return super.verifyListNamedQueryAll("com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.listAllByPartnerId",
+				partnerId);
+	}
+
+	@Override
+	public List<OrderDetail> listAllByPartnerId_OrderState(Long partnerId, String orderState) {
+		return super.verifyListNamedQueryAll(
+				"com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.listAllByPartnerId_OrderState", partnerId,
+				orderState);
+	}
+
 }

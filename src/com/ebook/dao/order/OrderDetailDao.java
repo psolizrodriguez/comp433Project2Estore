@@ -13,4 +13,8 @@ public interface OrderDetailDao extends Dao {
 	public OrderDetail getById(Long orderDetailId);
 
 	public boolean remove(OrderDetail orderDetail);
+
+	public List<OrderDetail> listAllByPartnerId(Long partnerId);
+
+	public List<OrderDetail> listAllByPartnerId_OrderState(Long partnerId, String orderState);
 }

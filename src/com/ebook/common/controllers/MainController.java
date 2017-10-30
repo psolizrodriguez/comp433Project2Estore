@@ -1,7 +1,6 @@
 package com.ebook.common.controllers;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -109,24 +108,28 @@ public class MainController {
 		amazon.setName("Amazon");
 		amazon.setUserName("amazon");
 		amazon.setPassword(AppBaseUtilsWeb.encriptText("amazon12345"));
-		List<Inventory> amazonInventory = new LinkedList<>();
-		amazonInventory.add(new Inventory(1L, fitbitAlta, 150.0, 10));
-		amazonInventory.add(new Inventory(2L, headphones, 80.0, 10));
-		amazonInventory.add(new Inventory(3L, laptopBag, 15.0, 10));
-		amazon.setInventory(amazonInventory);
 		amazon = partnerService.save(amazon);
+		Inventory amazonInv_1 = new Inventory(1L, amazon, fitbitAlta, 150.0, 10);
+		amazonInv_1 = inventoryService.save(amazonInv_1);
+		Inventory amazonInv_2 = new Inventory(2L, amazon, headphones, 80.0, 10);
+		amazonInv_2 = inventoryService.save(amazonInv_2);
+		Inventory amazonInv_3 = new Inventory(3L, amazon, laptopBag, 15.0, 10);
+		amazonInv_3 = inventoryService.save(amazonInv_3);
+
 		System.out.println("Adding Partner Ebay");
 		Partner ebay = new Partner();
 		ebay.setPartnerId(2L);
 		ebay.setName("Ebay");
 		ebay.setUserName("ebay");
 		ebay.setPassword(AppBaseUtilsWeb.encriptText("ebay12345"));
-		List<Inventory> ebayInventory = new LinkedList<>();
-		ebayInventory.add(new Inventory(4L, fitbitAlta, 160.0, 15));
-		ebayInventory.add(new Inventory(5L, headphones, 70.0, 15));
-		ebayInventory.add(new Inventory(6L, laptopBag, 20.0, 15));
-		ebay.setInventory(ebayInventory);
 		ebay = partnerService.save(ebay);
+		Inventory ebayInv_4 = new Inventory(4L, ebay, fitbitAlta, 160.0, 15);
+		ebayInv_4 = inventoryService.save(ebayInv_4);
+		Inventory ebayInv_5 = new Inventory(5L, ebay, headphones, 70.0, 15);
+		ebayInv_5 = inventoryService.save(ebayInv_5);
+		Inventory ebayInv_6 = new Inventory(6L, ebay, laptopBag, 20.0, 15);
+		ebayInv_6 = inventoryService.save(ebayInv_6);
+
 		// Searching for Inventory
 		System.out.println("Searching for Inventory");
 		List<Inventory> searchFitbit = inventoryService.listAllInventoryByKeywords("FitBit");
@@ -186,8 +189,8 @@ public class MainController {
 				"Small and stylish, very accurate on with the step count.", 5, juliaCicale));
 		fitbitAlta.setReview(reviewsFitbit);
 		fitbitAlta = productService.save(fitbitAlta);
-		
-		//Creating test Order
+
+		// Creating test Order
 		System.out.println("Placing Order");
 		searchFitbit = inventoryService.listAllInventoryByKeywords("FitBit");
 		CustomerOrder order2 = new CustomerOrder();
@@ -205,8 +208,8 @@ public class MainController {
 				"1010101010101010101020", "Julia Cicale", "911", "20/20"));
 		order2.setPaymentMethod(paymentMethods2);
 		order2 = customerOrderService.save(order2);
-	
-		//Creating test Order for fulfillOrder
+
+		// Creating test Order for fulfillOrder
 		System.out.println("Placing Order");
 		searchFitbit = inventoryService.listAllInventoryByKeywords("FitBit");
 		CustomerOrder order3 = new CustomerOrder();
@@ -216,7 +219,7 @@ public class MainController {
 		order3.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_PENDING);
 		order3.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PENDING);
 		List<OrderDetail> orderDetails3 = new ArrayList<>();
-		
+
 		orderDetails3.add(new ShippingOrder(4L, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
 				juliaCicale.getShippingAddress()));
 		order3.setOrderDetails(orderDetails3);
@@ -226,8 +229,8 @@ public class MainController {
 		order3.setPaymentMethod(paymentMethods3);
 		order3 = customerOrderService.save(order3);
 		customerOrderService.acceptPayment(order3);
-		
-		//Creating test Order for shipOrder and cancelOrder
+
+		// Creating test Order for shipOrder and cancelOrder
 		System.out.println("Placing Order");
 		searchFitbit = inventoryService.listAllInventoryByKeywords("FitBit");
 		searchHeadphones = inventoryService.listAllInventoryByKeywords("Headphones");
@@ -249,7 +252,7 @@ public class MainController {
 		order4 = customerOrderService.save(order4);
 		customerOrderService.acceptPayment(order4);
 		customerOrderService.fulfillOrder(order4);
-		
+
 		return "index";
 	}
 

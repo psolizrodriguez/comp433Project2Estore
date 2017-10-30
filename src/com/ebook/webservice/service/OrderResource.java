@@ -32,7 +32,8 @@ public class OrderResource implements OrderWebService {
 	@GET
 	@Produces({ "application/xml", "application/json" })
 	@Path("/searchCustomerOrders")
-	public List<CustomerOrderRepresentation> listAllOrdersByCustomerId(@QueryParam("customerId") long customerId, @QueryParam("orderState") String orderState) {
+	public List<CustomerOrderRepresentation> listAllOrdersByCustomerId(@QueryParam("customerId") long customerId,
+			@QueryParam("orderState") String orderState) {
 		if(orderState != null) {
 			System.out.println("GET METHOD Request for customerId " + customerId + " with order status " + orderState + "......");
 			return orderActivity.getOrdersByCustomerId_OrderState(customerId, orderState);

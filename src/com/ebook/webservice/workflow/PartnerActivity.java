@@ -1,5 +1,7 @@
 package com.ebook.webservice.workflow;
 
+import java.util.List;
+
 import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.CustomerOrderRequest;
@@ -27,4 +29,6 @@ public interface PartnerActivity {
 	public InventoryRepresentation createInventory(InventoryRequest inventoryRequest);
 
 	public ProductRepresentation createProduct(ProductRequest productRequest);
+	
+	public List<OrderDetailRepresentation> listAllOrderDetailByPartnerIdAndOrderState(Long partnerId, String orderState);
 }

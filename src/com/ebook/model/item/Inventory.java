@@ -15,16 +15,19 @@ public class Inventory {
 	private Long inventoryId;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
+	private Partner partner;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn
 	private Product product;
 	private Double price;
 	private Integer quantity;
 
 	public Inventory() {
-
 	}
 
-	public Inventory(Long inventoryId, Product product, Double price, Integer quantity) {
+	public Inventory(Long inventoryId, Partner partner, Product product, Double price, Integer quantity) {
 		this.inventoryId = inventoryId;
+		this.partner = partner;
 		this.product = product;
 		this.price = price;
 		this.quantity = quantity;
@@ -36,6 +39,14 @@ public class Inventory {
 
 	public void setInventoryId(Long inventoryId) {
 		this.inventoryId = inventoryId;
+	}
+
+	public Partner getPartner() {
+		return partner;
+	}
+
+	public void setPartner(Partner partner) {
+		this.partner = partner;
 	}
 
 	public Product getProduct() {

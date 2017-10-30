@@ -1,6 +1,7 @@
 package com.ebook.webservice.workflow;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +46,8 @@ public class PartnerActivityImpl implements PartnerActivity {
 
 	@Override
 	public PartnerRepresentation createPartner(PartnerRequest partnerRequest) {
-		return new PartnerRepresentation(
-				partnerService.save(new Partner(null, partnerRequest.getName(), partnerRequest.getUserName(),
-						AppBaseUtilsWeb.encriptText(partnerRequest.getPassword()), new ArrayList<>())));
+		return new PartnerRepresentation(partnerService.save(new Partner(null, partnerRequest.getName(),
+				partnerRequest.getUserName(), AppBaseUtilsWeb.encriptText(partnerRequest.getPassword()))));
 	}
 
 	@Override
@@ -90,12 +90,11 @@ public class PartnerActivityImpl implements PartnerActivity {
 
 	@Override
 	public InventoryRepresentation createInventory(InventoryRequest inventoryRequest) {
-		Inventory inventory = new Inventory(null, productService.getById(inventoryRequest.getProductId()),
-				inventoryRequest.getPrice(), inventoryRequest.getQuantity());
-		Partner partner = partnerService.getById(inventoryRequest.getPartnerId());
-		partner.getInventory().add(inventory);
-		partner = partnerService.save(partner);
-		return new InventoryRepresentation(partner.getInventory().get(partner.getInventory().size() - 1));
+		Inventory inventory = new Inventory(null, partnerService.getById(inventoryRequest.getPartnerId()),
+				productService.getById(inventoryRequest.getProductId()), inventoryRequest.getPrice(),
+				inventoryRequest.getQuantity());
+		inventory = inventoryService.save(inventory);
+		return new InventoryRepresentation(inventory);
 	}
 
 	@Override
@@ -103,6 +102,24 @@ public class PartnerActivityImpl implements PartnerActivity {
 		Product product = new Product(null, productRequest.getTitle(), productRequest.getDescription(), null);
 		product = productService.save(product);
 		return new ProductRepresentation(product.getProductId(), product.getTitle(), product.getDescription());
+	}
+
+	@Override
+	public List<OrderDetailRepresentation> listAllOrderDetailByPartnerIdAndOrderState(Long partnerId,
+			String orderState) {
+		List<OrderDetailRepresentation> listOrderDetailRepresentation = new ArrayList<>();
+		List<OrderDetail> listOrderDetail = null;
+		if (orderState == null) {
+			listOrderDetail = orderDetailService.listAllByPartnerId(partnerId);
+		} else {
+			listOrderDetail = orderDetailService.listAllByPartnerId_OrderState(partnerId, orderState);
+		}
+		if (listOrderDetail != null && listOrderDetail.size() > 0) {
+			for (OrderDetail orderDetail : listOrderDetail) {
+				listOrderDetailRepresentation.add(new OrderDetailRepresentation(orderDetail));
+			}
+		}
+		return listOrderDetailRepresentation;
 	}
 
 }

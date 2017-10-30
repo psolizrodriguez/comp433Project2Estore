@@ -15,4 +15,8 @@ public interface OrderDetailService {
 	public boolean remove(OrderDetail orderDetail);
 
 	public boolean shipOrderDetail(ShippingOrder orderDetail, String trackingNumber);
+	
+	public List<OrderDetail> listAllByPartnerId(Long partnerId);
+
+	public List<OrderDetail> listAllByPartnerId_OrderState(Long partnerId, String orderState);
 }

@@ -16,6 +16,12 @@
 	<query name="com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.getById">
 		<![CDATA[FROM OrderDetail o WHERE o.orderDetailId = ?1]]>
 	</query>
+	<query name="com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.listAllByPartnerId">
+		<![CDATA[FROM OrderDetail o WHERE o.inventory.partner.partnerId = ?1]]>
+	</query>
+	<query name="com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.listAllByPartnerId_OrderState">
+		<![CDATA[FROM OrderDetail o WHERE o.inventory.partner.partnerId = ?1 AND o.orderState = ?2]]>
+	</query>
 	<!-- OrderDetail Queries -->
 	<!-- CustomerOrder Queries -->
 	<query	name="com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.getById">
