@@ -15,6 +15,7 @@ import com.ebook.model.order.OrderDetail;
 import com.ebook.model.order.PaymentMethod;
 import com.ebook.model.order.PickUpOrder;
 import com.ebook.model.order.Refund;
+import com.ebook.model.order.ShippingOrder;
 import com.ebook.service.order.CustomerOrderService;
 import com.ebook.service.order.RefundService;
 
@@ -38,7 +39,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	public List<CustomerOrder> listAll() {
 		return dao.listAll();
 	}
-	
+
 	@Override
 	public List<CustomerOrder> listAllOrdersByCustomerId(Long customerId) {
 		return dao.listAllByCustomerId(customerId);
@@ -60,78 +61,90 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	}
 
 	public boolean acceptPayment(CustomerOrder customerOrder) {
-		if (customerOrder.getPaymentMethod() != null && customerOrder.getPaymentMethod().size() > 0) {
-			for (PaymentMethod paymentMethod : customerOrder.getPaymentMethod()) {
-				paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_VERIFIED);
+		if (customerOrder.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_PENDING)) {
+			if (customerOrder.getPaymentMethod() != null && customerOrder.getPaymentMethod().size() > 0) {
+				for (PaymentMethod paymentMethod : customerOrder.getPaymentMethod()) {
+					paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_VERIFIED);
+				}
 			}
+			customerOrder.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_VERIFIED);
+			customerOrder.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP);
+			customerOrder = save(customerOrder);
+			return customerOrder != null;
 		}
-		customerOrder.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_VERIFIED);
-		customerOrder.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP);
-		customerOrder = save(customerOrder);
-		return customerOrder != null;
+		return false;
 	}
 
 	@Override
 	public boolean fulfillOrder(CustomerOrder customerOrder) {
-		if (customerOrder.getOrderDetails() != null && customerOrder.getOrderDetails().size() > 0) {
-			for (OrderDetail orderDetail : customerOrder.getOrderDetails()) {
-				if (orderDetail.getInventory().getQuantity() < orderDetail.getQuantity()) {
-					customerOrder.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_CANCELED);
-				} else {
-					if (orderDetail instanceof PickUpOrder) {
-						((PickUpOrder) orderDetail).setTimeForPickUp(
-								AppBaseUtilsWeb.CalendarToString(AppBaseUtilsWeb.getCurrentTime(), "mm/dd/yyyy")
-										+ " 09:00 - 17:00");
-						((PickUpOrder) orderDetail).setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_PICK_UP);
-						orderDetail.getInventory()
-								.setQuantity(orderDetail.getInventory().getQuantity() - orderDetail.getQuantity());
-						
+		if (customerOrder.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP)) {
+			if (customerOrder.getOrderDetails() != null && customerOrder.getOrderDetails().size() > 0) {
+				for (OrderDetail orderDetail : customerOrder.getOrderDetails()) {
+					if (orderDetail.getInventory().getQuantity() < orderDetail.getQuantity()) {
+						customerOrder.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_CANCELED);
+					} else {
+						if (orderDetail instanceof PickUpOrder) {
+							((PickUpOrder) orderDetail).setTimeForPickUp(
+									AppBaseUtilsWeb.CalendarToString(AppBaseUtilsWeb.getCurrentTime(), "mm/dd/yyyy")
+											+ " 09:00 - 17:00");
+							orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_PICK_UP);
+							orderDetail.getInventory()
+									.setQuantity(orderDetail.getInventory().getQuantity() - orderDetail.getQuantity());
+
+						} else {
+							if (orderDetail instanceof ShippingOrder) {
+								orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP);
+							}
+						}
 					}
 				}
 			}
-		}
-		if (customerOrder.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP)) {
 			customerOrder.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_FULFILLED);
 			if (customerOrder.getPaymentMethod() != null && customerOrder.getPaymentMethod().size() > 0) {
 				for (PaymentMethod paymentMethod : customerOrder.getPaymentMethod()) {
 					paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PAID);
 				}
 			}
+			customerOrder = save(customerOrder);
+			return customerOrder != null;
 		}
-		customerOrder = save(customerOrder);
-		return customerOrder != null;
+		return false;
 	}
 
 	@Override
 	public boolean cancelOrderDetail(CustomerOrder customerOrder, OrderDetail orderDetail) {
-		orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_CANCELED);
-		orderDetail.getInventory().setQuantity(orderDetail.getInventory().getQuantity() + orderDetail.getQuantity());
-		Double ammountRefund = orderDetail.getSubTotal();
-		customerOrder.setTotal(customerOrder.getTotal() - ammountRefund);
-		if (customerOrder.getPaymentMethod() != null && customerOrder.getPaymentMethod().size() > 0) {
-			for (PaymentMethod paymentMethod : customerOrder.getPaymentMethod()) {
-				if (ammountRefund > 0.0) {
-					Double refunded = 0.0;
-					if (paymentMethod.getSubTotal() > ammountRefund) {
-						refunded = ammountRefund;
-						ammountRefund = 0.0;
-					} else {
-						ammountRefund -= paymentMethod.getSubTotal();
-						refunded = paymentMethod.getSubTotal();
+		if (orderDetail.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP)
+				|| orderDetail.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_PICK_UP)) {
+			orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_CANCELED);
+			orderDetail.getInventory()
+					.setQuantity(orderDetail.getInventory().getQuantity() + orderDetail.getQuantity());
+			Double ammountRefund = orderDetail.getSubTotal();
+			customerOrder.setTotal(customerOrder.getTotal() - ammountRefund);
+			if (customerOrder.getPaymentMethod() != null && customerOrder.getPaymentMethod().size() > 0) {
+				for (PaymentMethod paymentMethod : customerOrder.getPaymentMethod()) {
+					if (ammountRefund > 0.0) {
+						Double refunded = 0.0;
+						if (paymentMethod.getSubTotal() > ammountRefund) {
+							refunded = ammountRefund;
+							ammountRefund = 0.0;
+						} else {
+							ammountRefund -= paymentMethod.getSubTotal();
+							refunded = paymentMethod.getSubTotal();
+						}
+						Refund refund = new Refund(null, AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, refunded,
+								orderDetail, paymentMethod);
+						refund = refundService.save(refund);
+						if (paymentMethod.getSubTotal() == refunded) {
+							paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_REFUNDED);
+						} else {
+							paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PARTIALLY_REFUNDED);
+						}
 					}
-					Refund refund = new Refund(null,
-							AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, refunded, orderDetail, paymentMethod);
-					refund = refundService.save(refund);
-					if (paymentMethod.getSubTotal() == refunded) {
-						paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_REFUNDED);
-					} else {
-						paymentMethod.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PARTIALLY_REFUNDED);
-					}
-				}
 
+				}
 			}
+			customerOrder = save(customerOrder);
 		}
-		customerOrder = save(customerOrder);
 		return customerOrder != null;
 	}
 

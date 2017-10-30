@@ -11,9 +11,13 @@ import org.springframework.stereotype.Component;
 import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.CustomerOrderRequest;
+import com.ebook.webservice.representation.InventoryRepresentation;
+import com.ebook.webservice.representation.InventoryRequest;
 import com.ebook.webservice.representation.OrderDetailRepresentation;
 import com.ebook.webservice.representation.PartnerRepresentation;
 import com.ebook.webservice.representation.PartnerRequest;
+import com.ebook.webservice.representation.ProductRepresentation;
+import com.ebook.webservice.representation.ProductRequest;
 import com.ebook.webservice.representation.ShipOrderDetailRequest;
 import com.ebook.webservice.workflow.PartnerActivity;
 
@@ -23,14 +27,6 @@ public class PartnerResource implements PartnerWebService {
 
 	@Autowired
 	PartnerActivity partnerActivity;
-
-	@POST
-	@Produces({ "application/xml", "application/json" })
-	@Path("/createPartnerProfile")
-	public PartnerRepresentation createPartner(PartnerRequest partnerRequest) {
-		System.out.println("POST METHOD Message");
-		return partnerActivity.createPartner(partnerRequest);
-	}
 
 	@PUT
 	@Produces({ "application/xml", "application/json" })
@@ -59,7 +55,27 @@ public class PartnerResource implements PartnerWebService {
 	public OrderDetailRepresentation cancelOrder(CancelOrderDetailRequest cancelOrderDetailRequest) {
 		return partnerActivity.cancelOrder(cancelOrderDetailRequest);
 	}
-	
-	
+
+	@POST
+	@Produces({ "application/xml", "application/json" })
+	@Path("/partner")
+	public PartnerRepresentation createPartner(PartnerRequest partnerRequest) {
+		System.out.println("POST METHOD Message");
+		return partnerActivity.createPartner(partnerRequest);
+	}
+
+	@POST
+	@Produces({ "application/xml", "application/json" })
+	@Path("/inventory")
+	public InventoryRepresentation createInventory(InventoryRequest inventoryRequest) {
+		return partnerActivity.createInventory(inventoryRequest);
+	}
+
+	@POST
+	@Produces({ "application/xml", "application/json" })
+	@Path("/product")
+	public ProductRepresentation createProduct(ProductRequest productRequest) {
+		return partnerActivity.createProduct(productRequest);
+	}
 
 }

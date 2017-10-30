@@ -2,6 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
+	<!-- Inventory Queries -->
 	<query
 		name="com.ebook.dao.inventory.impl.InventoryDaoImpl.listAllInventoryByKeywords">
 		<![CDATA[FROM Inventory i WHERE i.quantity > 0 AND i.product.title LIKE ?1 ORDER BY i.price]]>
@@ -10,11 +11,15 @@
 		name="com.ebook.dao.inventory.impl.InventoryDaoImpl.listAll">
 		<![CDATA[FROM Inventory i WHERE i.quantity > 0 ORDER BY i.price]]>
 	</query>
-	<query	name="com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.getById">
-		<![CDATA[FROM CustomerOrder c WHERE c.orderId = ?1]]>
-	</query>
+	<!-- Inventory Queries -->
+	<!-- OrderDetail Queries -->
 	<query name="com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.getById">
 		<![CDATA[FROM OrderDetail o WHERE o.orderDetailId = ?1]]>
+	</query>
+	<!-- OrderDetail Queries -->
+	<!-- CustomerOrder Queries -->
+	<query	name="com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.getById">
+		<![CDATA[FROM CustomerOrder c WHERE c.orderId = ?1]]>
 	</query>
 	<query name="com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.listAllByCustomerId">
 		<![CDATA[FROM CustomerOrder c WHERE c.customer.customerId = ?1]]>
@@ -22,5 +27,18 @@
 	<query name="com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.listAllByCustomerId_OrderStatus">
 		<![CDATA[FROM CustomerOrder c WHERE c.customer.customerId = ?1 AND c.orderState = ?2]]>
 	</query>
+	<!-- CustomerOrder Queries -->
+	<!-- Partner Queries -->
+	<query name="com.ebook.dao.partner.impl.PartnerDaoImpl.getById">
+		<![CDATA[FROM Partner p WHERE p.partnerId = ?1]]>
+	</query>
+	<!-- Partner Queries -->
+	<!-- Product Queries -->
+	<query name="com.ebook.dao.product.impl.ProductDaoImpl.getById">
+		<![CDATA[FROM Product p WHERE p.productId = ?1]]>
+	</query>
+	<!-- Product Queries -->
+	
+	
 	
 </hibernate-mapping>

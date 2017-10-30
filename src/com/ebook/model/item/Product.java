@@ -32,6 +32,16 @@ public class Product {
 		return description;
 	}
 
+	public Product() {
+	}
+
+	public Product(Long productId, String title, String description, List<Review> review) {
+		this.productId = productId;
+		this.title = title;
+		this.description = description;
+		this.review = review;
+	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}

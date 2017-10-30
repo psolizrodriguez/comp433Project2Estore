@@ -43,15 +43,19 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
 	@Override
 	public boolean shipOrderDetail(ShippingOrder orderDetail, String trackingNumber) {
-		orderDetail.getInventory().setQuantity(orderDetail.getInventory().getQuantity() - orderDetail.getQuantity());
-		//inventoryDao.save(orderDetail.getInventory());
-		orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_SHIPPED);
-		orderDetail.setTrackingNumber(trackingNumber);
-		Calendar deliveryDate = AppBaseUtilsWeb.getCurrentTime();
-		deliveryDate.add(Calendar.DATE, 3);
-		orderDetail.setEstimatedDelivery(deliveryDate);
-		orderDetail = (ShippingOrder)save(orderDetail);
-		return  orderDetail != null;
+		if (orderDetail.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP)) {
+			orderDetail.getInventory()
+					.setQuantity(orderDetail.getInventory().getQuantity() - orderDetail.getQuantity());
+			// inventoryDao.save(orderDetail.getInventory());
+			orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_SHIPPED);
+			orderDetail.setTrackingNumber(trackingNumber);
+			Calendar deliveryDate = AppBaseUtilsWeb.getCurrentTime();
+			deliveryDate.add(Calendar.DATE, 3);
+			orderDetail.setEstimatedDelivery(deliveryDate);
+			orderDetail = (ShippingOrder) save(orderDetail);
+			return orderDetail != null;
+		}
+		return false;
 	}
 
 }

@@ -55,96 +55,7 @@ none
     }
 ]
 ```
-#### b. Accept buy order  
-##### Description: 
-This method allows us to accept the order after the payment has been validated. It is now fulfilled and can be shipped.
-##### URI: 
-http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/fulfillOrder
-##### Parameters
-none  
-##### Method: 
-PUT 
-##### Headers:   
-```
-Accept:application/json  
-Content-Type:application/json  
-```
-##### Body:  
-```
-{
-	"customerOrderId": 3
-} 
-```
-##### Response:  
-```
-{
-    "orderId": 3,
-    "orderDetails": [
-        {
-            "orderDetailId": 3,
-            "inventory": {
-                "inventoryId": 1,
-                "productRepresentation": {
-                    "productId": 1,
-                    "title": "FitBit Alta",
-                    "description": "Activity Tracker"
-                },
-                "price": 150,
-                "quantity": 9
-            },
-            "quantity": 1,
-            "subTotal": 150,
-            "orderState": "Pending"
-        }
-    ],
-    "paymentStatus": "Verified",
-    "customer": {
-        "customerId": 1,
-        "lastName": "Cicale",
-        "firstName": "Julia",
-        "userName": "julia.cicale",
-        "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
-        "billingAddress": {
-            "addressId": 2,
-            "street": "123 Business Rd.",
-            "unit": "Chicago",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60601"
-        },
-        "shippingAddress": {
-            "addressId": 1,
-            "street": "123 Home St.",
-            "unit": "Chicago",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60657"
-        }
-    },
-    "orderState": "Fulfilled",
-    "billingAddress": {
-        "addressId": 2,
-        "street": "123 Business Rd.",
-        "unit": "Chicago",
-        "city": "Chicago",
-        "state": "IL",
-        "zip": "60601"
-    },
-    "total": 150,
-    "paymentMethod": [
-        {
-            "paymentId": 3,
-            "paymentStatus": "Paid",
-            "subTotal": 150,
-            "creditCardNumber": "1010101010101010101020",
-            "nameOnCard": "Julia Cicale",
-            "securityCode": "911",
-            "validDate": "20/20"
-        }
-    ]
-}
-```
-#### c. Accept Credit Card payment  
+#### b. Accept Credit Card payment  
 ##### Description: 
 This method allows us to validate and accept the payments of an order
 ##### URI: 
@@ -224,6 +135,95 @@ Content-Type:application/json
         {
             "paymentId": 3,
             "paymentStatus": "Verified",
+            "subTotal": 150,
+            "creditCardNumber": "1010101010101010101020",
+            "nameOnCard": "Julia Cicale",
+            "securityCode": "911",
+            "validDate": "20/20"
+        }
+    ]
+}
+```
+#### c. Accept buy order  
+##### Description: 
+This method allows us to accept the order after the payment has been validated. It is now fulfilled and can be shipped.
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/fulfillOrder
+##### Parameters
+none  
+##### Method: 
+PUT 
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+	"customerOrderId": 3
+} 
+```
+##### Response:  
+```
+{
+    "orderId": 3,
+    "orderDetails": [
+        {
+            "orderDetailId": 3,
+            "inventory": {
+                "inventoryId": 1,
+                "productRepresentation": {
+                    "productId": 1,
+                    "title": "FitBit Alta",
+                    "description": "Activity Tracker"
+                },
+                "price": 150,
+                "quantity": 9
+            },
+            "quantity": 1,
+            "subTotal": 150,
+            "orderState": "Pending"
+        }
+    ],
+    "paymentStatus": "Verified",
+    "customer": {
+        "customerId": 1,
+        "lastName": "Cicale",
+        "firstName": "Julia",
+        "userName": "julia.cicale",
+        "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
+        "billingAddress": {
+            "addressId": 2,
+            "street": "123 Business Rd.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
+        },
+        "shippingAddress": {
+            "addressId": 1,
+            "street": "123 Home St.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60657"
+        }
+    },
+    "orderState": "Fulfilled",
+    "billingAddress": {
+        "addressId": 2,
+        "street": "123 Business Rd.",
+        "unit": "Chicago",
+        "city": "Chicago",
+        "state": "IL",
+        "zip": "60601"
+    },
+    "total": 150,
+    "paymentMethod": [
+        {
+            "paymentId": 3,
+            "paymentStatus": "Paid",
             "subTotal": 150,
             "creditCardNumber": "1010101010101010101020",
             "nameOnCard": "Julia Cicale",
@@ -467,7 +467,7 @@ none
         ]
     }
 ]
-```  
+```
 #### f. Order Cancel  
 ##### Description: 
 This method allows us to cancel an order (instead of shipping it)
@@ -513,7 +513,7 @@ Content-Type:application/json
 ##### Description: 
 This method allows us to register a new Partner inside of the application  
 ##### URI: 
-http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/createPartnerProfile
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/partner
 ##### Parameters
 none  
 ##### Method: 
@@ -541,8 +541,74 @@ Content-Type:application/json
 }
 ```
 #### b. Add product or products in market place  
-#### c. Push orders that customers made to partners  
-#### d. Get acknowledgement of order fulfillment  
+##### Description: 
+This method allows us to register a new product in the database  
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/product
+##### Parameters
+none  
+##### Method: 
+POST  
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+    "productId": 0,
+    "title": "Amazon Echo",
+    "description": "Alexa enabled device with a speaker"
+} 
+```
+##### Response:  
+```
+{
+    "productId": 5,
+    "title": "Amazon Echo",
+    "description": "Alexa enabled device with a speaker"
+}
+```
+#### c. Add products to inventory of partners 
+##### Description: 
+This method allows us to increase the inventory of a partner in the database  
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/inventory
+##### Parameters
+none  
+##### Method: 
+POST  
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+    "inventoryId": 0,
+    "partnerId" : 3,
+    "productId": 5,
+    "price": 49.99,
+    "quantity": 10
+} 
+```
+##### Response:  
+```
+{
+    "inventoryId": 9,
+    "productRepresentation": {
+        "productId": 5,
+        "title": "Amazon Echo",
+        "description": "Alexa enabled device with a speaker"
+    },
+    "price": 49.99,
+    "quantity": 10
+}
+```
+#### d. Push orders that customers made to partners  
+#### e. Get acknowledgement of order fulfillment  
 ### 3. Features to make your APIs robust:  
 #### a. ERROR Handling  
 #### b. Exception handling  
