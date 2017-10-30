@@ -508,6 +508,7 @@ Content-Type:application/json
     "orderState": "Canceled"
 }
 ```
+#### g. Create Order for Customer
 ### 2. Allowing Partners to use your site to sell their products with functionalities such as:  
 #### a. Need to register and create profile of partners  
 ##### Description: 
