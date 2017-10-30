@@ -10,6 +10,7 @@ import javax.ws.rs.QueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.workflow.OrderActivity;
 
@@ -26,6 +27,19 @@ public class OrderResource implements OrderWebService {
 	public List<InventoryRepresentation> getProducts(@QueryParam("keywords") String keywords) {
 		System.out.println("GET METHOD Request for all products .............");
 		return orderActivity.getProducts(keywords);
+	}
+
+	@GET
+	@Produces({ "application/xml", "application/json" })
+	@Path("/searchCustomerOrders")
+	public List<CustomerOrderRepresentation> listAllOrdersByCustomerId(@QueryParam("customerId") long customerId, @QueryParam("orderState") String orderState) {
+		if(orderState != null) {
+			System.out.println("GET METHOD Request for customerId " + customerId + " with order status " + orderState + "......");
+			return orderActivity.getOrdersByCustomerId_OrderState(customerId, orderState);
+		} else {
+			System.out.println("GET METHOD Request for customerId " + customerId + "......");
+			return orderActivity.getOrdersByCustomerId(customerId);
+		}
 	}
 
 }

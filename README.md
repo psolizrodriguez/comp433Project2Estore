@@ -273,7 +273,201 @@ Content-Type:application/json
     "orderState": "Shipped"
 }
 ```
-#### e. Provide order status; Provide status of orders in progress  
+comp433Project2Estore/services/orderService/searchCustomerOrders?customerId=1&orderState=Fulfilled
+#### e. Provide order status; Provide status of orders in progress
+##### Description: 
+This method performs a search for orders that match a certain customerId, as well as an orderState if one is specified.
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/orderService/searchCustomerOrders?customerId=1&orderState=Fulfilled
+##### Parameters
+-customerId: Id of the customer to retrieve the orders for  
+-orderState: specify state of the order (optional)  
+##### Method: 
+GET  
+##### Headers:   
+```
+Accept:application/json  
+```
+##### Body:  
+```
+none
+```
+##### Response:  
+```
+[
+    {
+        "orderId": 1,
+        "orderDetails": [
+            {
+                "orderDetailId": 2,
+                "inventory": {
+                    "inventoryId": 5,
+                    "productRepresentation": {
+                        "productId": 2,
+                        "title": "Bluetooth Headphones",
+                        "description": "Wireless and comfortable headphones for running"
+                    },
+                    "price": 70,
+                    "quantity": 14
+                },
+                "quantity": 2,
+                "subTotal": 140,
+                "orderState": "Canceled"
+            },
+            {
+                "orderDetailId": 1,
+                "inventory": {
+                    "inventoryId": 1,
+                    "productRepresentation": {
+                        "productId": 1,
+                        "title": "FitBit Alta",
+                        "description": "Activity Tracker"
+                    },
+                    "price": 150,
+                    "quantity": 9
+                },
+                "quantity": 1,
+                "subTotal": 150,
+                "orderState": "Shipped"
+            }
+        ],
+        "paymentStatus": "Verified",
+        "customer": {
+            "customerId": 1,
+            "lastName": "Cicale",
+            "firstName": "Julia",
+            "userName": "julia.cicale",
+            "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
+            "billingAddress": {
+                "addressId": 2,
+                "street": "123 Business Rd.",
+                "unit": "Chicago",
+                "city": "Chicago",
+                "state": "IL",
+                "zip": "60601"
+            },
+            "shippingAddress": {
+                "addressId": 1,
+                "street": "123 Home St.",
+                "unit": "Chicago",
+                "city": "Chicago",
+                "state": "IL",
+                "zip": "60657"
+            }
+        },
+        "orderState": "Fulfilled",
+        "billingAddress": {
+            "addressId": 2,
+            "street": "123 Business Rd.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
+        },
+        "total": 150,
+        "paymentMethod": [
+            {
+                "paymentId": 2,
+                "paymentStatus": "Partially Refunded",
+                "subTotal": 190,
+                "transactionId": "XVF1022",
+                "accountEmail": "julia.cicale@gmail.com"
+            },
+            {
+                "paymentId": 1,
+                "paymentStatus": "Refunded",
+                "subTotal": 100,
+                "creditCardNumber": "1010101010101010101020",
+                "nameOnCard": "Julia Cicale",
+                "securityCode": "911",
+                "validDate": "20/20"
+            }
+        ]
+    },
+    {
+        "orderId": 4,
+        "orderDetails": [
+            {
+                "orderDetailId": 6,
+                "inventory": {
+                    "inventoryId": 5,
+                    "productRepresentation": {
+                        "productId": 2,
+                        "title": "Bluetooth Headphones",
+                        "description": "Wireless and comfortable headphones for running"
+                    },
+                    "price": 70,
+                    "quantity": 14
+                },
+                "quantity": 1,
+                "subTotal": 70,
+                "orderState": "Ready to Pickup"
+            },
+            {
+                "orderDetailId": 5,
+                "inventory": {
+                    "inventoryId": 1,
+                    "productRepresentation": {
+                        "productId": 1,
+                        "title": "FitBit Alta",
+                        "description": "Activity Tracker"
+                    },
+                    "price": 150,
+                    "quantity": 9
+                },
+                "quantity": 1,
+                "subTotal": 150,
+                "orderState": "Pending"
+            }
+        ],
+        "paymentStatus": "Verified",
+        "customer": {
+            "customerId": 1,
+            "lastName": "Cicale",
+            "firstName": "Julia",
+            "userName": "julia.cicale",
+            "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
+            "billingAddress": {
+                "addressId": 2,
+                "street": "123 Business Rd.",
+                "unit": "Chicago",
+                "city": "Chicago",
+                "state": "IL",
+                "zip": "60601"
+            },
+            "shippingAddress": {
+                "addressId": 1,
+                "street": "123 Home St.",
+                "unit": "Chicago",
+                "city": "Chicago",
+                "state": "IL",
+                "zip": "60657"
+            }
+        },
+        "orderState": "Fulfilled",
+        "billingAddress": {
+            "addressId": 2,
+            "street": "123 Business Rd.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
+        },
+        "total": 220,
+        "paymentMethod": [
+            {
+                "paymentId": 5,
+                "paymentStatus": "Paid",
+                "subTotal": 220,
+                "creditCardNumber": "1010101010101010101020",
+                "nameOnCard": "Julia Cicale",
+                "securityCode": "911",
+                "validDate": "20/20"
+            }
+        ]
+    }
+]
+```  
 #### f. Order Cancel  
 ##### Description: 
 This method allows us to cancel an order (instead of shipping it)

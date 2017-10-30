@@ -9,6 +9,10 @@ public interface CustomerOrderService {
 	public CustomerOrder save(CustomerOrder customerOrder);
 
 	public List<CustomerOrder> listAll();
+	
+	public List<CustomerOrder> listAllOrdersByCustomerId(Long customerId);
+	
+	public List<CustomerOrder> listAllOrdersByCustomerId_OrderStatus(Long customerId, String orderStatus);
 
 	public CustomerOrder getById(Long customerOrderId);
 

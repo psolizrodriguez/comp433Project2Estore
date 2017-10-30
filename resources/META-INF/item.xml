@@ -16,6 +16,11 @@
 	<query name="com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.getById">
 		<![CDATA[FROM OrderDetail o WHERE o.orderDetailId = ?1]]>
 	</query>
-	
+	<query name="com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.listAllByCustomerId">
+		<![CDATA[FROM CustomerOrder c WHERE c.customer.customerId = ?1]]>
+	</query>
+	<query name="com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.listAllByCustomerId_OrderStatus">
+		<![CDATA[FROM CustomerOrder c WHERE c.customer.customerId = ?1 AND c.orderState = ?2]]>
+	</query>
 	
 </hibernate-mapping>

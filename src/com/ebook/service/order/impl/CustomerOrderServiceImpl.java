@@ -38,6 +38,16 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	public List<CustomerOrder> listAll() {
 		return dao.listAll();
 	}
+	
+	@Override
+	public List<CustomerOrder> listAllOrdersByCustomerId(Long customerId) {
+		return dao.listAllByCustomerId(customerId);
+	}
+
+	@Override
+	public List<CustomerOrder> listAllOrdersByCustomerId_OrderStatus(Long customerId, String orderStatus) {
+		return dao.listAllByCustomerId_OrderStatus(customerId, orderStatus);
+	}
 
 	@Override
 	public CustomerOrder getById(Long customerOrderId) {

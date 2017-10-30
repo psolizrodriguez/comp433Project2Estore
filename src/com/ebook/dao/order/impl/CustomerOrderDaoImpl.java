@@ -22,6 +22,17 @@ public class CustomerOrderDaoImpl extends AbstractBaseDao implements CustomerOrd
 	public List<CustomerOrder> listAll() {
 		return super.verifyListNamedQueryAll("com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.listAll");
 	}
+	
+	@Override
+	public List<CustomerOrder> listAllByCustomerId(Long customerId) {
+		return super.verifyListNamedQueryAll("com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.listAllByCustomerId", customerId);
+	}
+
+	@Override
+	public List<CustomerOrder> listAllByCustomerId_OrderStatus(Long customerId, String orderStatus) {
+		return super.verifyListNamedQueryAll("com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.listAllByCustomerId_OrderStatus", 
+				customerId, orderStatus);
+	}
 
 	@Transactional
 	public boolean remove(CustomerOrder customerOrder) {
@@ -34,4 +45,6 @@ public class CustomerOrderDaoImpl extends AbstractBaseDao implements CustomerOrd
 		return super.verifyNamedQueryAll("com.ebook.dao.customerOrder.impl.CustomerOrderDaoImpl.getById",
 				customerOrderId);
 	}
+
+
 }
