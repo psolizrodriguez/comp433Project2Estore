@@ -10,9 +10,7 @@ public interface OrderActivity {
 
 	public List<InventoryRepresentation> getProducts(String keywords);
 
-	public List<CustomerOrderRepresentation> getOrdersByCustomerId(long customerId);
-
-	public List<CustomerOrderRepresentation> getOrdersByCustomerId_OrderState(long customerId, String orderState);
+	public List<CustomerOrderRepresentation> getOrdersByCustomerId_OrderState(Long customerId, String orderState);
 
 	public CustomerOrderRepresentation createCustomerOrder(CustomerOrderRequest customerOrderRequest);
 

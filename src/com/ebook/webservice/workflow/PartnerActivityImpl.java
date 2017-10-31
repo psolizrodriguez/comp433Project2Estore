@@ -20,9 +20,8 @@ import com.ebook.service.item.PartnerService;
 import com.ebook.service.item.ProductService;
 import com.ebook.service.order.CustomerOrderService;
 import com.ebook.service.order.OrderDetailService;
-import com.ebook.webservice.representation.CancelOrderDetailRequest;
-import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.AcceptPaymentCustomerOrderRequest;
+import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
 import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
@@ -54,57 +53,43 @@ public class PartnerActivityImpl implements PartnerActivity {
 	}
 
 	@Override
-	public CustomerOrderRepresentation acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
+	public boolean acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
 		CustomerOrder customerOrder = customerOrderService.getById(customerOrderRequest.getCustomerOrderId());
-		customerOrderService.acceptPayment(customerOrder);
-		return new CustomerOrderRepresentation(customerOrder);
+		return customerOrderService.acceptPayment(customerOrder);
 	}
 
 	@Override
-	public CustomerOrderRepresentation fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
+	public boolean fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
 		CustomerOrder customerOrder = customerOrderService.getById(customerOrderRequest.getCustomerOrderId());
-		customerOrderService.fulfillOrder(customerOrder);
-		return new CustomerOrderRepresentation(customerOrder);
+		return customerOrderService.fulfillOrder(customerOrder);
 	}
 
 	@Override
-	public OrderDetailRepresentation shipOrder(ShipOrderDetailRequest shipOrderDetailRequest) {
+	public boolean shipOrder(ShipOrderDetailRequest shipOrderDetailRequest) {
 		OrderDetail orderDetail = orderDetailService.getById(shipOrderDetailRequest.getOrderDetailId());
 		String trackingNumber = shipOrderDetailRequest.getTrackingNumber();
-		orderDetailService.shipOrderDetail((ShippingOrder) orderDetail, trackingNumber);
-		return new OrderDetailRepresentation(orderDetail);
+		return orderDetailService.shipOrderDetail((ShippingOrder) orderDetail, trackingNumber);
 	}
 
 	@Override
-	public OrderDetailRepresentation cancelOrder(CancelOrderDetailRequest cancelOrderDetailRequest) {
-		OrderDetail orderDetail = null;
-		CustomerOrder customerOrder = customerOrderService.getById(cancelOrderDetailRequest.getOrderId());
-		if (customerOrder.getOrderDetails() != null && customerOrder.getOrderDetails().size() > 0) {
-			for (int i = 0; i < customerOrder.getOrderDetails().size(); i++) {
-				OrderDetail auxOrderDetail = customerOrder.getOrderDetails().get(i);
-				if (auxOrderDetail.getOrderDetailId() == cancelOrderDetailRequest.getOrderDetailId()) {
-					orderDetail = auxOrderDetail;
-				}
-			}
-		}
-		customerOrderService.cancelOrderDetail(customerOrder, orderDetail);
-		return new OrderDetailRepresentation(orderDetail);
+	public boolean cancelOrder(CancelOrderDetailRequest cancelOrderDetailRequest) {
+		return customerOrderService.cancelOrderDetail(
+				customerOrderService.getById(cancelOrderDetailRequest.getOrderId()),
+				cancelOrderDetailRequest.getOrderDetailId());
 	}
 
 	@Override
 	public InventoryRepresentation createInventory(InventoryRequest inventoryRequest) {
-		Inventory inventory = new Inventory(null, partnerService.getById(inventoryRequest.getPartnerId()),
-				productService.getById(inventoryRequest.getProductId()), inventoryRequest.getPrice(),
-				inventoryRequest.getQuantity());
-		inventory = inventoryService.save(inventory);
-		return new InventoryRepresentation(inventory);
+		return new InventoryRepresentation(
+				inventoryService.save(new Inventory(null, partnerService.getById(inventoryRequest.getPartnerId()),
+						productService.getById(inventoryRequest.getProductId()), inventoryRequest.getPrice(),
+						inventoryRequest.getQuantity())));
 	}
 
 	@Override
 	public ProductRepresentation createProduct(ProductRequest productRequest) {
-		Product product = new Product(null, productRequest.getTitle(), productRequest.getDescription(), null);
-		product = productService.save(product);
-		return new ProductRepresentation(product.getProductId(), product.getTitle(), product.getDescription());
+		return new ProductRepresentation(productService
+				.save(new Product(null, productRequest.getTitle(), productRequest.getDescription(), null)));
 	}
 
 	@Override
@@ -126,14 +111,11 @@ public class PartnerActivityImpl implements PartnerActivity {
 	}
 
 	@Override
-	public OrderDetailRepresentation deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest) {
+	public boolean deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest) {
 		Calendar delivered = AppBaseUtilsWeb.StringToCalendar(orderDetailDeliveredRequest.getDeliveredTime(),
 				AppBaseConstantsWeb.DATETIME_FORMAT);
 		OrderDetail orderDetail = orderDetailService.getById(orderDetailDeliveredRequest.getOrderDetailId());
-		if (orderDetailService.orderDelivered((ShippingOrder) orderDetail, delivered)) {
-			return new OrderDetailRepresentation(orderDetail);
-		}
-		return null;
+		return orderDetailService.orderDelivered((ShippingOrder) orderDetail, delivered);
 	}
 
 }

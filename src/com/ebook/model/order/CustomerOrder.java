@@ -25,20 +25,20 @@ public class CustomerOrder {
 	private Long orderId;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 	private String paymentStatus;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Customer customer;
 	private String orderState;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Address billingAddress;
 	private Double total;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Fetch(value = FetchMode.SUBSELECT)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private List<PaymentMethod> paymentMethod;
 
 	public CustomerOrder() {

@@ -14,6 +14,8 @@ import com.ebook.model.order.CustomerOrder;
 import com.ebook.model.order.OrderDetail;
 import com.ebook.model.order.PayPalPayment;
 import com.ebook.model.order.PaymentMethod;
+import com.ebook.model.order.PickUpOrder;
+import com.ebook.model.order.ShippingOrder;
 import com.ebook.service.customer.CustomerService;
 import com.ebook.service.item.InventoryService;
 import com.ebook.service.order.AddressService;
@@ -55,25 +57,14 @@ public class OrderActivityImpl implements OrderActivity {
 	}
 
 	@Override
-	public List<CustomerOrderRepresentation> getOrdersByCustomerId(long customerId) {
+	public List<CustomerOrderRepresentation> getOrdersByCustomerId_OrderState(Long customerId, String orderState) {
 		List<CustomerOrder> listOrders = new ArrayList<>();
 		List<CustomerOrderRepresentation> customerOrderRepresentation = new ArrayList<>();
-		listOrders = customerOrderService.listAllOrdersByCustomerId(customerId);
-
-		Iterator<CustomerOrder> it = listOrders.iterator();
-		while (it.hasNext()) {
-			CustomerOrder customerOrder = (CustomerOrder) it.next();
-			customerOrderRepresentation.add(new CustomerOrderRepresentation(customerOrder));
+		if (orderState != null) {
+			listOrders = customerOrderService.listAllOrdersByCustomerId_OrderStatus(customerId, orderState);
+		} else {
+			listOrders = customerOrderService.listAllOrdersByCustomerId(customerId);
 		}
-		return customerOrderRepresentation;
-	}
-
-	@Override
-	public List<CustomerOrderRepresentation> getOrdersByCustomerId_OrderState(long customerId, String orderState) {
-		List<CustomerOrder> listOrders = new ArrayList<>();
-		List<CustomerOrderRepresentation> customerOrderRepresentation = new ArrayList<>();
-		listOrders = customerOrderService.listAllOrdersByCustomerId_OrderStatus(customerId, orderState);
-
 		Iterator<CustomerOrder> it = listOrders.iterator();
 		while (it.hasNext()) {
 			CustomerOrder customerOrder = (CustomerOrder) it.next();
@@ -88,8 +79,16 @@ public class OrderActivityImpl implements OrderActivity {
 		Double total = 0.0;
 		if (customerOrderRequest.getOrderDetails() != null && customerOrderRequest.getOrderDetails().size() > 0) {
 			for (OrderDetailRequest orderDetailRequest : customerOrderRequest.getOrderDetails()) {
-				OrderDetail aux = new OrderDetail(null, inventoryService.getById(orderDetailRequest.getInventoryId()),
-						orderDetailRequest.getQuantity(), AppBaseConstantsWeb.ORDER_STATUS_PENDING);
+				OrderDetail aux = null;
+				if (orderDetailRequest.getAddressId() != null) {
+					aux = new ShippingOrder(null, inventoryService.getById(orderDetailRequest.getInventoryId()),
+							orderDetailRequest.getQuantity(), AppBaseConstantsWeb.ORDER_STATUS_PENDING,
+							addressService.getById(orderDetailRequest.getAddressId()), null);
+				} else {
+					aux = new PickUpOrder(null, inventoryService.getById(orderDetailRequest.getInventoryId()),
+							orderDetailRequest.getQuantity(), AppBaseConstantsWeb.ORDER_STATUS_PENDING);
+				}
+
 				listOrderDetail.add(aux);
 				total += aux.getSubTotal();
 			}

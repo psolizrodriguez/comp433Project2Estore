@@ -3,15 +3,14 @@ package com.ebook.service.order;
 import java.util.List;
 
 import com.ebook.model.order.CustomerOrder;
-import com.ebook.model.order.OrderDetail;
 
 public interface CustomerOrderService {
 	public CustomerOrder save(CustomerOrder customerOrder);
 
 	public List<CustomerOrder> listAll();
-	
+
 	public List<CustomerOrder> listAllOrdersByCustomerId(Long customerId);
-	
+
 	public List<CustomerOrder> listAllOrdersByCustomerId_OrderStatus(Long customerId, String orderStatus);
 
 	public CustomerOrder getById(Long customerOrderId);
@@ -22,5 +21,5 @@ public interface CustomerOrderService {
 
 	public boolean fulfillOrder(CustomerOrder customerOrder);
 
-	public boolean cancelOrderDetail(CustomerOrder customerOrder, OrderDetail orderDetail);
+	public boolean cancelOrderDetail(CustomerOrder customerOrder, Long orderDetailId);
 }

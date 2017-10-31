@@ -15,7 +15,6 @@ import com.ebook.model.order.OrderDetail;
 import com.ebook.model.order.PaymentMethod;
 import com.ebook.model.order.PickUpOrder;
 import com.ebook.model.order.Refund;
-import com.ebook.model.order.ShippingOrder;
 import com.ebook.service.order.CustomerOrderService;
 import com.ebook.service.order.RefundService;
 
@@ -81,20 +80,18 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 			if (customerOrder.getOrderDetails() != null && customerOrder.getOrderDetails().size() > 0) {
 				for (OrderDetail orderDetail : customerOrder.getOrderDetails()) {
 					if (orderDetail.getInventory().getQuantity() < orderDetail.getQuantity()) {
-						customerOrder.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_CANCELED);
+						cancelOrderDetail(customerOrder, orderDetail.getOrderDetailId());
 					} else {
 						if (orderDetail instanceof PickUpOrder) {
-							((PickUpOrder) orderDetail).setTimeForPickUp(
-									AppBaseUtilsWeb.CalendarToString(AppBaseUtilsWeb.getCurrentTime(), "mm/dd/yyyy")
-											+ " 09:00 - 17:00");
+							((PickUpOrder) orderDetail)
+									.setTimeForPickUp(AppBaseUtilsWeb.CalendarToString(AppBaseUtilsWeb.getCurrentTime(),
+											AppBaseConstantsWeb.DATE_FORMAT) + " 09:00 - 17:00");
 							orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_PICK_UP);
 							orderDetail.getInventory()
 									.setQuantity(orderDetail.getInventory().getQuantity() - orderDetail.getQuantity());
 
 						} else {
-							if (orderDetail instanceof ShippingOrder) {
-								orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP);
-							}
+							orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP);
 						}
 					}
 				}
@@ -112,9 +109,19 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 	}
 
 	@Override
-	public boolean cancelOrderDetail(CustomerOrder customerOrder, OrderDetail orderDetail) {
-		if (orderDetail.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP)
-				|| orderDetail.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_PICK_UP)) {
+	public boolean cancelOrderDetail(CustomerOrder customerOrder, Long orderDetailId) {
+		OrderDetail orderDetail = null;
+		if (customerOrder.getOrderDetails() != null && customerOrder.getOrderDetails().size() > 0) {
+			for (OrderDetail aux : customerOrder.getOrderDetails()) {
+				if (orderDetail == null) {
+					if (aux.getOrderDetailId().equals(orderDetailId)) {
+						orderDetail = aux;
+					}
+				}
+			}
+		}
+		if (orderDetail != null && (orderDetail.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_SHIP)
+				|| orderDetail.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_READY_TO_PICK_UP))) {
 			orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_CANCELED);
 			orderDetail.getInventory()
 					.setQuantity(orderDetail.getInventory().getQuantity() + orderDetail.getQuantity());

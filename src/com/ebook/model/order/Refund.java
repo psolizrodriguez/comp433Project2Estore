@@ -16,10 +16,10 @@ public class Refund {
 	private String refundStatus;
 	private Double total;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private OrderDetail orderDetail;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private PaymentMethod paymentMethod;
 
 	public Refund() {

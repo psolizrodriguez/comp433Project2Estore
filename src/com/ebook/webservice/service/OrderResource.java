@@ -27,29 +27,43 @@ public class OrderResource implements OrderWebService {
 	@Produces({ "application/xml", "application/json" })
 	@Path("/searchInventoryofProduct")
 	public List<InventoryRepresentation> getProducts(@QueryParam("keywords") String keywords) {
-		System.out.println("GET METHOD Request for all products .............");
-		return orderActivity.getProducts(keywords);
+		List<InventoryRepresentation> listInventoryRepresentation = null;
+		try {
+			listInventoryRepresentation = orderActivity.getProducts(keywords);
+		} catch (Exception e) {
+			e.printStackTrace();
+			listInventoryRepresentation = null;
+		}
+		return listInventoryRepresentation;
 	}
 
 	@GET
 	@Produces({ "application/xml", "application/json" })
 	@Path("/searchCustomerOrders")
-	public List<CustomerOrderRepresentation> listAllOrdersByCustomerId(@QueryParam("customerId") long customerId,
+	public List<CustomerOrderRepresentation> listAllOrdersByCustomerId(@QueryParam("customerId") Long customerId,
 			@QueryParam("orderState") String orderState) {
-		if(orderState != null) {
-			System.out.println("GET METHOD Request for customerId " + customerId + " with order status " + orderState + "......");
-			return orderActivity.getOrdersByCustomerId_OrderState(customerId, orderState);
-		} else {
-			System.out.println("GET METHOD Request for customerId " + customerId + "......");
-			return orderActivity.getOrdersByCustomerId(customerId);
+		List<CustomerOrderRepresentation> listCustomerOrderRepresentation = null;
+		try {
+			listCustomerOrderRepresentation = orderActivity.getOrdersByCustomerId_OrderState(customerId, orderState);
+		} catch (Exception e) {
+			e.printStackTrace();
+			listCustomerOrderRepresentation = null;
 		}
+		return listCustomerOrderRepresentation;
 	}
 
 	@POST
 	@Produces({ "application/xml", "application/json" })
 	@Path("/customerOrder")
 	public CustomerOrderRepresentation createCustomerOrder(CustomerOrderRequest customerOrderRequest) {
-		return orderActivity.createCustomerOrder(customerOrderRequest);
+		CustomerOrderRepresentation customerOrderRepresentation = null;
+		try {
+			customerOrderRepresentation = orderActivity.createCustomerOrder(customerOrderRequest);
+		} catch (Exception e) {
+			e.printStackTrace();
+			customerOrderRepresentation = null;
+		}
+		return customerOrderRepresentation;
 	}
 
 }

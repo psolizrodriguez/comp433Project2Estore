@@ -8,13 +8,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ebook.webservice.representation.CancelOrderDetailRequest;
-import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.AcceptPaymentCustomerOrderRequest;
+import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
 import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
@@ -36,29 +37,63 @@ public class PartnerResource implements PartnerWebService {
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/acceptPayment")
-	public CustomerOrderRepresentation acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
-		return partnerActivity.acceptPayment(customerOrderRequest);
+	public Response acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
+		try {
+			if (partnerActivity.acceptPayment(customerOrderRequest)) {
+				return Response.status(Status.OK).build();
+			} else {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+		} catch (Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/fulfillOrder")
-	public CustomerOrderRepresentation fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
-		return partnerActivity.fulfillOrder(customerOrderRequest);
+	public Response fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
+		try {
+			if (partnerActivity.fulfillOrder(customerOrderRequest)) {
+				return Response.status(Status.OK).build();
+			} else {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/shipOrder")
-	public OrderDetailRepresentation shipOrder(ShipOrderDetailRequest shipOrderDetailRequest) {
-		return partnerActivity.shipOrder(shipOrderDetailRequest);
+	public Response shipOrder(ShipOrderDetailRequest shipOrderDetailRequest) {
+		try {
+			if (partnerActivity.shipOrder(shipOrderDetailRequest)) {
+				return Response.status(Status.OK).build();
+			} else {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/cancelOrder")
-	public OrderDetailRepresentation cancelOrder(CancelOrderDetailRequest cancelOrderDetailRequest) {
-		return partnerActivity.cancelOrder(cancelOrderDetailRequest);
+	public Response cancelOrder(CancelOrderDetailRequest cancelOrderDetailRequest) {
+		try {
+			if (partnerActivity.cancelOrder(cancelOrderDetailRequest)) {
+				return Response.status(Status.OK).build();
+			} else {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+		} catch (Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@POST
@@ -94,8 +129,17 @@ public class PartnerResource implements PartnerWebService {
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/markOrderAsDelivered")
-	public OrderDetailRepresentation deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest) {
-		return partnerActivity.deliveredOrderDetail(orderDetailDeliveredRequest);
+	public Response deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest) {
+		try {
+			if (partnerActivity.deliveredOrderDetail(orderDetailDeliveredRequest)) {
+				return Response.status(Status.OK).build();
+			} else {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 }

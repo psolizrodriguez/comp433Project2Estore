@@ -14,7 +14,7 @@ import com.ebook.model.item.Inventory;
 @Entity
 public class ShippingOrder extends OrderDetail {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Address shippingAddress;
 	private Calendar estimatedDelivery;
 	private String trackingNumber;

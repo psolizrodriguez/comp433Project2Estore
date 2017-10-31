@@ -11,6 +11,15 @@ import javax.xml.bind.annotation.XmlType;
 public class OrderDetailRequest {
 	private Long inventoryId;
 	private Integer quantity;
+	private Long addressId;
+
+	public Long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
 
 	public Long getInventoryId() {
 		return inventoryId;

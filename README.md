@@ -19,7 +19,7 @@ This method performs a search over the title column of product table joining it 
 ##### URI: 
 http://18.220.231.8:8080/comp433Project2Estore/services/orderService/searchInventoryofProduct?keywords=FitBit 
 ##### Parameters
--keywords: Name of the product to perform the search over the inventory  
+**-keywords:** Name of the product to perform the search over the inventory  
 ##### Method: 
 GET  
 ##### Headers:   
@@ -35,7 +35,12 @@ none
 [
     {
         "inventoryId": 1,
-        "productRepresentation": {
+        "partner": {
+            "partnerId": 1,
+            "name": "Amazon",
+            "userName": "amazon"
+        },
+        "product": {
             "productId": 1,
             "title": "FitBit Alta",
             "description": "Activity Tracker"
@@ -45,7 +50,12 @@ none
     },
     {
         "inventoryId": 4,
-        "productRepresentation": {
+        "partner": {
+            "partnerId": 2,
+            "name": "Ebay",
+            "userName": "ebay"
+        },
+        "product": {
             "productId": 1,
             "title": "FitBit Alta",
             "description": "Activity Tracker"
@@ -76,27 +86,59 @@ Content-Type:application/json
 	"billingAddressId": 2,
 	"orderDetails": [
 		{
-		"inventoryId": 5,
-		"quantity": 1	
+			"inventoryId": 1,
+			"quantity": 1,
+			"addressId": 1
+		},
+		{
+			"inventoryId": 5,
+			"quantity": 1	
 		}
 	],
 	"paymentMethod": [
 		{
-			"subTotal": 70,
+			"subTotal": 150,
 			"transactionId": "XVF1022",
 			"accountEmail": "julia.cicale@gmail.com"
+		},
+		{
+			"subTotal": 160,
+			"creditCardNumber": "5216740121470216",
+			"nameOnCard": "Julia Cicale",
+			"securityCode": "000",
+			"validDate": "12/21"
 		}
 	]
-	
 }
 ```
 ##### Response:  
 ```
 {
-    "orderId": 5,
+    "orderId": 1,
     "orderDetails": [
         {
-            "orderDetailId": 7,
+            "orderDetailId": 1,
+            "inventory": {
+                "inventoryId": 1,
+                "partner": {
+                    "partnerId": 1,
+                    "name": "Amazon",
+                    "userName": "amazon"
+                },
+                "product": {
+                    "productId": 1,
+                    "title": "FitBit Alta",
+                    "description": "Activity Tracker"
+                },
+                "price": 150,
+                "quantity": 10
+            },
+            "quantity": 1,
+            "subTotal": 150,
+            "orderState": "Pending"
+        },
+        {
+            "orderDetailId": 2,
             "inventory": {
                 "inventoryId": 5,
                 "partner": {
@@ -105,15 +147,15 @@ Content-Type:application/json
                     "userName": "ebay"
                 },
                 "product": {
-                    "productId": 2,
-                    "title": "Bluetooth Headphones",
-                    "description": "Wireless and comfortable headphones for running"
+                    "productId": 1,
+                    "title": "FitBit Alta",
+                    "description": "Activity Tracker"
                 },
-                "price": 70,
-                "quantity": 14
+                "price": 160,
+                "quantity": 15
             },
             "quantity": 1,
-            "subTotal": 70,
+            "subTotal": 160,
             "orderState": "Pending"
         }
     ],
@@ -125,20 +167,20 @@ Content-Type:application/json
         "userName": "julia.cicale",
         "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
         "billingAddress": {
-            "addressId": 2,
-            "street": "123 Business Rd.",
-            "unit": "Chicago",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60601"
-        },
-        "shippingAddress": {
             "addressId": 1,
             "street": "123 Home St.",
             "unit": "Chicago",
             "city": "Chicago",
             "state": "IL",
             "zip": "60657"
+        },
+        "shippingAddress": {
+            "addressId": 2,
+            "street": "123 Business Rd.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
         }
     },
     "orderState": "Pending",
@@ -150,14 +192,23 @@ Content-Type:application/json
         "state": "IL",
         "zip": "60601"
     },
-    "total": 70,
+    "total": 310,
     "paymentMethod": [
         {
-            "paymentId": 6,
+            "paymentId": 1,
             "paymentStatus": "Pending",
-            "subTotal": 70,
+            "subTotal": 150,
             "transactionId": "XVF1022",
             "accountEmail": "julia.cicale@gmail.com"
+        },
+        {
+            "paymentId": 2,
+            "paymentStatus": "Pending",
+            "subTotal": 160,
+            "creditCardNumber": "5216740121470216",
+            "nameOnCard": "Julia Cicale",
+            "securityCode": "000",
+            "validDate": "12/21"
         }
     ]
 }
@@ -179,81 +230,16 @@ Content-Type:application/json
 ##### Body:  
 ```
 {
-	"customerOrderId": 2
+	"customerOrderId": 1
 } 
 ```
 ##### Response:  
 ```
-{
-    "orderId": 2,
-    "orderDetails": [
-        {
-            "orderDetailId": 3,
-            "inventory": {
-                "inventoryId": 1,
-                "productRepresentation": {
-                    "productId": 1,
-                    "title": "FitBit Alta",
-                    "description": "Activity Tracker"
-                },
-                "price": 150,
-                "quantity": 9
-            },
-            "quantity": 1,
-            "subTotal": 150,
-            "orderState": "Pending"
-        }
-    ],
-    "paymentStatus": "Verified",
-    "customer": {
-        "customerId": 1,
-        "lastName": "Cicale",
-        "firstName": "Julia",
-        "userName": "julia.cicale",
-        "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
-        "billingAddress": {
-            "addressId": 2,
-            "street": "123 Business Rd.",
-            "unit": "Chicago",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60601"
-        },
-        "shippingAddress": {
-            "addressId": 1,
-            "street": "123 Home St.",
-            "unit": "Chicago",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60657"
-        }
-    },
-    "orderState": "Ready to Ship",
-    "billingAddress": {
-        "addressId": 2,
-        "street": "123 Business Rd.",
-        "unit": "Chicago",
-        "city": "Chicago",
-        "state": "IL",
-        "zip": "60601"
-    },
-    "total": 150,
-    "paymentMethod": [
-        {
-            "paymentId": 3,
-            "paymentStatus": "Verified",
-            "subTotal": 150,
-            "creditCardNumber": "1010101010101010101020",
-            "nameOnCard": "Julia Cicale",
-            "securityCode": "911",
-            "validDate": "20/20"
-        }
-    ]
-}
+Ok: 200
 ```
 #### d. Accept buy order  
 ##### Description: 
-This method allows us to accept the order after the payment has been validated. It is now fulfilled and can be shipped.
+This method allows us to validate the order after the payment has been verified. It is now fulfilled and Partners can ship.
 ##### URI: 
 http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/fulfillOrder
 ##### Parameters
@@ -268,77 +254,12 @@ Content-Type:application/json
 ##### Body:  
 ```
 {
-	"customerOrderId": 3
+	"customerOrderId": 1
 } 
 ```
 ##### Response:  
 ```
-{
-    "orderId": 3,
-    "orderDetails": [
-        {
-            "orderDetailId": 3,
-            "inventory": {
-                "inventoryId": 1,
-                "productRepresentation": {
-                    "productId": 1,
-                    "title": "FitBit Alta",
-                    "description": "Activity Tracker"
-                },
-                "price": 150,
-                "quantity": 9
-            },
-            "quantity": 1,
-            "subTotal": 150,
-            "orderState": "Pending"
-        }
-    ],
-    "paymentStatus": "Verified",
-    "customer": {
-        "customerId": 1,
-        "lastName": "Cicale",
-        "firstName": "Julia",
-        "userName": "julia.cicale",
-        "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
-        "billingAddress": {
-            "addressId": 2,
-            "street": "123 Business Rd.",
-            "unit": "Chicago",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60601"
-        },
-        "shippingAddress": {
-            "addressId": 1,
-            "street": "123 Home St.",
-            "unit": "Chicago",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60657"
-        }
-    },
-    "orderState": "Fulfilled",
-    "billingAddress": {
-        "addressId": 2,
-        "street": "123 Business Rd.",
-        "unit": "Chicago",
-        "city": "Chicago",
-        "state": "IL",
-        "zip": "60601"
-    },
-    "total": 150,
-    "paymentMethod": [
-        {
-            "paymentId": 3,
-            "paymentStatus": "Paid",
-            "subTotal": 150,
-            "creditCardNumber": "1010101010101010101020",
-            "nameOnCard": "Julia Cicale",
-            "securityCode": "911",
-            "validDate": "20/20"
-        }
-    ]
-}
+Ok: 200
 ```
 #### e. Ship orders  
 ##### Description: 
@@ -357,28 +278,13 @@ Content-Type:application/json
 ##### Body:  
 ```
 {
-	"orderDetailId": 5,
+	"orderDetailId": 1,
 	"trackingNumber": "1234567898765432123456"
 }
 ```
 ##### Response:  
 ```
-{
-    "orderDetailId": 5,
-    "inventory": {
-        "inventoryId": 1,
-        "productRepresentation": {
-            "productId": 1,
-            "title": "FitBit Alta",
-            "description": "Activity Tracker"
-        },
-        "price": 150,
-        "quantity": 8
-    },
-    "quantity": 1,
-    "subTotal": 150,
-    "orderState": "Shipped"
-}
+Ok: 200
 ```
 comp433Project2Estore/services/orderService/searchCustomerOrders?customerId=1&orderState=Fulfilled
 #### f. Provide order status; Provide status of orders in progress
@@ -406,26 +312,15 @@ none
         "orderId": 1,
         "orderDetails": [
             {
-                "orderDetailId": 2,
-                "inventory": {
-                    "inventoryId": 5,
-                    "productRepresentation": {
-                        "productId": 2,
-                        "title": "Bluetooth Headphones",
-                        "description": "Wireless and comfortable headphones for running"
-                    },
-                    "price": 70,
-                    "quantity": 14
-                },
-                "quantity": 2,
-                "subTotal": 140,
-                "orderState": "Canceled"
-            },
-            {
                 "orderDetailId": 1,
                 "inventory": {
                     "inventoryId": 1,
-                    "productRepresentation": {
+                    "partner": {
+                        "partnerId": 1,
+                        "name": "Amazon",
+                        "userName": "amazon"
+                    },
+                    "product": {
                         "productId": 1,
                         "title": "FitBit Alta",
                         "description": "Activity Tracker"
@@ -436,95 +331,27 @@ none
                 "quantity": 1,
                 "subTotal": 150,
                 "orderState": "Shipped"
-            }
-        ],
-        "paymentStatus": "Verified",
-        "customer": {
-            "customerId": 1,
-            "lastName": "Cicale",
-            "firstName": "Julia",
-            "userName": "julia.cicale",
-            "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
-            "billingAddress": {
-                "addressId": 2,
-                "street": "123 Business Rd.",
-                "unit": "Chicago",
-                "city": "Chicago",
-                "state": "IL",
-                "zip": "60601"
-            },
-            "shippingAddress": {
-                "addressId": 1,
-                "street": "123 Home St.",
-                "unit": "Chicago",
-                "city": "Chicago",
-                "state": "IL",
-                "zip": "60657"
-            }
-        },
-        "orderState": "Fulfilled",
-        "billingAddress": {
-            "addressId": 2,
-            "street": "123 Business Rd.",
-            "unit": "Chicago",
-            "city": "Chicago",
-            "state": "IL",
-            "zip": "60601"
-        },
-        "total": 150,
-        "paymentMethod": [
-            {
-                "paymentId": 2,
-                "paymentStatus": "Partially Refunded",
-                "subTotal": 190,
-                "transactionId": "XVF1022",
-                "accountEmail": "julia.cicale@gmail.com"
             },
             {
-                "paymentId": 1,
-                "paymentStatus": "Refunded",
-                "subTotal": 100,
-                "creditCardNumber": "1010101010101010101020",
-                "nameOnCard": "Julia Cicale",
-                "securityCode": "911",
-                "validDate": "20/20"
-            }
-        ]
-    },
-    {
-        "orderId": 4,
-        "orderDetails": [
-            {
-                "orderDetailId": 6,
+                "orderDetailId": 2,
                 "inventory": {
                     "inventoryId": 5,
-                    "productRepresentation": {
-                        "productId": 2,
-                        "title": "Bluetooth Headphones",
-                        "description": "Wireless and comfortable headphones for running"
+                    "partner": {
+                        "partnerId": 2,
+                        "name": "Ebay",
+                        "userName": "ebay"
                     },
-                    "price": 70,
-                    "quantity": 14
-                },
-                "quantity": 1,
-                "subTotal": 70,
-                "orderState": "Ready to Pickup"
-            },
-            {
-                "orderDetailId": 5,
-                "inventory": {
-                    "inventoryId": 1,
-                    "productRepresentation": {
+                    "product": {
                         "productId": 1,
                         "title": "FitBit Alta",
                         "description": "Activity Tracker"
                     },
-                    "price": 150,
-                    "quantity": 9
+                    "price": 160,
+                    "quantity": 14
                 },
                 "quantity": 1,
-                "subTotal": 150,
-                "orderState": "Pending"
+                "subTotal": 160,
+                "orderState": "Ready to Pickup"
             }
         ],
         "paymentStatus": "Verified",
@@ -535,20 +362,20 @@ none
             "userName": "julia.cicale",
             "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
             "billingAddress": {
-                "addressId": 2,
-                "street": "123 Business Rd.",
-                "unit": "Chicago",
-                "city": "Chicago",
-                "state": "IL",
-                "zip": "60601"
-            },
-            "shippingAddress": {
                 "addressId": 1,
                 "street": "123 Home St.",
                 "unit": "Chicago",
                 "city": "Chicago",
                 "state": "IL",
                 "zip": "60657"
+            },
+            "shippingAddress": {
+                "addressId": 2,
+                "street": "123 Business Rd.",
+                "unit": "Chicago",
+                "city": "Chicago",
+                "state": "IL",
+                "zip": "60601"
             }
         },
         "orderState": "Fulfilled",
@@ -560,16 +387,23 @@ none
             "state": "IL",
             "zip": "60601"
         },
-        "total": 220,
+        "total": 310,
         "paymentMethod": [
             {
-                "paymentId": 5,
+                "paymentId": 1,
                 "paymentStatus": "Paid",
-                "subTotal": 220,
-                "creditCardNumber": "1010101010101010101020",
+                "subTotal": 150,
+                "transactionId": "XVF1022",
+                "accountEmail": "julia.cicale@gmail.com"
+            },
+            {
+                "paymentId": 2,
+                "paymentStatus": "Paid",
+                "subTotal": 160,
+                "creditCardNumber": "5216740121470216",
                 "nameOnCard": "Julia Cicale",
-                "securityCode": "911",
-                "validDate": "20/20"
+                "securityCode": "000",
+                "validDate": "12/21"
             }
         ]
     }
@@ -592,28 +426,13 @@ Content-Type:application/json
 ##### Body:  
 ```
 {
-	"orderDetailId": 6,
-	"orderId": 4
+	"orderDetailId": 2,
+	"orderId": 1
 }
 ```
 ##### Response:  
 ```
-{
-    "orderDetailId": 6,
-    "inventory": {
-        "inventoryId": 5,
-        "productRepresentation": {
-            "productId": 2,
-            "title": "Bluetooth Headphones",
-            "description": "Wireless and comfortable headphones for running"
-        },
-        "price": 70,
-        "quantity": 15
-    },
-    "quantity": 1,
-    "subTotal": 70,
-    "orderState": "Canceled"
-}
+Ok: 200
 ```
 ### 2. Allowing Partners to use your site to sell their products with functionalities such as:  
 #### a. Need to register and create profile of partners  
@@ -716,12 +535,12 @@ Content-Type:application/json
 ```
 #### d. Push orders that customers made to partners  
 ##### Description: 
-This method allows the partners to get a list of all the OrderDetails that had been placed over their inventories.
+This method allows the partners to get a list of all the OrderDetails that had been placed over their inventories.  
 ##### URI: 
-http://18.220.231.8:8080/comp433Project2Estore/services/orderService/searchOrderDetailByPartnerIdAndOrderState?partnerId=2&orderState=Ready%20to%20Pickup
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/searchOrderDetailByPartnerIdAndOrderState?partnerId=1&orderState=Shipped  
 ##### Parameters
--partnerId: Id of thepartner to retrieve the orders for  
--orderState: specify state of the order detail (optional)[Pending, Ready to Ship, Shipped, Ready to Pickup]  
+**-partnerId:** Id of thepartner to retrieve the orders for  
+**-orderState:** specify state of the order detail (optional)[Pending, Ready to Ship, Shipped, Ready to Pickup]  
 ##### Method: 
 GET  
 ##### Headers:   
@@ -736,25 +555,25 @@ none
 ```
 [
     {
-        "orderDetailId": 6,
+        "orderDetailId": 1,
         "inventory": {
-            "inventoryId": 5,
+            "inventoryId": 1,
             "partner": {
-                "partnerId": 2,
-                "name": "Ebay",
-                "userName": "ebay"
+                "partnerId": 1,
+                "name": "Amazon",
+                "userName": "amazon"
             },
             "product": {
-                "productId": 2,
-                "title": "Bluetooth Headphones",
-                "description": "Wireless and comfortable headphones for running"
+                "productId": 1,
+                "title": "FitBit Alta",
+                "description": "Activity Tracker"
             },
-            "price": 70,
-            "quantity": 14
+            "price": 150,
+            "quantity": 9
         },
         "quantity": 1,
-        "subTotal": 70,
-        "orderState": "Ready to Pickup"
+        "subTotal": 150,
+        "orderState": "Shipped"
     }
 ]
 ```
@@ -762,7 +581,7 @@ none
 ##### Description: 
 This method allows us to mark one orderDetail item as delivered, only if the current status is "Shipped".  
 Once this is done, the previous method can be used to check all the "Delivered" orders from that partner.  
-http://18.220.231.8:8080/comp433Project2Estore/services/orderService/searchOrderDetailByPartnerIdAndOrderState?partnerId=2&orderState=Delivered
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/searchOrderDetailByPartnerIdAndOrderState?partnerId=1&orderState=Delivered
 ##### URI: 
 http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/markOrderAsDelivered
 ##### Parameters
@@ -783,32 +602,61 @@ Content-Type:application/json
 ```
 ##### Response:  
 ```
-{
-    "orderDetailId": 1,
-    "inventory": {
-        "inventoryId": 1,
-        "partner": {
-            "partnerId": 1,
-            "name": "Amazon",
-            "userName": "amazon"
-        },
-        "product": {
-            "productId": 1,
-            "title": "FitBit Alta",
-            "description": "Activity Tracker"
-        },
-        "price": 150,
-        "quantity": 9
-    },
-    "quantity": 1,
-    "subTotal": 150,
-    "orderState": "Delivered"
-}
+Ok: 200
 ```
 ### 3. Features to make your APIs robust:  
 #### a. ERROR Handling  
-#### b. Exception handling  
+We create a null variable that will be sent back to the user no matter if the operation was completed successfully or not. If there is a problem, we make sure the variable to be sent is set to null.  
 
+```
+@GET
+	@Produces({ "application/xml", "application/json" })
+	@Path("/searchInventoryofProduct")
+	public List<InventoryRepresentation> getProducts(@QueryParam("keywords") String keywords) {
+		List<InventoryRepresentation> listInventoryRepresentation = null;
+		try {
+			listInventoryRepresentation = orderActivity.getProducts(keywords);
+		} catch (Exception e) {
+			e.printStackTrace();
+			listInventoryRepresentation = null;
+		}
+		return listInventoryRepresentation;
+	}
+```
+Furthermore, we can consider the underlying logic of the requested operation as a normal method. Which would return true when the operation is completed successfully, and false if not. Then we return a 200 or a 400 error code respectively.  
+
+```
+	@PUT
+	@Produces({ "application/xml", "application/json" })
+	@Path("/markOrderAsDelivered")
+	public Response deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest) {
+		try {
+			if (partnerActivity.deliveredOrderDetail(orderDetailDeliveredRequest)) {
+				return Response.status(Status.OK).build();
+			} else {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+```
+#### b. Exception handling  
+We are adding a try and a catch block surrounding the code that could cause an exception in all methods, then we print the exception to the log files of the server and send a response with the generic error 500.  
+
+```
+	try {
+			if (partnerActivity.fulfillOrder(customerOrderRequest)) {
+				return Response.status(Status.OK).build();
+			} else {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+```
 # COMP 388/433: Project 2
 ## Description
 Suppose you want to sell any items online (like big eCommerce sites) � you have also decided

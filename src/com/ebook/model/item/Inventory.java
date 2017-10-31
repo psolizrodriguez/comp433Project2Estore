@@ -14,10 +14,10 @@ public class Inventory {
 	@GeneratedValue
 	private Long inventoryId;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Partner partner;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Product product;
 	private Double price;
 	private Integer quantity;

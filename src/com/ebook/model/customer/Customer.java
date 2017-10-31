@@ -18,11 +18,25 @@ public class Customer {
 	private String userName;
 	private String password;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Address billingAddress;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Address shippingAddress;
+
+	public Customer(Long customerId, String lastName, String firstName, String userName, String password,
+			Address billingAddress, Address shippingAddress) {
+		this.customerId = customerId;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.userName = userName;
+		this.password = password;
+		this.billingAddress = billingAddress;
+		this.shippingAddress = shippingAddress;
+	}
+
+	public Customer() {
+	}
 
 	public String getUserName() {
 		return userName;

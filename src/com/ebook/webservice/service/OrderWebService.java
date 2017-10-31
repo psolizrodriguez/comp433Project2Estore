@@ -13,7 +13,7 @@ public interface OrderWebService {
 
 	public List<InventoryRepresentation> getProducts(String keywords);
 
-	public List<CustomerOrderRepresentation> listAllOrdersByCustomerId(long customerId, String orderState);
+	public List<CustomerOrderRepresentation> listAllOrdersByCustomerId(Long customerId, String orderState);
 
 	public CustomerOrderRepresentation createCustomerOrder(CustomerOrderRequest customerOrderRequest);
 

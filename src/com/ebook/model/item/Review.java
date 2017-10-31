@@ -19,7 +19,7 @@ public class Review {
 	private String description;
 	private Integer rating;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Customer customer;
 
 	public Review() {

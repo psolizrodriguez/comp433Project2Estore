@@ -2,9 +2,8 @@ package com.ebook.webservice.workflow;
 
 import java.util.List;
 
-import com.ebook.webservice.representation.CancelOrderDetailRequest;
-import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.AcceptPaymentCustomerOrderRequest;
+import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
 import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
@@ -19,13 +18,13 @@ public interface PartnerActivity {
 
 	public PartnerRepresentation createPartner(PartnerRequest partnerRequest);
 
-	public CustomerOrderRepresentation acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest);
+	public boolean acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest);
 
-	public CustomerOrderRepresentation fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest);
+	public boolean fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest);
 
-	public OrderDetailRepresentation shipOrder(ShipOrderDetailRequest shipOrderDetailRequest);
+	public boolean shipOrder(ShipOrderDetailRequest shipOrderDetailRequest);
 
-	public OrderDetailRepresentation cancelOrder(CancelOrderDetailRequest cancelOrderDetailRequest);
+	public boolean cancelOrder(CancelOrderDetailRequest cancelOrderDetailRequest);
 
 	public InventoryRepresentation createInventory(InventoryRequest inventoryRequest);
 
@@ -34,5 +33,5 @@ public interface PartnerActivity {
 	public List<OrderDetailRepresentation> listAllOrderDetailByPartnerIdAndOrderState(Long partnerId,
 			String orderState);
 
-	public OrderDetailRepresentation deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest);
+	public boolean deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest);
 }

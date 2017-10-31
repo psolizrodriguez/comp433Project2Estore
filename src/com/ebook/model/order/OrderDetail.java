@@ -19,7 +19,7 @@ public class OrderDetail {
 	@GeneratedValue
 	private Long orderDetailId;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Inventory inventory;
 	private Integer quantity;
 	private Double subTotal;
