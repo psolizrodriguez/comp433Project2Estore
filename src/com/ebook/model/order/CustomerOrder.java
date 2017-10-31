@@ -41,6 +41,21 @@ public class CustomerOrder {
 	@JoinColumn
 	private List<PaymentMethod> paymentMethod;
 
+	public CustomerOrder() {
+	}
+
+	public CustomerOrder(Long orderId, List<OrderDetail> orderDetails, String paymentStatus, Customer customer,
+			String orderState, Address billingAddress, Double total, List<PaymentMethod> paymentMethod) {
+		this.orderId = orderId;
+		this.orderDetails = orderDetails;
+		this.paymentStatus = paymentStatus;
+		this.customer = customer;
+		this.orderState = orderState;
+		this.billingAddress = billingAddress;
+		this.total = total;
+		this.paymentMethod = paymentMethod;
+	}
+
 	public Long getOrderId() {
 		return orderId;
 	}

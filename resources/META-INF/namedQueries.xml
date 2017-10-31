@@ -2,6 +2,18 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
+
+
+	<!-- Customer Queries -->
+	<query name="com.ebook.dao.customer.impl.CustomerDaoImpl.getById">
+		<![CDATA[FROM Customer c WHERE c.customerId = ?1]]>
+	</query>
+	<!-- Customer Queries -->
+	<!-- Address Queries -->
+	<query name="com.ebook.dao.address.impl.AddressDaoImpl.getById">
+		<![CDATA[FROM Address a WHERE a.addressId = ?1]]>
+	</query>
+	<!-- Address Queries -->
 	<!-- Inventory Queries -->
 	<query
 		name="com.ebook.dao.inventory.impl.InventoryDaoImpl.listAllInventoryByKeywords">
@@ -11,6 +23,11 @@
 		name="com.ebook.dao.inventory.impl.InventoryDaoImpl.listAll">
 		<![CDATA[FROM Inventory i WHERE i.quantity > 0 ORDER BY i.price]]>
 	</query>
+	<query
+		name="com.ebook.dao.inventory.impl.InventoryDaoImpl.getById">
+		<![CDATA[FROM Inventory i WHERE i.inventoryId = ?1]]>
+	</query>
+	
 	<!-- Inventory Queries -->
 	<!-- OrderDetail Queries -->
 	<query name="com.ebook.dao.orderDetail.impl.OrderDetailDaoImpl.getById">

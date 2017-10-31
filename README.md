@@ -56,6 +56,112 @@ none
 ]
 ```
 #### b. Create Order for Customer
+##### Description: 
+This method allows us to create a customerOrder from a customer. Used when you are a customer and would like to place an order of an item you are interested 
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/orderService/customerOrder
+##### Parameters
+none  
+##### Method: 
+POST  
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+	"customerId": 1,
+	"billingAddressId": 2,
+	"orderDetails": [
+		{
+		"inventoryId": 5,
+		"quantity": 1	
+		}
+	],
+	"paymentMethod": [
+		{
+			"subTotal": 70,
+			"transactionId": "XVF1022",
+			"accountEmail": "julia.cicale@gmail.com"
+		}
+	]
+	
+}
+```
+##### Response:  
+```
+{
+    "orderId": 5,
+    "orderDetails": [
+        {
+            "orderDetailId": 7,
+            "inventory": {
+                "inventoryId": 5,
+                "partner": {
+                    "partnerId": 2,
+                    "name": "Ebay",
+                    "userName": "ebay"
+                },
+                "product": {
+                    "productId": 2,
+                    "title": "Bluetooth Headphones",
+                    "description": "Wireless and comfortable headphones for running"
+                },
+                "price": 70,
+                "quantity": 14
+            },
+            "quantity": 1,
+            "subTotal": 70,
+            "orderState": "Pending"
+        }
+    ],
+    "paymentStatus": "Pending",
+    "customer": {
+        "customerId": 1,
+        "lastName": "Cicale",
+        "firstName": "Julia",
+        "userName": "julia.cicale",
+        "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
+        "billingAddress": {
+            "addressId": 2,
+            "street": "123 Business Rd.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
+        },
+        "shippingAddress": {
+            "addressId": 1,
+            "street": "123 Home St.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60657"
+        }
+    },
+    "orderState": "Pending",
+    "billingAddress": {
+        "addressId": 2,
+        "street": "123 Business Rd.",
+        "unit": "Chicago",
+        "city": "Chicago",
+        "state": "IL",
+        "zip": "60601"
+    },
+    "total": 70,
+    "paymentMethod": [
+        {
+            "paymentId": 6,
+            "paymentStatus": "Pending",
+            "subTotal": 70,
+            "transactionId": "XVF1022",
+            "accountEmail": "julia.cicale@gmail.com"
+        }
+    ]
+}
+```
 #### c. Accept Credit Card payment  
 ##### Description: 
 This method allows us to validate and accept the payments of an order

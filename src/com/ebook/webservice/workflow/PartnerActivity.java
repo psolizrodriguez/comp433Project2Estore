@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
-import com.ebook.webservice.representation.CustomerOrderRequest;
+import com.ebook.webservice.representation.AcceptPaymentCustomerOrderRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
 import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
@@ -19,9 +19,9 @@ public interface PartnerActivity {
 
 	public PartnerRepresentation createPartner(PartnerRequest partnerRequest);
 
-	public CustomerOrderRepresentation acceptPayment(CustomerOrderRequest customerOrderRequest);
+	public CustomerOrderRepresentation acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest);
 
-	public CustomerOrderRepresentation fulfillOrder(CustomerOrderRequest customerOrderRequest);
+	public CustomerOrderRepresentation fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest);
 
 	public OrderDetailRepresentation shipOrder(ShipOrderDetailRequest shipOrderDetailRequest);
 

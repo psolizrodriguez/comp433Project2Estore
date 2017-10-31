@@ -22,7 +22,7 @@ import com.ebook.service.order.CustomerOrderService;
 import com.ebook.service.order.OrderDetailService;
 import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
-import com.ebook.webservice.representation.CustomerOrderRequest;
+import com.ebook.webservice.representation.AcceptPaymentCustomerOrderRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
 import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
@@ -54,14 +54,14 @@ public class PartnerActivityImpl implements PartnerActivity {
 	}
 
 	@Override
-	public CustomerOrderRepresentation acceptPayment(CustomerOrderRequest customerOrderRequest) {
+	public CustomerOrderRepresentation acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
 		CustomerOrder customerOrder = customerOrderService.getById(customerOrderRequest.getCustomerOrderId());
 		customerOrderService.acceptPayment(customerOrder);
 		return new CustomerOrderRepresentation(customerOrder);
 	}
 
 	@Override
-	public CustomerOrderRepresentation fulfillOrder(CustomerOrderRequest customerOrderRequest) {
+	public CustomerOrderRepresentation fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
 		CustomerOrder customerOrder = customerOrderService.getById(customerOrderRequest.getCustomerOrderId());
 		customerOrderService.fulfillOrder(customerOrder);
 		return new CustomerOrderRepresentation(customerOrder);

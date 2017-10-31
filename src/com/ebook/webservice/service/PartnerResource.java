@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
-import com.ebook.webservice.representation.CustomerOrderRequest;
+import com.ebook.webservice.representation.AcceptPaymentCustomerOrderRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
 import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
@@ -36,14 +36,14 @@ public class PartnerResource implements PartnerWebService {
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/acceptPayment")
-	public CustomerOrderRepresentation acceptPayment(CustomerOrderRequest customerOrderRequest) {
+	public CustomerOrderRepresentation acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
 		return partnerActivity.acceptPayment(customerOrderRequest);
 	}
 
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/fulfillOrder")
-	public CustomerOrderRepresentation fulfillOrder(CustomerOrderRequest customerOrderRequest) {
+	public CustomerOrderRepresentation fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest) {
 		return partnerActivity.fulfillOrder(customerOrderRequest);
 	}
 

@@ -3,6 +3,7 @@ package com.ebook.webservice.service;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
+import com.ebook.webservice.representation.CustomerOrderRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.workflow.OrderActivity;
 
@@ -41,6 +43,13 @@ public class OrderResource implements OrderWebService {
 			System.out.println("GET METHOD Request for customerId " + customerId + "......");
 			return orderActivity.getOrdersByCustomerId(customerId);
 		}
+	}
+
+	@POST
+	@Produces({ "application/xml", "application/json" })
+	@Path("/customerOrder")
+	public CustomerOrderRepresentation createCustomerOrder(CustomerOrderRequest customerOrderRequest) {
+		return orderActivity.createCustomerOrder(customerOrderRequest);
 	}
 
 }
