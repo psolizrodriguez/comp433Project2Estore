@@ -609,7 +609,7 @@ Ok: 200
 We create a null variable that will be sent back to the user no matter if the operation was completed successfully or not. If there is a problem, we make sure the variable to be sent is set to null.  
 
 ```
-@GET
+	@GET
 	@Produces({ "application/xml", "application/json" })
 	@Path("/searchInventoryofProduct")
 	public List<InventoryRepresentation> getProducts(@QueryParam("keywords") String keywords) {
