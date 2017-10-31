@@ -17,6 +17,7 @@ import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.CustomerOrderRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
+import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
 import com.ebook.webservice.representation.OrderDetailRepresentation;
 import com.ebook.webservice.representation.PartnerRepresentation;
 import com.ebook.webservice.representation.PartnerRequest;
@@ -88,6 +89,13 @@ public class PartnerResource implements PartnerWebService {
 	public List<OrderDetailRepresentation> listAllOrderDetailByPartnerIdAndOrderState(
 			@QueryParam("partnerId") Long partnerId, @QueryParam("orderState") String orderState) {
 		return partnerActivity.listAllOrderDetailByPartnerIdAndOrderState(partnerId, orderState);
+	}
+
+	@PUT
+	@Produces({ "application/xml", "application/json" })
+	@Path("/markOrderAsDelivered")
+	public OrderDetailRepresentation deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest) {
+		return partnerActivity.deliveredOrderDetail(orderDetailDeliveredRequest);
 	}
 
 }

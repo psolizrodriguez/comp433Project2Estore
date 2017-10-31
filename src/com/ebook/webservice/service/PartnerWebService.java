@@ -9,6 +9,7 @@ import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.CustomerOrderRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
+import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
 import com.ebook.webservice.representation.OrderDetailRepresentation;
 import com.ebook.webservice.representation.PartnerRepresentation;
 import com.ebook.webservice.representation.PartnerRequest;
@@ -32,7 +33,10 @@ public interface PartnerWebService {
 	public InventoryRepresentation createInventory(InventoryRequest inventoryRequest);
 
 	public ProductRepresentation createProduct(ProductRequest productRequest);
-	
-	public List<OrderDetailRepresentation> listAllOrderDetailByPartnerIdAndOrderState(Long partnerId, String orderState);
+
+	public List<OrderDetailRepresentation> listAllOrderDetailByPartnerIdAndOrderState(Long partnerId,
+			String orderState);
+
+	public OrderDetailRepresentation deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest);
 
 }

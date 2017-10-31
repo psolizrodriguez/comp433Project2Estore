@@ -18,19 +18,29 @@ public class ShippingOrder extends OrderDetail {
 	private Address shippingAddress;
 	private Calendar estimatedDelivery;
 	private String trackingNumber;
+	private Calendar delivered;
 
 	public ShippingOrder() {
 
 	}
 
 	public ShippingOrder(Long orderDetailId, Inventory inventory, Integer quantity, String orderState,
-			Address shippingAddress) {
+			Address shippingAddress, Calendar delivered) {
 		super(orderDetailId, inventory, quantity, orderState);
 		this.shippingAddress = shippingAddress;
+		this.delivered = delivered;
 	}
 
 	public String getTrackingNumber() {
 		return trackingNumber;
+	}
+
+	public Calendar getDelivered() {
+		return delivered;
+	}
+
+	public void setDelivered(Calendar delivered) {
+		this.delivered = delivered;
 	}
 
 	public void setTrackingNumber(String trackingNumber) {

@@ -55,7 +55,8 @@ none
     }
 ]
 ```
-#### b. Accept Credit Card payment  
+#### b. Create Order for Customer
+#### c. Accept Credit Card payment  
 ##### Description: 
 This method allows us to validate and accept the payments of an order
 ##### URI: 
@@ -144,7 +145,7 @@ Content-Type:application/json
     ]
 }
 ```
-#### c. Accept buy order  
+#### d. Accept buy order  
 ##### Description: 
 This method allows us to accept the order after the payment has been validated. It is now fulfilled and can be shipped.
 ##### URI: 
@@ -233,7 +234,7 @@ Content-Type:application/json
     ]
 }
 ```
-#### d. Ship orders  
+#### e. Ship orders  
 ##### Description: 
 This method allows us to ship an Order once it has been fulfilled
 ##### URI: 
@@ -274,7 +275,7 @@ Content-Type:application/json
 }
 ```
 comp433Project2Estore/services/orderService/searchCustomerOrders?customerId=1&orderState=Fulfilled
-#### e. Provide order status; Provide status of orders in progress
+#### f. Provide order status; Provide status of orders in progress
 ##### Description: 
 This method performs a search for orders that match a certain customerId, as well as an orderState if one is specified.
 ##### URI: 
@@ -468,7 +469,7 @@ none
     }
 ]
 ```
-#### f. Order Cancel  
+#### g. Order Cancel  
 ##### Description: 
 This method allows us to cancel an order (instead of shipping it)
 ##### URI: 
@@ -508,7 +509,6 @@ Content-Type:application/json
     "orderState": "Canceled"
 }
 ```
-#### g. Create Order for Customer
 ### 2. Allowing Partners to use your site to sell their products with functionalities such as:  
 #### a. Need to register and create profile of partners  
 ##### Description: 
@@ -653,6 +653,52 @@ none
 ]
 ```
 #### e. Get acknowledgement of order fulfillment  
+##### Description: 
+This method allows us to mark one orderDetail item as delivered, only if the current status is "Shipped".  
+Once this is done, the previous method can be used to check all the "Delivered" orders from that partner.  
+http://18.220.231.8:8080/comp433Project2Estore/services/orderService/searchOrderDetailByPartnerIdAndOrderState?partnerId=2&orderState=Delivered
+##### URI: 
+http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/markOrderAsDelivered
+##### Parameters
+none  
+##### Method: 
+PUT 
+##### Headers:   
+```
+Accept:application/json  
+Content-Type:application/json  
+```
+##### Body:  
+```
+{
+	"orderDetailId" : 1,
+	"deliveredTime": "10/30/17 20:30"
+} 
+```
+##### Response:  
+```
+{
+    "orderDetailId": 1,
+    "inventory": {
+        "inventoryId": 1,
+        "partner": {
+            "partnerId": 1,
+            "name": "Amazon",
+            "userName": "amazon"
+        },
+        "product": {
+            "productId": 1,
+            "title": "FitBit Alta",
+            "description": "Activity Tracker"
+        },
+        "price": 150,
+        "quantity": 9
+    },
+    "quantity": 1,
+    "subTotal": 150,
+    "orderState": "Delivered"
+}
+```
 ### 3. Features to make your APIs robust:  
 #### a. ERROR Handling  
 #### b. Exception handling  

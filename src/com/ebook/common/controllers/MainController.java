@@ -163,7 +163,7 @@ public class MainController {
 		// Adding items to the Order
 		List<OrderDetail> orderDetails = new ArrayList<>();
 		orderDetails.add(new ShippingOrder(1L, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
-				juliaCicale.getShippingAddress()));
+				juliaCicale.getShippingAddress(), null));
 		orderDetails.add(new PickUpOrder(2L, searchHeadphones.get(0), 2, AppBaseConstantsWeb.ORDER_STATUS_PENDING));
 		juliaOrder.setOrderDetails(orderDetails);
 		System.out.println("Total of Order is : " + juliaOrder.getTotal());
@@ -201,7 +201,7 @@ public class MainController {
 		order2.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PENDING);
 		List<OrderDetail> orderDetails2 = new ArrayList<>();
 		orderDetails2.add(new ShippingOrder(3L, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
-				juliaCicale.getShippingAddress()));
+				juliaCicale.getShippingAddress(), null));
 		order2.setOrderDetails(orderDetails2);
 		List<PaymentMethod> paymentMethods2 = new ArrayList<>();
 		paymentMethods2.add(new CreditCardPayment(3L, AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 150.0,
@@ -221,7 +221,7 @@ public class MainController {
 		List<OrderDetail> orderDetails3 = new ArrayList<>();
 
 		orderDetails3.add(new ShippingOrder(4L, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
-				juliaCicale.getShippingAddress()));
+				juliaCicale.getShippingAddress(), null));
 		order3.setOrderDetails(orderDetails3);
 		List<PaymentMethod> paymentMethods3 = new ArrayList<>();
 		paymentMethods3.add(new CreditCardPayment(4L, AppBaseConstantsWeb.PAYMENT_STATUS_PENDING, 150.0,
@@ -242,7 +242,7 @@ public class MainController {
 		order4.setPaymentStatus(AppBaseConstantsWeb.PAYMENT_STATUS_PENDING);
 		List<OrderDetail> orderDetails4 = new ArrayList<>();
 		orderDetails4.add(new ShippingOrder(5L, searchFitbit.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING,
-				juliaCicale.getShippingAddress()));
+				juliaCicale.getShippingAddress(), null));
 		orderDetails4.add(new PickUpOrder(6L, searchHeadphones.get(0), 1, AppBaseConstantsWeb.ORDER_STATUS_PENDING));
 		order4.setOrderDetails(orderDetails4);
 		List<PaymentMethod> paymentMethods4 = new ArrayList<>();

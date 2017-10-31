@@ -68,4 +68,15 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		return dao.listAllByPartnerId_OrderState(partnerId, orderState);
 	}
 
+	@Override
+	public boolean orderDelivered(ShippingOrder orderDetail, Calendar delivered) {
+		if (orderDetail.getOrderState().equals(AppBaseConstantsWeb.ORDER_STATUS_SHIPPED)) {
+			orderDetail.setOrderState(AppBaseConstantsWeb.ORDER_STATUS_DELIVERED);
+			orderDetail.setDelivered(delivered);
+			orderDetail = (ShippingOrder) save(orderDetail);
+			return orderDetail != null;
+		}
+		return false;
+	}
+
 }

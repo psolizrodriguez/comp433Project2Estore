@@ -1,11 +1,13 @@
 package com.ebook.webservice.workflow;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ebook.common.constants.AppBaseConstantsWeb;
 import com.ebook.common.utility.AppBaseUtilsWeb;
 import com.ebook.model.item.Inventory;
 import com.ebook.model.item.Partner;
@@ -23,6 +25,7 @@ import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.CustomerOrderRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
+import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
 import com.ebook.webservice.representation.OrderDetailRepresentation;
 import com.ebook.webservice.representation.PartnerRepresentation;
 import com.ebook.webservice.representation.PartnerRequest;
@@ -120,6 +123,17 @@ public class PartnerActivityImpl implements PartnerActivity {
 			}
 		}
 		return listOrderDetailRepresentation;
+	}
+
+	@Override
+	public OrderDetailRepresentation deliveredOrderDetail(OrderDetailDeliveredRequest orderDetailDeliveredRequest) {
+		Calendar delivered = AppBaseUtilsWeb.StringToCalendar(orderDetailDeliveredRequest.getDeliveredTime(),
+				AppBaseConstantsWeb.DATETIME_FORMAT);
+		OrderDetail orderDetail = orderDetailService.getById(orderDetailDeliveredRequest.getOrderDetailId());
+		if (orderDetailService.orderDelivered((ShippingOrder) orderDetail, delivered)) {
+			return new OrderDetailRepresentation(orderDetail);
+		}
+		return null;
 	}
 
 }
