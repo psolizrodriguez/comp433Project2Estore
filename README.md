@@ -286,7 +286,6 @@ Content-Type:application/json
 ```
 Ok: 200
 ```
-comp433Project2Estore/services/orderService/searchCustomerOrders?customerId=1&orderState=Fulfilled
 #### f. Provide order status; Provide status of orders in progress
 ##### Description: 
 This method performs a search for orders that match a certain customerId, as well as an orderState if one is specified.
