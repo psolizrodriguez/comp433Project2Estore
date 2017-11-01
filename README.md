@@ -231,7 +231,105 @@ Content-Type:application/json
 none
 ##### Response:  
 ```
-Ok: 200
+{
+    "orderId": 1,
+    "orderDetails": [
+        {
+            "orderDetailId": 1,
+            "inventory": {
+                "inventoryId": 1,
+                "partner": {
+                    "partnerId": 1,
+                    "name": "Amazon",
+                    "userName": "amazon"
+                },
+                "product": {
+                    "productId": 1,
+                    "title": "FitBit Alta",
+                    "description": "Activity Tracker"
+                },
+                "price": 150,
+                "quantity": 10
+            },
+            "quantity": 1,
+            "subTotal": 150,
+            "orderState": "Pending"
+        },
+        {
+            "orderDetailId": 2,
+            "inventory": {
+                "inventoryId": 5,
+                "partner": {
+                    "partnerId": 2,
+                    "name": "Ebay",
+                    "userName": "ebay"
+                },
+                "product": {
+                    "productId": 1,
+                    "title": "FitBit Alta",
+                    "description": "Activity Tracker"
+                },
+                "price": 160,
+                "quantity": 15
+            },
+            "quantity": 1,
+            "subTotal": 160,
+            "orderState": "Pending"
+        }
+    ],
+    "paymentStatus": "Verified",
+    "customer": {
+        "customerId": 1,
+        "lastName": "Cicale",
+        "firstName": "Julia",
+        "userName": "julia.cicale",
+        "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
+        "billingAddress": {
+            "addressId": 1,
+            "street": "123 Home St.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60657"
+        },
+        "shippingAddress": {
+            "addressId": 2,
+            "street": "123 Business Rd.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
+        }
+    },
+    "orderState": "Ready to Ship",
+    "billingAddress": {
+        "addressId": 2,
+        "street": "123 Business Rd.",
+        "unit": "Chicago",
+        "city": "Chicago",
+        "state": "IL",
+        "zip": "60601"
+    },
+    "total": 310,
+    "paymentMethod": [
+        {
+            "paymentId": 1,
+            "paymentStatus": "Verified",
+            "subTotal": 150,
+            "transactionId": "XVF1022",
+            "accountEmail": "julia.cicale@gmail.com"
+        },
+        {
+            "paymentId": 2,
+            "paymentStatus": "Verified",
+            "subTotal": 160,
+            "creditCardNumber": "5216740121470216",
+            "nameOnCard": "Julia Cicale",
+            "securityCode": "000",
+            "validDate": "12/21"
+        }
+    ]
+}
 ```
 #### d. Accept buy order  
 ##### Description: 
@@ -251,7 +349,105 @@ Content-Type:application/json
 none
 ##### Response:  
 ```
-Ok: 200
+{
+    "orderId": 1,
+    "orderDetails": [
+        {
+            "orderDetailId": 1,
+            "inventory": {
+                "inventoryId": 1,
+                "partner": {
+                    "partnerId": 1,
+                    "name": "Amazon",
+                    "userName": "amazon"
+                },
+                "product": {
+                    "productId": 1,
+                    "title": "FitBit Alta",
+                    "description": "Activity Tracker"
+                },
+                "price": 150,
+                "quantity": 10
+            },
+            "quantity": 1,
+            "subTotal": 150,
+            "orderState": "Ready to Ship"
+        },
+        {
+            "orderDetailId": 2,
+            "inventory": {
+                "inventoryId": 5,
+                "partner": {
+                    "partnerId": 2,
+                    "name": "Ebay",
+                    "userName": "ebay"
+                },
+                "product": {
+                    "productId": 1,
+                    "title": "FitBit Alta",
+                    "description": "Activity Tracker"
+                },
+                "price": 160,
+                "quantity": 14
+            },
+            "quantity": 1,
+            "subTotal": 160,
+            "orderState": "Ready to Pickup"
+        }
+    ],
+    "paymentStatus": "Verified",
+    "customer": {
+        "customerId": 1,
+        "lastName": "Cicale",
+        "firstName": "Julia",
+        "userName": "julia.cicale",
+        "password": "078c57f6a6270578fcbb9bbc6a8372bb55fa2a16",
+        "billingAddress": {
+            "addressId": 1,
+            "street": "123 Home St.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60657"
+        },
+        "shippingAddress": {
+            "addressId": 2,
+            "street": "123 Business Rd.",
+            "unit": "Chicago",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": "60601"
+        }
+    },
+    "orderState": "Fulfilled",
+    "billingAddress": {
+        "addressId": 2,
+        "street": "123 Business Rd.",
+        "unit": "Chicago",
+        "city": "Chicago",
+        "state": "IL",
+        "zip": "60601"
+    },
+    "total": 310,
+    "paymentMethod": [
+        {
+            "paymentId": 1,
+            "paymentStatus": "Paid",
+            "subTotal": 150,
+            "transactionId": "XVF1022",
+            "accountEmail": "julia.cicale@gmail.com"
+        },
+        {
+            "paymentId": 2,
+            "paymentStatus": "Paid",
+            "subTotal": 160,
+            "creditCardNumber": "5216740121470216",
+            "nameOnCard": "Julia Cicale",
+            "securityCode": "000",
+            "validDate": "12/21"
+        }
+    ]
+}
 ```
 #### e. Ship orders  
 ##### Description: 
@@ -275,7 +471,27 @@ Content-Type:application/json
 ```
 ##### Response:  
 ```
-Ok: 200
+{
+    "orderDetailId": 1,
+    "inventory": {
+        "inventoryId": 1,
+        "partner": {
+            "partnerId": 1,
+            "name": "Amazon",
+            "userName": "amazon"
+        },
+        "product": {
+            "productId": 1,
+            "title": "FitBit Alta",
+            "description": "Activity Tracker"
+        },
+        "price": 150,
+        "quantity": 9
+    },
+    "quantity": 1,
+    "subTotal": 150,
+    "orderState": "Shipped"
+}
 ```
 #### f. Provide order status; Provide status of orders in progress
 ##### Description: 
@@ -417,7 +633,27 @@ Content-Type:application/json
 none
 ##### Response:  
 ```
-Ok: 200
+{
+    "orderDetailId": 2,
+    "inventory": {
+        "inventoryId": 5,
+        "partner": {
+            "partnerId": 2,
+            "name": "Ebay",
+            "userName": "ebay"
+        },
+        "product": {
+            "productId": 1,
+            "title": "FitBit Alta",
+            "description": "Activity Tracker"
+        },
+        "price": 160,
+        "quantity": 15
+    },
+    "quantity": 1,
+    "subTotal": 160,
+    "orderState": "Canceled"
+}
 ```
 ### 2. Allowing Partners to use your site to sell their products with functionalities such as:  
 #### a. Need to register and create profile of partners  

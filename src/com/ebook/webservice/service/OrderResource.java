@@ -9,8 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.CustomerOrderRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
+import com.ebook.webservice.representation.OrderDetailRepresentation;
 import com.ebook.webservice.representation.ShipOrderDetailRequest;
 import com.ebook.webservice.workflow.OrderActivity;
 
@@ -74,64 +73,58 @@ public class OrderResource implements OrderWebService {
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/customerOrder/{customerOrderId}/accept")
-	public Response acceptPayment(@PathParam("customerOrderId") Long customerOrderId) {
+	public CustomerOrderRepresentation acceptPayment(@PathParam("customerOrderId") Long customerOrderId) {
+		CustomerOrderRepresentation customerOrderRepresentation = null;
 		try {
-			if (orderActivity.acceptPayment(customerOrderId)) {
-				return Response.status(Status.OK).build();
-			} else {
-				return Response.status(Status.BAD_REQUEST).build();
-			}
+			customerOrderRepresentation = orderActivity.acceptPayment(customerOrderId);
 		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			e.printStackTrace();
+			customerOrderRepresentation = null;
 		}
+		return customerOrderRepresentation;
 	}
 	
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/customerOrder/{customerOrderId}/fulfill")
-	public Response fulfillOrder(@PathParam("customerOrderId") Long customerOrderId) {
+	public CustomerOrderRepresentation fulfillOrder(@PathParam("customerOrderId") Long customerOrderId) {
+		CustomerOrderRepresentation customerOrderRepresentation = null;
 		try {
-			if (orderActivity.fulfillOrder(customerOrderId)) {
-				return Response.status(Status.OK).build();
-			} else {
-				return Response.status(Status.BAD_REQUEST).build();
-			}
+			customerOrderRepresentation = orderActivity.fulfillOrder(customerOrderId);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			customerOrderRepresentation = null;
 		}
+		return customerOrderRepresentation;
 	}
 
 
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/customerOrder/{customerOrderId}/orderDetail/{customerOrderDetailId}/ship")
-	public Response shipOrder(@PathParam("customerOrderId") Long customerOrderId, @PathParam("customerOrderDetailId") Long customerOrderDetailId, ShipOrderDetailRequest shipOrderDetailRequest) {
+	public OrderDetailRepresentation shipOrder(@PathParam("customerOrderId") Long customerOrderId, @PathParam("customerOrderDetailId") Long customerOrderDetailId, ShipOrderDetailRequest shipOrderDetailRequest) {
+		OrderDetailRepresentation orderDetailRepresentation = null;
 		try {
-			if (orderActivity.shipOrder(customerOrderDetailId, shipOrderDetailRequest)) {
-				return Response.status(Status.OK).build();
-			} else {
-				return Response.status(Status.BAD_REQUEST).build();
-			}
+			orderDetailRepresentation = orderActivity.shipOrder(customerOrderDetailId, shipOrderDetailRequest);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			orderDetailRepresentation = null;
 		}
+		return orderDetailRepresentation;
 	}
 	 
 	@PUT
 	@Produces({ "application/xml", "application/json" })
 	@Path("/customerOrder/{customerOrderId}/orderDetail/{customerOrderDetailId}/cancel")
-	public Response cancelOrder(@PathParam("customerOrderId") Long customerOrderId, @PathParam("customerOrderDetailId") Long customerOrderDetailId) {
+	public OrderDetailRepresentation cancelOrder(@PathParam("customerOrderId") Long customerOrderId, @PathParam("customerOrderDetailId") Long customerOrderDetailId) {
+		OrderDetailRepresentation orderDetailRepresentation = null;
 		try {
-			if (orderActivity.cancelOrder(customerOrderId, customerOrderDetailId)) {
-				return Response.status(Status.OK).build();
-			} else {
-				return Response.status(Status.BAD_REQUEST).build();
-			}
+			orderDetailRepresentation = orderActivity.cancelOrder(customerOrderId, customerOrderDetailId);
 		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			e.printStackTrace();
+			orderDetailRepresentation = null;
 		}
+		return orderDetailRepresentation;
 	}
 
 }
