@@ -9,16 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class ShipOrderDetailRequest {
-	private Long orderDetailId;
 	private String trackingNumber;
-
-	public Long getOrderDetailId() {
-		return orderDetailId;
-	}
-
-	public void setOrderDetailId(Long orderDetailId) {
-		this.orderDetailId = orderDetailId;
-	}
 
 	public String getTrackingNumber() {
 		return trackingNumber;

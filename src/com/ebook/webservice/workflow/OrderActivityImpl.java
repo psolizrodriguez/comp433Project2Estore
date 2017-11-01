@@ -20,11 +20,13 @@ import com.ebook.service.customer.CustomerService;
 import com.ebook.service.item.InventoryService;
 import com.ebook.service.order.AddressService;
 import com.ebook.service.order.CustomerOrderService;
+import com.ebook.service.order.OrderDetailService;
 import com.ebook.webservice.representation.CustomerOrderRepresentation;
 import com.ebook.webservice.representation.CustomerOrderRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.OrderDetailRequest;
 import com.ebook.webservice.representation.PaymentMethodRequest;
+import com.ebook.webservice.representation.ShipOrderDetailRequest;
 
 @Service
 public class OrderActivityImpl implements OrderActivity {
@@ -37,6 +39,8 @@ public class OrderActivityImpl implements OrderActivity {
 	private CustomerOrderService customerOrderService;
 	@Autowired
 	private AddressService addressService;
+	@Autowired
+	private OrderDetailService orderDetailService;
 
 	public List<InventoryRepresentation> getProducts(String keywords) {
 
@@ -118,5 +122,30 @@ public class OrderActivityImpl implements OrderActivity {
 				addressService.getById(customerOrderRequest.getBillingAddressId()), total, listPaymentMethod);
 		customerOrder = customerOrderService.save(customerOrder);
 		return new CustomerOrderRepresentation(customerOrder);
+	}
+	
+	@Override
+	public boolean acceptPayment(Long customerOrderId) {
+		CustomerOrder customerOrder = customerOrderService.getById(customerOrderId);
+		return customerOrderService.acceptPayment(customerOrder);
+	}
+
+	@Override
+	public boolean fulfillOrder(Long customerOrderId) {
+		CustomerOrder customerOrder = customerOrderService.getById(customerOrderId);
+		return customerOrderService.fulfillOrder(customerOrder);
+	}
+
+	@Override
+	public boolean shipOrder(Long orderDetailId, ShipOrderDetailRequest shipOrderDetailRequest) {
+		OrderDetail orderDetail = orderDetailService.getById(orderDetailId);
+		String trackingNumber = shipOrderDetailRequest.getTrackingNumber();
+		return orderDetailService.shipOrderDetail((ShippingOrder) orderDetail, trackingNumber);
+	}
+
+	@Override
+	public boolean cancelOrder(Long customerOrderId, Long orderDetailId) {
+		return customerOrderService.cancelOrderDetail(
+				customerOrderService.getById(customerOrderId), orderDetailId);
 	}
 }

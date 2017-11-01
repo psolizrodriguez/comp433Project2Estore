@@ -2,8 +2,6 @@ package com.ebook.webservice.workflow;
 
 import java.util.List;
 
-import com.ebook.webservice.representation.AcceptPaymentCustomerOrderRequest;
-import com.ebook.webservice.representation.CancelOrderDetailRequest;
 import com.ebook.webservice.representation.InventoryRepresentation;
 import com.ebook.webservice.representation.InventoryRequest;
 import com.ebook.webservice.representation.OrderDetailDeliveredRequest;
@@ -12,19 +10,10 @@ import com.ebook.webservice.representation.PartnerRepresentation;
 import com.ebook.webservice.representation.PartnerRequest;
 import com.ebook.webservice.representation.ProductRepresentation;
 import com.ebook.webservice.representation.ProductRequest;
-import com.ebook.webservice.representation.ShipOrderDetailRequest;
 
 public interface PartnerActivity {
 
 	public PartnerRepresentation createPartner(PartnerRequest partnerRequest);
-
-	public boolean acceptPayment(AcceptPaymentCustomerOrderRequest customerOrderRequest);
-
-	public boolean fulfillOrder(AcceptPaymentCustomerOrderRequest customerOrderRequest);
-
-	public boolean shipOrder(ShipOrderDetailRequest shipOrderDetailRequest);
-
-	public boolean cancelOrder(CancelOrderDetailRequest cancelOrderDetailRequest);
 
 	public InventoryRepresentation createInventory(InventoryRequest inventoryRequest);
 

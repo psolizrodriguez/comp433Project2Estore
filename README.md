@@ -217,7 +217,7 @@ Content-Type:application/json
 ##### Description: 
 This method allows us to validate and accept the payments of an order
 ##### URI: 
-http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/acceptPayment
+http://18.220.231.8:8080/comp433Project2Estore/services/orderService/customerOrder/1/accept
 ##### Parameters
 none  
 ##### Method: 
@@ -228,11 +228,7 @@ Accept:application/json
 Content-Type:application/json  
 ```
 ##### Body:  
-```
-{
-	"customerOrderId": 1
-} 
-```
+none
 ##### Response:  
 ```
 Ok: 200
@@ -241,7 +237,7 @@ Ok: 200
 ##### Description: 
 This method allows us to validate the order after the payment has been verified. It is now fulfilled and Partners can ship.
 ##### URI: 
-http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/fulfillOrder
+http://18.220.231.8:8080/comp433Project2Estore/services/orderService/customerOrder/1/fulfill
 ##### Parameters
 none  
 ##### Method: 
@@ -252,11 +248,7 @@ Accept:application/json
 Content-Type:application/json  
 ```
 ##### Body:  
-```
-{
-	"customerOrderId": 1
-} 
-```
+none
 ##### Response:  
 ```
 Ok: 200
@@ -265,7 +257,7 @@ Ok: 200
 ##### Description: 
 This method allows us to ship an Order once it has been fulfilled
 ##### URI: 
-http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/shipOrder
+http://18.220.231.8:8080/comp433Project2Estore/services/orderService/customerOrder/1/orderDetail/1/ship
 ##### Parameters
 none  
 ##### Method: 
@@ -278,7 +270,6 @@ Content-Type:application/json
 ##### Body:  
 ```
 {
-	"orderDetailId": 1,
 	"trackingNumber": "1234567898765432123456"
 }
 ```
@@ -412,7 +403,7 @@ none
 ##### Description: 
 This method allows us to cancel an order (instead of shipping it)
 ##### URI: 
-http://18.220.231.8:8080/comp433Project2Estore/services/partnerService/cancelOrder
+http://18.220.231.8:8080/comp433Project2Estore/services/orderService/customerOrder/1/orderDetail/2/cancel
 ##### Parameters
 none  
 ##### Method: 
@@ -423,12 +414,7 @@ Accept:application/json
 Content-Type:application/json  
 ```
 ##### Body:  
-```
-{
-	"orderDetailId": 2,
-	"orderId": 1
-}
-```
+none
 ##### Response:  
 ```
 Ok: 200
