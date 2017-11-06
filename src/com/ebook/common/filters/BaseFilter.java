@@ -22,34 +22,21 @@ public class BaseFilter implements Filter {
 		// TODO Auto-generated method stub
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		LOG.info("req.getServletPath():: " + req.getServletPath());
 		resp.setHeader("Cache-Control", "no-cache, no-store,must-revalidate");
 		resp.setHeader("Pragma", "no-cache");
+		resp.addHeader("Access-Control-Allow-Headers",
+				"origin, content-type, accept, x-requested-with, my-cool-header");
+		resp.addHeader("Access-Control-Max-Age", "60"); // seconds to cache preflight request --> less OPTIONS traffic
+		resp.addHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+		resp.addHeader("Access-Control-Allow-Origin", "*");
 		resp.setDateHeader("Expires", 0);
 		System.out.println(req.getServletPath());
-		if (req.getServletPath().equalsIgnoreCase("/registerWithGSTIN.html")) {
-			LOG.info("it is insecured url preLogin");
-			filterChain.doFilter(request, response);
-		} else {
-			if (req.getServletPath().equalsIgnoreCase("/next.html")) {
-				LOG.info("it is a secured url");
-				filterChain.doFilter(request, response);
-			} else {
-				LOG.info("it is a insecured url postLogin");
-				if (req.getSession().getAttribute("userDetails") == null) {
-					// resp.sendRedirect("timeOut.html");
-					filterChain.doFilter(request, response);// for insecured
-															// test.
-				} else {
-					LOG.info("in else of else in filter");
-					filterChain.doFilter(request, response);
-				}
-			}
-		}
+		filterChain.doFilter(request, response);
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
