@@ -10,7 +10,7 @@ import com.ebook.model.customer.Address;
 @XmlRootElement(name = "Address")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class AddressRepresentation {
+public class AddressRepresentation extends AbstractRepresentation{
 	private Long addressId;
 	private String street;
 	private String unit;

@@ -1,5 +1,7 @@
 package com.ebook.common.constants;
 
+import java.util.Properties;
+
 public class AppBaseConstantsWeb {
 	// Application Constants
 	public static int BYTES_FOR_ENCRIPTION = 512;
@@ -25,4 +27,7 @@ public class AppBaseConstantsWeb {
 	// PICK UP ORDER DETAILS
 	public static final String INITIAL_TIME_PICK_UP = "09:00";
 	public static final String FINAL_TIME_PICK_UP = "17:00";
+	// COMMON VARIABLES
+	public static Properties LINKS_PROPERTIES = null;
+	public static String SERVICES_URL = null;
 }

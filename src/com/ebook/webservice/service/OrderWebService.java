@@ -13,7 +13,7 @@ import com.ebook.webservice.representation.ShipOrderDetailRequest;
 @WebService
 public interface OrderWebService {
 
-	public List<InventoryRepresentation> getProducts(String keywords);
+	public List<InventoryRepresentation> searchInventoryofProduct(String keywords);
 
 	public List<CustomerOrderRepresentation> listAllOrdersByCustomerId(Long customerId, String orderState);
 

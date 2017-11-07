@@ -10,7 +10,7 @@ import com.ebook.model.customer.Customer;
 @XmlRootElement(name = "Customer")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class CustomerRepresentation {
+public class CustomerRepresentation extends AbstractRepresentation {
 	private Long customerId;
 	private String lastName;
 	private String firstName;

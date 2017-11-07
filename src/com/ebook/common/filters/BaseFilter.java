@@ -11,12 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
-import com.ebook.common.utility.ConfigManager;
-
 public class BaseFilter implements Filter {
-	private static final Logger LOG = ConfigManager.getLogger(BaseFilter.class);
 
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -26,7 +21,6 @@ public class BaseFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		LOG.info("req.getServletPath():: " + req.getServletPath());
 		resp.setHeader("Cache-Control", "no-cache, no-store,must-revalidate");
 		resp.setHeader("Pragma", "no-cache");
 		resp.addHeader("Access-Control-Allow-Headers",

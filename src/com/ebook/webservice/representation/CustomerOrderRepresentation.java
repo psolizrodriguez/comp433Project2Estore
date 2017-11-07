@@ -17,7 +17,7 @@ import com.ebook.model.order.PaymentMethod;
 @XmlRootElement(name = "CustomerOrder")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class CustomerOrderRepresentation {
+public class CustomerOrderRepresentation extends AbstractRepresentation {
 	private Long orderId;
 	private List<OrderDetailRepresentation> orderDetails;
 	private String paymentStatus;

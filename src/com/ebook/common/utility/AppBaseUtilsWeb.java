@@ -1,6 +1,7 @@
 package com.ebook.common.utility;
 
 import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +12,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+
+import com.ebook.common.constants.AppBaseConstantsWeb;
+
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -20,19 +26,12 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.j2ee.servlets.BaseHttpServlet;
 
-import org.apache.log4j.Logger;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
-
-import com.ebook.common.constants.AppBaseConstantsWeb;
-
 public class AppBaseUtilsWeb {
-	private static Logger LOGGER = ConfigManager.getLogger(AppBaseUtilsWeb.class);
 
 	public static Date stringToDate(String date, String format) {
 		try {
 			return new SimpleDateFormat(format).parse(date);
 		} catch (Exception e) {
-			printException(LOGGER, e);
 			return null;
 		}
 
@@ -46,7 +45,6 @@ public class AppBaseUtilsWeb {
 		try {
 			return new BigDecimal(value);
 		} catch (Exception e) {
-			printException(LOGGER, e);
 			return null;
 		}
 
@@ -84,7 +82,7 @@ public class AppBaseUtilsWeb {
 			cal = Calendar.getInstance();
 			cal.setTime(new SimpleDateFormat(format).parse(value));
 		} catch (ParseException e) {
-			printException(LOGGER, e);
+			e.printStackTrace();
 		}
 		return cal;
 	}
@@ -134,7 +132,8 @@ public class AppBaseUtilsWeb {
 		return BigDecimal.valueOf(((double) newValue) / mult);
 	}
 
-	public static void loadReportIntoSession(HttpServletRequest request, String reportName, String reportTitle, String[] fields, Map<String, Object> reportParameters, List<Object[]> data) {
+	public static void loadReportIntoSession(HttpServletRequest request, String reportName, String reportTitle,
+			String[] fields, Map<String, Object> reportParameters, List<Object[]> data) {
 		try {
 			if (data == null) {
 				data = new ArrayList<Object[]>();
@@ -149,7 +148,7 @@ public class AppBaseUtilsWeb {
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, reportParameters, ds);
 			request.getSession().setAttribute(BaseHttpServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jasperPrint);
 		} catch (Exception e) {
-			printException(LOGGER, e);
+			e.printStackTrace();
 		}
 	}
 
@@ -176,9 +175,10 @@ public class AppBaseUtilsWeb {
 
 	public static JasperReport getJasperReportAsStream(String reportName) {
 		try {
-			return JasperCompileManager.compileReport(JRXmlLoader.load(AppBaseUtilsWeb.class.getResourceAsStream(reportName)));
+			return JasperCompileManager
+					.compileReport(JRXmlLoader.load(AppBaseUtilsWeb.class.getResourceAsStream(reportName)));
 		} catch (JRException e) {
-			printException(LOGGER, e);
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -189,16 +189,18 @@ public class AppBaseUtilsWeb {
 			if ((obj.getClass() == Double.class)) {
 				rv = Integer.parseInt(String.valueOf(Math.round((Double.parseDouble(String.valueOf(obj))))));
 			} else {
-				if ((obj.getClass() == Integer.class) || (obj.getClass() == Long.class) || (obj.getClass() == Double.class)) {
+				if ((obj.getClass() == Integer.class) || (obj.getClass() == Long.class)
+						|| (obj.getClass() == Double.class)) {
 					rv = Integer.parseInt(obj.toString());
-				} else if ((obj.getClass() == int.class) || (obj.getClass() == long.class) || (obj.getClass() == double.class)) {
+				} else if ((obj.getClass() == int.class) || (obj.getClass() == long.class)
+						|| (obj.getClass() == double.class)) {
 					rv = (Integer) obj;
 				} else if (obj.getClass() == String.class) {
 					rv = Integer.parseInt(obj.toString());
 				}
 			}
 		} catch (Exception e) {
-			printException(LOGGER, e);
+			e.printStackTrace();
 		}
 		return rv;
 	}
@@ -206,16 +208,35 @@ public class AppBaseUtilsWeb {
 	public static final Double getDouble(Object obj) {
 		Double rv = null;
 		try {
-			if ((obj.getClass() == Integer.class) || (obj.getClass() == Long.class) || (obj.getClass() == Double.class)) {
+			if ((obj.getClass() == Integer.class) || (obj.getClass() == Long.class)
+					|| (obj.getClass() == Double.class)) {
 				rv = Double.parseDouble(obj.toString());
-			} else if ((obj.getClass() == int.class) || (obj.getClass() == long.class) || (obj.getClass() == double.class)) {
+			} else if ((obj.getClass() == int.class) || (obj.getClass() == long.class)
+					|| (obj.getClass() == double.class)) {
 				rv = (Double) obj;
 			} else if (obj.getClass() == String.class) {
 				rv = Double.parseDouble(obj.toString());
 			}
 		} catch (Exception e) {
-			printException(LOGGER, e);
+			e.printStackTrace();
 		}
 		return rv;
+	}
+
+	public static String[] getValuesOfPropertiesForLinks(String service, String uri, int methodNumber,
+			String... params) {
+		String resourcePath = "link." + service + "." + uri + "." + methodNumber + ".";
+		String[] result = new String[4];
+		System.out.println(resourcePath);
+		result[0] = AppBaseConstantsWeb.LINKS_PROPERTIES.getProperty(resourcePath + "type");
+		result[1] = AppBaseConstantsWeb.LINKS_PROPERTIES.getProperty(resourcePath + "method");
+		result[2] = AppBaseConstantsWeb.LINKS_PROPERTIES.getProperty(resourcePath + "rel");
+		result[3] = AppBaseConstantsWeb.LINKS_PROPERTIES.getProperty(resourcePath + "href");
+		if (params != null) {
+			result[3] = MessageFormat.format(result[3], params);
+		}
+		result[3] = AppBaseConstantsWeb.SERVICES_URL + result[3];
+		
+		return result;
 	}
 }

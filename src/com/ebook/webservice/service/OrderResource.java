@@ -30,7 +30,7 @@ public class OrderResource implements OrderWebService {
 	@GET
 	@Produces({ "application/xml", "application/json" })
 	@Path("/searchInventoryofProduct")
-	public List<InventoryRepresentation> getProducts(@QueryParam("keywords") String keywords) {
+	public List<InventoryRepresentation> searchInventoryofProduct(@QueryParam("keywords") String keywords) {
 		List<InventoryRepresentation> listInventoryRepresentation = null;
 		try {
 			listInventoryRepresentation = orderActivity.getProducts(keywords);

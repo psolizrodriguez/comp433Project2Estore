@@ -1,11 +1,15 @@
 package com.ebook.common.aspect;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.Properties;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.ebook.common.utility.ConfigManager;
+import com.ebook.common.constants.AppBaseConstantsWeb;
 
 public class BaseDispatcherServlet extends DispatcherServlet {
 
@@ -16,18 +20,26 @@ public class BaseDispatcherServlet extends DispatcherServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		// ServletContext context = config.getServletContext();
-
-		try {
-			if (ConfigManager.getLogger(BaseDispatcherServlet.class) == null) {
-				System.out.println("Logger is Null...");
-			} else {
-				System.out.println("Logger is Initialized....");
+		System.out.println("Initializing Links Properties");
+		if (AppBaseConstantsWeb.LINKS_PROPERTIES == null) {
+			synchronized (AppBaseConstantsWeb.LINKS_PROPERTIES = new Properties()) {
+				try {
+					AppBaseConstantsWeb.LINKS_PROPERTIES.load(
+							Thread.currentThread().getContextClassLoader().getResourceAsStream("links.properties"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-
-		} catch (Exception e) {
-			System.out.println(" exception = " + e);
-			e.printStackTrace();
+		}
+		if (AppBaseConstantsWeb.SERVICES_URL == null) {
+			InetAddress ip;
+			try {
+				ip = InetAddress.getLocalHost();
+				AppBaseConstantsWeb.SERVICES_URL = "http://" + ip.getHostAddress()
+						+ ":8080/comp433Project2Estore/services/";
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

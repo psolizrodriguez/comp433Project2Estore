@@ -10,7 +10,7 @@ import com.ebook.model.item.Product;
 @XmlRootElement(name = "Product")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class ProductRepresentation {
+public class ProductRepresentation extends AbstractRepresentation {
 	private Long productId;
 	private String title;
 	private String description;

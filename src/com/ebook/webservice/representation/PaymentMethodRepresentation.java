@@ -10,7 +10,7 @@ import com.ebook.model.order.PaymentMethod;
 @XmlRootElement(name = "PaymentMethod")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class PaymentMethodRepresentation {
+public class PaymentMethodRepresentation extends AbstractRepresentation {
 	private Long paymentId;
 	private String paymentStatus;
 	private Double subTotal;
@@ -24,7 +24,7 @@ public class PaymentMethodRepresentation {
 		this.paymentStatus = paymentStatus;
 		this.subTotal = subTotal;
 	}
-	
+
 	public PaymentMethodRepresentation(PaymentMethod paymentMethod) {
 		this.paymentId = paymentMethod.getPaymentId();
 		this.paymentStatus = paymentMethod.getPaymentStatus();

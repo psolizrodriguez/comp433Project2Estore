@@ -10,7 +10,7 @@ import com.ebook.model.item.Inventory;
 @XmlRootElement(name = "Inventory")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class InventoryRepresentation {
+public class InventoryRepresentation extends AbstractRepresentation {
 	private Long inventoryId;
 	private PartnerRepresentation partner;
 	private ProductRepresentation product;
@@ -35,6 +35,7 @@ public class InventoryRepresentation {
 		this.product = new ProductRepresentation(inventory.getProduct());
 		this.price = inventory.getPrice();
 		this.quantity = inventory.getQuantity();
+		createLinks();
 	}
 
 	public Long getInventoryId() {

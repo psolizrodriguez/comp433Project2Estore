@@ -10,7 +10,7 @@ import com.ebook.model.order.OrderDetail;
 @XmlRootElement(name = "OrderDetail")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class OrderDetailRepresentation {
+public class OrderDetailRepresentation extends AbstractRepresentation {
 	private Long orderDetailId;
 	private InventoryRepresentation inventory;
 	private Integer quantity;
