@@ -1,5 +1,6 @@
-
 # COMP 388/433: Project 3
+### INTRODUCTION 
+# It is an amazing project
 ## Team Members  
 - Julia Cicale  
 - Percy Soliz  
